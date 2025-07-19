@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Focus View</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+</head>
+<body class="bg-black overflow-hidden">
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-sm">
+        <div class="flex items-center justify-between p-4">
+            <button onclick="goBack()" class="text-white hover:text-gray-300 transition-colors">
+                <i class="fas fa-arrow-left text-xl"></i>
+            </button>
+            <div class="text-white text-sm">
+                <span id="current-index">1</span> / <span id="total-products">0</span>
+            </div>
+            <button onclick="toggleInfo()" class="text-white hover:text-gray-300 transition-colors">
+                <i class="fas fa-info-circle text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Product Container -->
+    <div id="product-container" class="h-screen overflow-y-auto snap-y snap-mandatory">
+        <!-- Products will be dynamically loaded here -->
+    </div>
+
+    <!-- Sticky Action Buttons -->
+    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black to-transparent z-40">
+        <div class="flex space-x-3 max-w-md mx-auto">
+            <button onclick="goBack()" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200">
+                <i class="fas fa-list mr-2"></i>Back to List
+            </button>
+            <button id="focus-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200">
+                <i class="fab fa-whatsapp mr-2"></i>Order Now
+            </button>
+        </div>
+    </div>
+
+    <!-- Product Focus Template -->
+    <template id="product-focus-template">
+        <div class="product-focus h-screen snap-start relative flex items-center justify-center">
+            <div class="w-full max-w-md mx-auto p-4">
+                <!-- Product Image Carousel -->
+                <div class="relative mb-6">
+                    <div class="focus-image-carousel swiper rounded-2xl shadow-2xl overflow-hidden">
+                        <div class="swiper-wrapper">
+                            <!-- Images will be added dynamically -->
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="swiper-button-next text-white bg-black bg-opacity-50 w-8 h-8 rounded-full flex items-center justify-center after:text-xs after:font-bold"></div>
+                        <div class="swiper-button-prev text-white bg-black bg-opacity-50 w-8 h-8 rounded-full flex items-center justify-center after:text-xs after:font-bold"></div>
+                        
+                        <!-- Pagination -->
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    
+                    <!-- Category Badge -->
+                    <div class="absolute top-4 right-4 z-10">
+                        <span class="focus-category bg-white bg-opacity-90 px-3 py-1 rounded-full text-sm font-medium text-gray-700"></span>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
+                    <h2 class="focus-name text-2xl font-bold text-gray-800 mb-3"></h2>
+                    
+                    <!-- Expandable Description -->
+                    <div class="focus-description-container mb-4">
+                        <div class="focus-description text-gray-600 leading-relaxed"></div>
+                        <button class="focus-description-toggle text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 hidden">
+                            <span class="toggle-text">Read more</span>
+                            <i class="fas fa-chevron-down ml-1 toggle-icon transition-transform duration-200"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Price and Rating -->
+                    <div class="flex items-center justify-between mb-6">
+                        <span class="focus-price text-3xl font-bold text-blue-600"></span>
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-2">
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                                <i class="fas fa-star text-sm"></i>
+                            </div>
+                            <span class="focus-rating text-sm text-gray-600"></span>
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <span class="text-gray-500 block">Brand</span>
+                            <span class="focus-brand font-medium"></span>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-3">
+                            <span class="text-gray-500 block">Stock</span>
+                            <span class="focus-stock font-medium text-green-600"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white text-center">
+                <div class="animate-bounce">
+                    <i class="fas fa-chevron-up text-sm mb-1"></i>
+                    <p class="text-xs">Swipe to browse</p>
+                    <i class="fas fa-chevron-down text-sm mt-1"></i>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Info Modal -->
+    <div id="info-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl p-6 max-w-sm w-full">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold">How to Navigate</h3>
+                    <button onclick="toggleInfo()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="space-y-3 text-sm text-gray-600">
+                    <div class="flex items-center">
+                        <i class="fas fa-hand-pointer text-blue-600 w-6"></i>
+                        <span>Scroll or swipe to browse products</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fab fa-whatsapp text-green-600 w-6"></i>
+                        <span>Tap "Order Now" to send WhatsApp message</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-arrow-left text-gray-600 w-6"></i>
+                        <span>Use back button to return to catalog</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/focus.js"></script>
+</body>
+</html>

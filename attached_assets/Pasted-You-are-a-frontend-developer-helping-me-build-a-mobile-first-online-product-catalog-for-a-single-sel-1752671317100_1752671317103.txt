@@ -1,0 +1,97 @@
+You are a frontend developer helping me build a mobile-first online product catalog for a single seller.
+The goal is to replace repetitive daily WhatsApp/Facebook posting by giving the seller a clean, reusable catalog link that buyers can browse and order from.
+
+✅ Scope: Not a SaaS product. Only for a single seller. No backend for now.
+
+🛠 Tech Stack:
+
+HTML
+
+Tailwind CSS
+
+Vanilla JavaScript
+
+Product data via static JSON array or inline JS object
+
+WhatsApp integration via wa.me/?text=... links
+
+
+🎯 Key Features to Build:
+
+1. Product Catalog Page (Main Page)
+
+No landing page. Catalog is the homepage (index.html)
+
+Show 2–3 product cards vertically stacked by default (mobile-first layout)
+
+Each card includes:
+
+Product image
+
+Product name/title
+
+Short description
+
+Price
+
+Buttons:
+
+“Order on WhatsApp” (opens wa.me link with product name/price pre-filled)
+
+“View Full” ➜ opens product in fullscreen (focus mode)
+
+
+
+
+2. Reels-Style Focus View (Optional but Important)
+
+Fullscreen product view like Instagram Reels
+
+User scrolls/swipes vertically to view next/previous product
+
+Sticky buttons: “Back to List” + “Order Now”
+
+Smooth animation/transition on scroll or swipe
+
+
+3. Optional Quick Filter Bar
+
+Sticky horizontal category filter (dummy for now)
+
+Clicking on a category filters product list (JS filtering)
+
+
+4. OTP Form Placeholder (Optional Page)
+
+Order form with Name, Phone, Address, Product auto-filled
+
+Include OTP input field as placeholder (no backend validation required)
+
+On submit, simulate success with alert() or thank you message
+
+
+🧑‍🎨 Design Guidelines:
+
+Mobile-first layout
+
+Clean and modern UI using Tailwind
+
+Use light theme with soft shadows, rounded corners, modern fonts
+
+Smooth scrolling and animated transitions
+
+Responsive for desktop with minor layout changes (larger cards, two-column)
+
+
+📁 Expected Output Files:
+
+index.html (main catalog view)
+
+product-focus.html or JS modal for fullscreen
+
+styles.css (if any custom Tailwind classes)
+
+script.js (render product cards, handle transitions and filters)
+
+products.js (or inline data array for products)
+

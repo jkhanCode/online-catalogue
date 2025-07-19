@@ -1,0 +1,487 @@
+/* Custom styles to complement Tailwind CSS */
+
+/* Smooth scrolling for all elements */
+* {
+    scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* Custom line clamp utilities */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Filter button styles */
+.filter-btn {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    border: 1px solid transparent;
+}
+
+.filter-btn:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.filter-btn.active {
+    background-color: #3b82f6;
+    color: white;
+    border-color: #2563eb;
+}
+
+/* Product card hover effects */
+.product-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Button hover animations */
+.btn-hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.btn-hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.btn-hover-scale:active {
+    transform: scale(0.98);
+}
+
+/* Focus view specific styles */
+.product-focus {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Smooth snap scrolling for focus view */
+#product-container {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-focus {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+/* OTP input styles */
+.otp-input {
+    transition: all 0.2s ease;
+}
+
+.otp-input:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Loading animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Bounce animation for scroll indicator */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.animate-bounce {
+    animation: bounce 2s infinite;
+}
+
+/* Custom gradient backgrounds */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+/* Focus ring for accessibility */
+.focus-visible:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Custom backdrop blur */
+.backdrop-blur-sm {
+    backdrop-filter: blur(4px);
+}
+
+/* Toast notification styles */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    max-width: 300px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+/* Responsive image aspect ratios */
+.aspect-square {
+    aspect-ratio: 1 / 1;
+}
+
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+.aspect-photo {
+    aspect-ratio: 4 / 3;
+}
+
+/* Custom scrollbar for desktop */
+@media (min-width: 768px) {
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 3px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+    
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+    
+    .print-full-width {
+        width: 100% !important;
+        max-width: none !important;
+    }
+}
+
+/* Dark mode support (for future enhancement) */
+@media (prefers-color-scheme: dark) {
+    .dark-mode-text {
+        color: #f8fafc;
+    }
+    
+    .dark-mode-bg {
+        background-color: #1e293b;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .filter-btn {
+        border: 2px solid;
+    }
+    
+    .product-card {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .animate-spin,
+    .animate-bounce {
+        animation: none;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .product-card:hover {
+        transform: none;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-hover-scale:hover {
+        transform: none;
+    }
+}
+
+/* Small screen optimizations */
+@media (max-width: 640px) {
+    .product-card {
+        margin-bottom: 1rem;
+    }
+    
+    .filter-btn {
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1024px) {
+    .product-grid {
+        gap: 2rem;
+    }
+    
+    .product-card {
+        transition: all 0.3s ease;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-8px);
+    }
+}
+
+/* Animation delays for staggered effects */
+.animate-delay-100 {
+    animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+    animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+    animation-delay: 300ms;
+}
+
+/* Custom focus styles for better accessibility */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* WhatsApp button specific styling */
+.whatsapp-btn {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+}
+
+.whatsapp-btn:hover {
+    box-shadow: 0 6px 8px rgba(37, 211, 102, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Success state animations */
+.success-pulse {
+    animation: pulse-success 2s infinite;
+}
+
+@keyframes pulse-success {
+    0% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+/* Order modal styles */
+.z-60 {
+    z-index: 60;
+}
+
+.modal-otp-input {
+    transition: all 0.2s ease;
+}
+
+.modal-otp-input:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Modal backdrop animation */
+#order-modal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+#order-modal > div {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Swiper carousel customization */
+.swiper-button-next,
+.swiper-button-prev {
+    width: 32px !important;
+    height: 32px !important;
+    margin-top: -16px !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 12px !important;
+    font-weight: bold !important;
+}
+
+.swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.7) !important;
+    opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: white !important;
+}
+
+.swiper-pagination {
+    bottom: 8px !important;
+}
+
+/* Expandable description styles */
+.description-toggle {
+    transition: all 0.2s ease;
+}
+
+.description-toggle:hover {
+    color: #2563eb;
+}
+
+.toggle-icon {
+    transition: transform 0.2s ease;
+}
+
+/* Image modal styles */
+#image-modal {
+    backdrop-filter: blur(4px);
+}
+
+#image-modal img {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Product card description enhancement */
+.product-description-container {
+    position: relative;
+}
+
+.product-description-toggle {
+    background: none;
+    border: none;
+    color: #3b82f6;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0;
+    margin-top: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.product-description-toggle:hover {
+    color: #2563eb;
+}
+
+.product-description-toggle .toggle-icon {
+    margin-left: 0.25rem;
+    transition: transform 0.2s ease;
+}
+
+/* Enhanced carousel for mobile */
+@media (max-width: 768px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+    
+    .swiper-pagination {
+        display: block !important;
+    }
+}
+
+/* Enhanced carousel for desktop */
+@media (min-width: 769px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: flex !important;
+    }
+}
+
+/* Loading skeleton styles */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}

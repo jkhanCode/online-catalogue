@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order - Complete Your Purchase</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-md mx-auto px-4 py-4 md:max-w-2xl">
+            <div class="flex items-center">
+                <button onclick="goBack()" class="mr-4 text-gray-600 hover:text-gray-800">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </button>
+                <h1 class="text-xl font-bold text-gray-800">Complete Your Order</h1>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-md mx-auto px-4 py-6 md:max-w-2xl">
+        <!-- Product Summary -->
+        <div id="product-summary" class="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-100">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Order Summary</h2>
+            <div class="flex items-center space-x-4">
+                <img id="order-product-image" class="w-16 h-16 object-cover rounded-lg" src="" alt="">
+                <div class="flex-1">
+                    <h3 id="order-product-name" class="font-medium text-gray-800"></h3>
+                    <p id="order-product-price" class="text-blue-600 font-bold"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Form -->
+        <form id="order-form" class="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-100">
+            <h2 class="text-lg font-semibold text-gray-800 mb-6">Your Information</h2>
+            
+            <div class="space-y-6">
+                <!-- Full Name -->
+                <div>
+                    <label for="full-name" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-user mr-2 text-gray-400"></i>Full Name *
+                    </label>
+                    <input type="text" id="full-name" name="fullName" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                           placeholder="Enter your full name">
+                </div>
+
+                <!-- Phone Number -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-phone mr-2 text-gray-400"></i>Phone Number *
+                    </label>
+                    <input type="tel" id="phone" name="phone" required
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                           placeholder="+1 (555) 123-4567">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-envelope mr-2 text-gray-400"></i>Email Address
+                    </label>
+                    <input type="email" id="email" name="email"
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                           placeholder="your.email@example.com">
+                </div>
+
+                <!-- Delivery Address -->
+                <div>
+                    <label for="address" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>Delivery Address *
+                    </label>
+                    <textarea id="address" name="address" required rows="3"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                              placeholder="Enter your complete delivery address"></textarea>
+                </div>
+
+                <!-- Special Instructions -->
+                <div>
+                    <label for="instructions" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-comment mr-2 text-gray-400"></i>Special Instructions
+                    </label>
+                    <textarea id="instructions" name="instructions" rows="2"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                              placeholder="Any special requests or delivery instructions"></textarea>
+                </div>
+            </div>
+        </form>
+
+        <!-- OTP Verification -->
+        <div id="otp-section" class="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-100 hidden">
+            <h2 class="text-lg font-semibold text-gray-800 mb-4">Verify Your Phone Number</h2>
+            <p class="text-gray-600 text-sm mb-4">We've sent a verification code to your phone number</p>
+            
+            <div class="flex space-x-2 mb-4">
+                <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold">
+                <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold">
+                <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold">
+                <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold">
+                <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold">
+                <input type="text" maxlength="1" class="otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold">
+            </div>
+            
+            <div class="flex justify-between items-center text-sm">
+                <span class="text-gray-500">Didn't receive the code?</span>
+                <button type="button" id="resend-otp" class="text-blue-600 hover:text-blue-700 font-medium">
+                    Resend OTP
+                </button>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-3">
+            <button type="button" id="verify-phone-btn" onclick="showOTPSection()"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105">
+                <i class="fas fa-mobile-alt mr-2"></i>Verify Phone Number
+            </button>
+            
+            <button type="button" id="confirm-order-btn" onclick="confirmOrder()" disabled
+                    class="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 disabled:transform-none">
+                <i class="fas fa-check-circle mr-2"></i>Confirm Order
+            </button>
+            
+            <button type="button" onclick="orderViaWhatsApp()"
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-4 px-6 rounded-xl transition-all duration-200">
+                <i class="fab fa-whatsapp mr-2 text-green-500"></i>Order via WhatsApp Instead
+            </button>
+        </div>
+
+        <!-- Terms and Privacy -->
+        <div class="mt-6 text-center">
+            <p class="text-xs text-gray-500">
+                By placing this order, you agree to our 
+                <a href="#" class="text-blue-600 hover:underline">Terms of Service</a> and 
+                <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>
+            </p>
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-2xl text-green-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Order Confirmed!</h3>
+            <p class="text-gray-600 mb-6">Thank you for your order. We'll contact you soon to confirm delivery details.</p>
+            <div class="space-y-3">
+                <button onclick="goToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors">
+                    <i class="fab fa-whatsapp mr-2"></i>Continue on WhatsApp
+                </button>
+                <button onclick="backToCatalog()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">
+                    Back to Catalog
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/order.js"></script>
+</body>
+</html>
