@@ -1,0 +1,7 @@
+# Ignore all test files
+**/test/**
+**/*.test.*
+**/__tests__/**
+
+# Ignore VS Code settings
+.vscode/

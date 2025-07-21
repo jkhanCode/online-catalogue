@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="px-4 py-6">
+        <h1 class="text-2xl font-bold mb-6 text-center">Responsive Grid Layout Test</h1>
+        
+        <!-- Test Product Grid -->
+        <div id="product-grid">
+            <!-- Card 1 -->
+            <article class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+                <div class="relative">
+                    <img class="product-image w-full h-48 object-cover" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop" alt="Headphones" loading="lazy" />
+                    <div class="absolute top-3 right-3">
+                        <span class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                    </div>
+                    <div class="absolute top-3 left-3">
+                        <button class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black">
+                            <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200" title="Premium Wireless Headphones">Premium Wireless Headphones</h3>
+                    <div class="product-description-container mb-3 flex-1">
+                        <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2">High-quality wireless headphones with advanced noise cancellation.</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="product-price text-2xl font-bold text-blue-600">$149.99</span>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                            <span class="product-rating text-sm text-gray-600 ml-1">4.8 (124)</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 mt-auto">
+                        <button class="order-btn flex-1 text-white font-medium px-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                            <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                        </button>
+                        <button class="whatsapp-btn text-white font-medium px-4 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+                <div class="relative">
+                    <img class="product-image w-full h-48 object-cover" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop" alt="Smart Watch" loading="lazy" />
+                    <div class="absolute top-3 right-3">
+                        <span class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                    </div>
+                    <div class="absolute top-3 left-3">
+                        <button class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200">
+                            <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200" title="Smart Fitness Watch with GPS and Heart Rate Monitor">Smart Fitness Watch with GPS</h3>
+                    <div class="product-description-container mb-3 flex-1">
+                        <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2">Track your health and fitness goals with advanced monitoring features.</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="product-price text-2xl font-bold text-blue-600">$199.99</span>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                            <span class="product-rating text-sm text-gray-600 ml-1">4.6 (89)</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 mt-auto">
+                        <button class="order-btn flex-1 text-white font-medium px-6">
+                            <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                        </button>
+                        <button class="whatsapp-btn text-white font-medium px-4">
+                            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+                <div class="relative">
+                    <img class="product-image w-full h-48 object-cover" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop" alt="T-Shirt" loading="lazy" />
+                    <div class="absolute top-3 right-3">
+                        <span class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Fashion</span>
+                    </div>
+                    <div class="absolute top-3 left-3">
+                        <button class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200">
+                            <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200" title="Organic Cotton T-Shirt">Organic Cotton T-Shirt</h3>
+                    <div class="product-description-container mb-3 flex-1">
+                        <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2">Comfortable and sustainable organic cotton t-shirt in multiple colors.</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="product-price text-2xl font-bold text-blue-600">$29.99</span>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                            <span class="product-rating text-sm text-gray-600 ml-1">4.7 (156)</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 mt-auto">
+                        <button class="order-btn flex-1 text-white font-medium px-6">
+                            <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                        </button>
+                        <button class="whatsapp-btn text-white font-medium px-4">
+                            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+                <div class="relative">
+                    <img class="product-image w-full h-48 object-cover" src="https://images.unsplash.com/photo-1514228742587-6b1558fcf93a?w=400&h=300&fit=crop" alt="Coffee Mug" loading="lazy" />
+                    <div class="absolute top-3 right-3">
+                        <span class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Home</span>
+                    </div>
+                    <div class="absolute top-3 left-3">
+                        <button class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200">
+                            <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200" title="Ceramic Coffee Mug Set">Ceramic Coffee Mug Set</h3>
+                    <div class="product-description-container mb-3 flex-1">
+                        <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2">Beautiful handcrafted ceramic coffee mugs perfect for your morning ritual.</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="product-price text-2xl font-bold text-blue-600">$39.99</span>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                            <span class="product-rating text-sm text-gray-600 ml-1">4.9 (67)</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 mt-auto">
+                        <button class="order-btn flex-1 text-white font-medium px-6">
+                            <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                        </button>
+                        <button class="whatsapp-btn text-white font-medium px-4">
+                            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+                <div class="relative">
+                    <img class="product-image w-full h-48 object-cover" src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop" alt="Face Moisturizer" loading="lazy" />
+                    <div class="absolute top-3 right-3">
+                        <span class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Beauty</span>
+                    </div>
+                    <div class="absolute top-3 left-3">
+                        <button class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200">
+                            <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-4 flex flex-col flex-1">
+                    <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200" title="Natural Face Moisturizer">Natural Face Moisturizer</h3>
+                    <div class="product-description-container mb-3 flex-1">
+                        <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2">Hydrating face moisturizer with natural ingredients for all skin types.</div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="product-price text-2xl font-bold text-blue-600">$24.99</span>
+                        <div class="flex items-center text-yellow-400">
+                            <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                            <span class="product-rating text-sm text-gray-600 ml-1">4.5 (203)</span>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3 mt-auto">
+                        <button class="order-btn flex-1 text-white font-medium px-6">
+                            <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                        </button>
+                        <button class="whatsapp-btn text-white font-medium px-4">
+                            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+        
+        <div class="mt-8 text-center text-sm text-gray-600">
+            <p><strong>Responsive Grid Test:</strong></p>
+            <ul class="mt-2 space-y-1">
+                <li>• <strong>Mobile:</strong> 1 column (single card per row)</li>
+                <li>• <strong>Tablet:</strong> 2 columns (640px+)</li>
+                <li>• <strong>Desktop:</strong> 3 columns (1024px+)</li>
+                <li>• <strong>Large:</strong> 4 columns (1400px+)</li>
+            </ul>
+            <p class="mt-4 text-xs text-gray-500">Resize your browser to see the responsive behavior</p>
+        </div>
+    </div>
+</body>
+</html>
