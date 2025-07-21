@@ -1,452 +1,373 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Product Catalog - Shop with Us</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link href="css/styles.css" rel="stylesheet" />
-        <link
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-            rel="stylesheet"
-        />
-    </head>
-    <body class="bg-gray-50 min-h-screen">
-        <!-- Header -->
-        <header class="bg-white shadow-sm sticky top-0 z-40">
-            <div class="max-w-md mx-auto px-4 py-4 md:max-w-4xl">
-                <div class="flex items-center justify-between">
-                    <h1 class="text-xl font-bold text-gray-800">
-                        Our Products
-                    </h1>
-                    <div class="flex items-center space-x-2">
-                        <i class="fas fa-store text-blue-600"></i>
-                        <span class="text-sm text-gray-600 hidden sm:inline"
-                            >Quality Products</span
-                        >
-                    </div>
-                </div>
-            </div>
-        </header>
 
-        <!-- Filter Bar -->
-        <div class="bg-white border-b sticky top-16 z-30">
-            <div class="max-w-md mx-auto px-4 py-3 md:max-w-4xl">
-                <div class="flex space-x-2 overflow-x-auto scrollbar-hide">
-                    <button
-                        class="filter-btn active px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200"
-                        data-category="all"
-                    >
-                        All Products
-                    </button>
-                    <button
-                        class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200"
-                        data-category="electronics"
-                    >
-                        Electronics
-                    </button>
-                    <button
-                        class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200"
-                        data-category="fashion"
-                    >
-                        Fashion
-                    </button>
-                    <button
-                        class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200"
-                        data-category="home"
-                    >
-                        Home & Living
-                    </button>
-                    <button
-                        class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200"
-                        data-category="beauty"
-                    >
-                        Beauty
-                    </button>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Catalog - Shop with Us</title>
+    <meta name="description"
+        content="Browse our curated collection of quality products. Find electronics, fashion, home goods, and beauty products at great prices." />
+    <meta name="keywords" content="products, catalog, electronics, fashion, home, beauty, online shopping" />
+    <meta property="og:title" content="Product Catalog - Shop with Us" />
+    <meta property="og:description" content="Browse our curated collection of quality products at great prices." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=630&fit=crop" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Product Catalog - Shop with Us" />
+    <meta name="twitter:description" content="Browse our curated collection of quality products at great prices." />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-lg z-50">
+        Skip to main content
+    </a>
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-40" role="banner">
+        <div class="max-w-md mx-auto px-4 py-4 md:max-w-4xl">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl font-bold text-gray-800">
+                    Our Products
+                </h1>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-store text-blue-600" aria-hidden="true"></i>
+                    <span class="text-sm text-gray-600 hidden sm:inline">Quality Products</span>
                 </div>
             </div>
         </div>
+    </header>
 
-        <!-- Product Grid -->
-        <main class="max-w-md mx-auto px-4 py-6 md:max-w-4xl">
-            <div
-                id="product-grid"
-                class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-            >
-                <!-- Products will be dynamically loaded here -->
-            </div>
-
-            <!-- Loading State -->
-            <div id="loading" class="flex justify-center items-center py-12">
-                <div
-                    class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"
-                ></div>
-            </div>
-
-            <!-- No Products Message -->
-            <div id="no-products" class="hidden text-center py-12">
-                <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
-                <p class="text-gray-500 text-lg">
-                    No products found in this category
-                </p>
+    <!-- Filter Bar -->
+    <nav class="bg-white border-b sticky top-16 z-30" role="navigation" aria-label="Product categories">
+        <div class="max-w-md mx-auto px-4 py-3 md:max-w-4xl">
+            <div class="flex space-x-2 py-2 overflow-x-auto scrollbar-hide">
                 <button
-                    onclick="resetFilters()"
-                    class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                    View All Products
+                    class="filter-btn active px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    data-category="all" aria-pressed="true" aria-label="Show all products">
+                    All Products
+                </button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    data-category="electronics" aria-pressed="false" aria-label="Show electronics products">
+                    Electronics
+                </button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    data-category="fashion" aria-pressed="false" aria-label="Show fashion products">
+                    Fashion
+                </button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    data-category="home" aria-pressed="false" aria-label="Show home and living products">
+                    Home & Living
+                </button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    data-category="beauty" aria-pressed="false" aria-label="Show beauty products">
+                    Beauty
                 </button>
             </div>
-        </main>
+        </div>
+    </nav>
 
-        <!-- Product Card Template -->
-        <template id="product-card-template">
-            <div
-                class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100"
-            >
-                <div class="relative">
-                    <img
-                        class="product-image w-full h-48 object-cover"
-                        src=""
-                        alt=""
-                    />
-                    <div class="absolute top-3 right-3">
-                        <span
-                            class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700"
-                        ></span>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <h3
-                        class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-2"
-                    ></h3>
-                    <div class="product-description-container mb-3">
-                        <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2"></div>
-                        <button class="product-description-toggle hidden">
-                            <span class="toggle-text">Read more</span>
-                            <i class="fas fa-chevron-down toggle-icon"></i>
-                        </button>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span
-                            class="product-price text-xl font-bold text-blue-600"
-                        ></span>
-                        <div class="flex items-center text-yellow-400">
-                            <i class="fas fa-star text-sm"></i>
-                            <span
-                                class="product-rating text-sm text-gray-600 ml-1"
-                            ></span>
-                        </div>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button
-                            class="view-full-btn bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-                        >
-                            <i class="fas fa-eye mr-2"></i>View Full
-                        </button>
-                        <button
-                            class="order-btn flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200"
-                        >
-                            <i class="fas fa-shopping-cart mr-2"></i>Order
-                        </button>
-                        <button
-                            class="whatsapp-btn bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-3 rounded-lg transition-colors duration-200"
-                        >
-                            <i class="fab fa-whatsapp"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <!-- Order Modal -->
-        <div
-            id="order-modal"
-            class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"
-        >
-            <div
-                class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto"
-            >
-                <!-- Modal Header -->
-                <div
-                    class="sticky top-0 bg-white rounded-t-2xl border-b border-gray-200 p-6"
-                >
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-bold text-gray-800">
-                            Complete Your Order
-                        </h2>
-                        <button
-                            onclick="closeOrderModal()"
-                            class="text-gray-500 hover:text-gray-700"
-                        >
-                            <i class="fas fa-times text-xl"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Product Summary -->
-                <div class="p-6 border-b border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                        Order Summary
-                    </h3>
-                    <div class="flex items-center space-x-4">
-                        <img
-                            id="modal-product-image"
-                            class="w-16 h-16 object-cover rounded-lg"
-                            src=""
-                            alt=""
-                        />
-                        <div class="flex-1">
-                            <h4
-                                id="modal-product-name"
-                                class="font-medium text-gray-800"
-                            ></h4>
-                            <p
-                                id="modal-product-price"
-                                class="text-blue-600 font-bold"
-                            ></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Order Form -->
-                <div class="p-6">
-                    <form id="modal-order-form">
-                        <div class="space-y-4">
-                            <!-- Full Name -->
-                            <div>
-                                <label
-                                    for="modal-full-name"
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                >
-                                    <i
-                                        class="fas fa-user mr-2 text-gray-400"
-                                    ></i
-                                    >Full Name *
-                                </label>
-                                <input
-                                    type="text"
-                                    id="modal-full-name"
-                                    name="fullName"
-                                    required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                                    placeholder="Enter your full name"
-                                />
-                            </div>
-
-                            <!-- Phone Number -->
-                            <div>
-                                <label
-                                    for="modal-phone"
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                >
-                                    <i
-                                        class="fas fa-phone mr-2 text-gray-400"
-                                    ></i
-                                    >Phone Number *
-                                </label>
-                                <input
-                                    type="tel"
-                                    id="modal-phone"
-                                    name="phone"
-                                    required
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                                    placeholder="+1 (555) 123-4567"
-                                />
-                            </div>
-
-                            <!-- Email -->
-                            <div>
-                                <label
-                                    for="modal-email"
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                >
-                                    <i
-                                        class="fas fa-envelope mr-2 text-gray-400"
-                                    ></i
-                                    >Email Address
-                                </label>
-                                <input
-                                    type="email"
-                                    id="modal-email"
-                                    name="email"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
-                                    placeholder="your.email@example.com"
-                                />
-                            </div>
-
-                            <!-- Delivery Address -->
-                            <div>
-                                <label
-                                    for="modal-address"
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                >
-                                    <i
-                                        class="fas fa-map-marker-alt mr-2 text-gray-400"
-                                    ></i
-                                    >Delivery Address *
-                                </label>
-                                <textarea
-                                    id="modal-address"
-                                    name="address"
-                                    required
-                                    rows="3"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-                                    placeholder="Enter your complete delivery address"
-                                ></textarea>
-                            </div>
-
-                            <!-- Special Instructions -->
-                            <div>
-                                <label
-                                    for="modal-instructions"
-                                    class="block text-sm font-medium text-gray-700 mb-2"
-                                >
-                                    <i
-                                        class="fas fa-comment mr-2 text-gray-400"
-                                    ></i
-                                    >Special Instructions
-                                </label>
-                                <textarea
-                                    id="modal-instructions"
-                                    name="instructions"
-                                    rows="2"
-                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
-                                    placeholder="Any special requests or delivery instructions"
-                                ></textarea>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- OTP Verification Section -->
-                    <div id="modal-otp-section" class="mt-6 hidden">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                            Verify Your Phone Number
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            We've sent a verification code to your phone number
-                        </p>
-
-                        <div class="flex space-x-2 mb-4">
-                            <input
-                                type="text"
-                                maxlength="1"
-                                class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold"
-                            />
-                            <input
-                                type="text"
-                                maxlength="1"
-                                class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold"
-                            />
-                            <input
-                                type="text"
-                                maxlength="1"
-                                class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold"
-                            />
-                            <input
-                                type="text"
-                                maxlength="1"
-                                class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold"
-                            />
-                            <input
-                                type="text"
-                                maxlength="1"
-                                class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold"
-                            />
-                            <input
-                                type="text"
-                                maxlength="1"
-                                class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold"
-                            />
-                        </div>
-
-                        <div class="flex justify-between items-center text-sm">
-                            <span class="text-gray-500"
-                                >Didn't receive the code?</span
-                            >
-                            <button
-                                type="button"
-                                id="modal-resend-otp"
-                                class="text-blue-600 hover:text-blue-700 font-medium"
-                            >
-                                Resend OTP
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="mt-6 space-y-3">
-                        <button
-                            type="button"
-                            id="modal-verify-phone-btn"
-                            onclick="showModalOTPSection()"
-                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200"
-                        >
-                            <i class="fas fa-mobile-alt mr-2"></i>Verify Phone
-                            Number
-                        </button>
-
-                        <button
-                            type="button"
-                            id="modal-confirm-order-btn"
-                            onclick="confirmModalOrder()"
-                            disabled
-                            class="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-all duration-200"
-                        >
-                            <i class="fas fa-check-circle mr-2"></i>Confirm
-                            Order
-                        </button>
-
-                        <button
-                            type="button"
-                            onclick="orderModalViaWhatsApp()"
-                            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-all duration-200"
-                        >
-                            <i class="fab fa-whatsapp mr-2 text-green-500"></i
-                            >Order via WhatsApp Instead
-                        </button>
-                    </div>
-                </div>
+    <!-- Product Grid -->
+    <main id="main-content" class="px-4 py-6" role="main">
+        <!-- Search Bar -->
+        <div class="mb-6">
+            <div class="relative">
+                <input type="search" id="search-input" placeholder="Search products..."
+                    class="w-full px-4 py-3 pl-10 pr-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    aria-label="Search products" />
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                    aria-hidden="true"></i>
+                <button id="clear-search"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden"
+                    aria-label="Clear search">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
         </div>
 
-        <!-- Success Modal -->
-        <div
-            id="modal-success-modal"
-            class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center p-4"
-        >
-            <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center">
-                <div
-                    class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"
-                >
-                    <i class="fas fa-check text-2xl text-green-600"></i>
+        <div id="product-grid" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3" role="region"
+            aria-label="Product catalog">
+            <!-- Products will be dynamically loaded here -->
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="flex justify-center items-center py-12" aria-live="polite">
+            <div class="flex flex-col items-center">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-2"></div>
+                <span class="text-gray-600 text-sm">Loading products...</span>
+            </div>
+        </div>
+
+        <!-- Loading Skeleton -->
+        <div id="loading-skeleton" class="hidden grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <!-- Skeleton cards will be generated here -->
+        </div>
+
+        <!-- No Products Message -->
+        <div id="no-products" class="hidden text-center py-12" role="status" aria-live="polite">
+            <i class="fas fa-box-open text-4xl text-gray-400 mb-4" aria-hidden="true"></i>
+            <p class="text-gray-500 text-lg">
+                No products found in this category
+            </p>
+            <button onclick="resetFilters()"
+                class="mt-4 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                View All Products
+            </button>
+        </div>
+
+        <!-- Error State -->
+        <div id="error-state" class="hidden text-center py-12" role="alert">
+            <i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-4" aria-hidden="true"></i>
+            <p class="text-gray-500 text-lg mb-4">
+                Something went wrong loading the products
+            </p>
+            <button onclick="retryLoadProducts()"
+                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Try Again
+            </button>
+        </div>
+    </main>
+
+    <!-- Product Card Template -->
+    <template id="product-card-template">
+        <article
+            class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full"
+            role="article">
+            <div class="relative">
+                <img class="product-image w-full h-48 object-cover" src="" alt="" loading="lazy"
+                    onerror="this.classList.add('error'); this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjlmYWZiIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZiNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBBdmFpbGFibGU8L3RleHQ+PC9zdmc+'" />
+                <div class="absolute top-3 right-3">
+                    <span
+                        class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm"></span>
                 </div>
-                <h3 class="text-xl font-bold text-gray-800 mb-2">
-                    Order Confirmed!
+                <div class="absolute top-3 left-3">
+                    <button
+                        class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black">
+                        <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
+                        <span class="sr-only">View product details</span>
+                    </button>
+                </div>
+            </div>
+            <div class="p-4 flex flex-col flex-1">
+                <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded"
+                    tabindex="0" role="button" aria-label="View product details" title=""></h3>
+                <div class="product-description-container mb-3 flex-1">
+                    <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2"></div>
+                    <button
+                        class="product-description-toggle hidden text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded"
+                        aria-expanded="false">
+                        <span class="toggle-text">Read more</span>
+                        <i class="fas fa-chevron-down toggle-icon ml-1 transition-transform duration-200"
+                            aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="product-price text-2xl font-bold text-blue-600"></span>
+                    <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                        <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                        <span class="product-rating text-sm text-gray-600 ml-1"></span>
+                    </div>
+                </div>
+                <div class="flex space-x-3 mt-auto">
+                    <button
+                        class="order-btn flex-1 text-white font-medium px-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        type="button">
+                        <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                    </button>
+                    <button
+                        class="whatsapp-btn text-white font-medium px-4 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                        type="button">
+                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                    </button>
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
+            <div class="sticky top-0 bg-white rounded-t-2xl border-b border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-gray-800">
+                        Complete Your Order
+                    </h2>
+                    <button onclick="closeOrderModal()" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Summary -->
+            <div class="p-6 border-b border-gray-200">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                    Order Summary
                 </h3>
-                <p class="text-gray-600 mb-6">
-                    Thank you for your order. We'll contact you soon to confirm
-                    delivery details.
-                </p>
-                <div class="space-y-3">
-                    <button
-                        onclick="goModalToWhatsApp()"
-                        class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-                    >
-                        <i class="fab fa-whatsapp mr-2"></i>Continue on WhatsApp
+                <div class="flex items-center space-x-4">
+                    <img id="modal-product-image" class="w-16 h-16 object-cover rounded-lg" src="" alt="" />
+                    <div class="flex-1">
+                        <h4 id="modal-product-name" class="font-medium text-gray-800"></h4>
+                        <p id="modal-product-price" class="text-blue-600 font-bold"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Form -->
+            <div class="p-6">
+                <form id="modal-order-form">
+                    <div class="space-y-4">
+                        <!-- Full Name -->
+                        <div>
+                            <label for="modal-full-name" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-user mr-2 text-gray-400"></i>Full Name *
+                            </label>
+                            <input type="text" id="modal-full-name" name="fullName" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                placeholder="Enter your full name" />
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div>
+                            <label for="modal-phone" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-phone mr-2 text-gray-400"></i>Phone Number *
+                            </label>
+                            <input type="tel" id="modal-phone" name="phone" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                placeholder="+1 (555) 123-4567" />
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="modal-email" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-envelope mr-2 text-gray-400"></i>Email Address
+                            </label>
+                            <input type="email" id="modal-email" name="email"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                                placeholder="your.email@example.com" />
+                        </div>
+
+                        <!-- Delivery Address -->
+                        <div>
+                            <label for="modal-address" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>Delivery Address *
+                            </label>
+                            <textarea id="modal-address" name="address" required rows="3"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                placeholder="Enter your complete delivery address"></textarea>
+                        </div>
+
+                        <!-- Special Instructions -->
+                        <div>
+                            <label for="modal-instructions" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-comment mr-2 text-gray-400"></i>Special Instructions
+                            </label>
+                            <textarea id="modal-instructions" name="instructions" rows="2"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-none"
+                                placeholder="Any special requests or delivery instructions"></textarea>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- OTP Verification Section -->
+                <div id="modal-otp-section" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                        Verify Your Phone Number
+                    </h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        We've sent a verification code to your phone number
+                    </p>
+
+                    <div class="flex space-x-2 mb-4">
+                        <input type="text" maxlength="1"
+                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
+                        <input type="text" maxlength="1"
+                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
+                        <input type="text" maxlength="1"
+                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
+                        <input type="text" maxlength="1"
+                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
+                        <input type="text" maxlength="1"
+                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
+                        <input type="text" maxlength="1"
+                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
+                    </div>
+
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-500">Didn't receive the code?</span>
+                        <button type="button" id="modal-resend-otp"
+                            class="text-blue-600 hover:text-blue-700 font-medium">
+                            Resend OTP
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-6 space-y-3">
+                    <button type="button" id="modal-verify-phone-btn" onclick="showModalOTPSection()"
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                        <i class="fas fa-shield-alt mr-2"></i>Verify Phone
+                        Number
                     </button>
-                    <button
-                        onclick="closeAllModals()"
-                        class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors"
-                    >
-                        Back to Catalog
+
+                    <button type="button" id="modal-confirm-order-btn" onclick="confirmModalOrder()" disabled
+                        class="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                        <i class="fas fa-check mr-2"></i>Confirm
+                        Order
+                    </button>
+
+                    <button type="button" onclick="orderModalViaWhatsApp()"
+                        class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                        <i class="fab fa-whatsapp mr-2 text-green-500"></i>Continue with WhatsApp
                     </button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Scripts -->
-        <script src="js/products.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/order-modal.js"></script>
-    </body>
+    <!-- Success Modal -->
+    <div id="modal-success-modal"
+        class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-2xl text-green-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+                Order Confirmed!
+            </h3>
+            <p class="text-gray-600 mb-6">
+                Thank you for your order. We'll contact you soon to confirm
+                delivery details.
+            </p>
+            <div class="space-y-3">
+                <button onclick="goModalToWhatsApp()"
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors">
+                    <i class="fab fa-whatsapp mr-2"></i>Chat with Us
+                </button>
+                <button onclick="closeAllModals()"
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Catalog
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/error-handler.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/order-modal.js"></script>
+</body>
+
 </html>

@@ -5,6 +5,30 @@
     scroll-behavior: smooth;
 }
 
+/* Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sr-only.focus:not-sr-only {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
 /* Hide scrollbar but keep functionality */
 .scrollbar-hide {
     -ms-overflow-style: none;
@@ -16,11 +40,20 @@
 }
 
 /* Custom line clamp utilities */
+.line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    line-clamp: 1;
+}
+
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-clamp: 2;
 }
 
 .line-clamp-3 {
@@ -28,6 +61,13 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-clamp: 3;
+}
+
+/* Ensure consistent title height */
+.product-name {
+    min-height: 1.75rem; /* Ensure consistent height for single line */
+    line-height: 1.75rem;
 }
 
 /* Filter button styles */
@@ -51,11 +91,97 @@
 /* Product card hover effects */
 .product-card {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .product-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Ensure consistent card heights in grid */
+#product-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1.5rem;
+    align-items: stretch;
+    max-width: 380px; /* Slightly narrower for better mobile experience */
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Tablet: 2 columns */
+@media (min-width: 640px) {
+    #product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 720px; /* More compact for cleaner look */
+        gap: 1.75rem;
+        padding: 0 1.5rem;
+    }
+}
+
+/* Desktop: 3 columns - sweet spot for most screens */
+@media (min-width: 1024px) {
+    #product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1000px; /* More contained, cleaner appearance */
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+}
+
+/* Large desktop: Still 3 columns but with more breathing room */
+@media (min-width: 1400px) {
+    #product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1100px; /* Keep it contained and elegant */
+        gap: 2.5rem;
+        padding: 0 2rem;
+    }
+}
+
+/* Ultra-wide screens: Keep it elegant with 3 columns and more spacing */
+@media (min-width: 1800px) {
+    #product-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 1200px; /* Still contained for premium feel */
+        gap: 3rem;
+        padding: 0 3rem;
+    }
+}
+
+/* Touch feedback for mobile */
+.product-card:active {
+    transform: translateY(-2px) scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Image loading states */
+.product-image {
+    transition: opacity 0.3s ease;
+    background-color: #f3f4f6;
+}
+
+.product-image.loading {
+    opacity: 0.7;
+}
+
+.product-image.error {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 3rem;
+    background-color: #f9fafb;
+}
+
+/* Lazy loading placeholder */
+.product-image[data-src] {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
 }
 
 /* Button hover animations */
@@ -266,6 +392,37 @@
         font-size: 0.875rem;
         padding: 0.5rem 0.75rem;
     }
+    
+    /* Optimize button layout for mobile */
+    .product-card .flex.space-x-3 {
+        gap: 0.75rem;
+    }
+    
+    .product-card .order-btn,
+    .product-card .whatsapp-btn {
+        font-size: 0.875rem;
+        min-height: 44px;
+        height: 44px;
+        border-radius: 10px;
+    }
+    
+    .product-card .order-btn {
+        padding: 0 1.25rem;
+    }
+    
+    .product-card .whatsapp-btn {
+        padding: 0 1rem;
+        min-width: 90px;
+    }
+    
+    /* Make view icon more prominent on mobile */
+    .view-icon-btn {
+        padding: 0.625rem;
+    }
+    
+    .view-icon-btn i {
+        font-size: 1rem;
+    }
 }
 
 /* Large screen optimizations */
@@ -299,9 +456,60 @@
 /* Custom focus styles for better accessibility */
 button:focus-visible,
 input:focus-visible,
-textarea:focus-visible {
+textarea:focus-visible,
+a:focus-visible {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
+    border-radius: 0.25rem;
+}
+
+/* Enhanced focus for interactive elements */
+.filter-btn:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .filter-btn {
+        border: 2px solid currentColor;
+    }
+    
+    .product-card {
+        border: 2px solid #000;
+    }
+    
+    button {
+        border: 2px solid currentColor;
+    }
+}
+
+/* Focus management for modals */
+.modal-open {
+    overflow: hidden;
+}
+
+.modal-open .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+}
+
+/* Improved button states */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+button:disabled:hover {
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 /* WhatsApp button specific styling */
@@ -470,11 +678,248 @@ textarea:focus-visible {
     }
 }
 
+/* View icon button styles */
+.view-icon-btn {
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+}
+
+.view-icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.view-icon-btn:active {
+    transform: scale(0.95);
+}
+
+/* Clickable product title styles */
+.product-name[role="button"] {
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.product-name[role="button"]:hover {
+    color: #2563eb;
+    text-decoration: underline;
+    text-decoration-color: #3b82f6;
+    text-underline-offset: 2px;
+}
+
+.product-name[role="button"]:focus {
+    color: #2563eb;
+}
+
+/* Add a subtle indicator that the title is clickable */
+.product-name[role="button"]::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'/%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.product-name[role="button"]:hover::after {
+    opacity: 0.5;
+}
+
+/* Enhanced button spacing in card footer */
+.product-card .flex.space-x-3 button {
+    min-height: 48px; /* Optimal touch target - slightly taller for better aesthetics */
+    height: 48px; /* Fixed height for consistency */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px; /* More refined rounded corners */
+    font-size: 0.9rem; /* Slightly smaller text for sleeker look */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
+}
+
+/* Improved card footer button styles */
+.product-card .order-btn,
+.product-card .whatsapp-btn {
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    outline: none;
+}
+
+/* Refined hover effects */
+.product-card .order-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+}
+
+.product-card .whatsapp-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+}
+
+/* Active states for better feedback */
+.product-card .order-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.product-card .whatsapp-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Icon spacing improvements */
+.product-card button i {
+    flex-shrink: 0;
+    font-size: 0.875rem; /* Slightly smaller icons for better proportion */
+}
+
+/* Primary button (Order Now) - sleeker styling */
+.product-card .order-btn {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    box-shadow: 0 4px 14px rgba(79, 70, 229, 0.15);
+    color: white;
+}
+
+.product-card .order-btn:hover {
+    background: linear-gradient(135deg, #4338ca 0%, #2563eb 100%);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.25);
+}
+
+/* WhatsApp button - sleeker styling */
+.product-card .whatsapp-btn {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.15);
+    color: white;
+    min-width: 100px; /* Ensure consistent width */
+}
+
+.product-card .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+    box-shadow: 0 8px 25px rgba(5, 150, 105, 0.25);
+}
+
+/* Button text and icon alignment */
+.product-card button {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.product-card button i {
+    vertical-align: middle;
+}
+
+/* Subtle button press animation */
+@keyframes button-press {
+    0% { transform: translateY(-2px); }
+    50% { transform: translateY(0); }
+    100% { transform: translateY(-1px); }
+}
+
+.product-card button:active {
+    animation: button-press 0.15s ease-out;
+}
+
+/* Enhanced focus states for accessibility - individual elements only */
+.product-card button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Focus states for clickable title */
+.product-card .product-name:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Focus states for read more button */
+.product-card .product-description-toggle:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Focus states for view icon button */
+.product-card .view-icon-btn:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Remove any focus-within effects on the card itself */
+.product-card:focus-within {
+    /* No additional styling - let individual elements handle their own focus */
+}
+
+/* Improved button proportions */
+.product-card .order-btn {
+    flex: 2; /* Give more space to primary action */
+}
+
+.product-card .whatsapp-btn {
+    flex: 1; /* Secondary action takes less space */
+}
+
+/* Button loading state (for future use) */
+.product-card button.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.product-card button.loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+/* Ensure consistent card content layout */
+.product-card .p-4 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0; /* Allow flex items to shrink */
+}
+
+/* Consistent button container positioning */
+.product-card .flex.space-x-3.mt-auto {
+    margin-top: auto;
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+/* Ensure description container takes available space */
+.product-description-container.flex-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 3rem; /* Minimum height for 2 lines of description */
+}
+
+.product-card .whatsapp-btn:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
 /* Loading skeleton styles */
 .skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
     animation: skeleton-loading 1.5s infinite;
+    border-radius: 0.5rem;
 }
 
 @keyframes skeleton-loading {
@@ -484,4 +929,50 @@ textarea:focus-visible {
     100% {
         background-position: -200% 0;
     }
+}
+
+/* Skeleton card structure */
+.skeleton-card {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid #f3f4f6;
+}
+
+.skeleton-image {
+    width: 100%;
+    height: 12rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+.skeleton-text {
+    height: 1rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.skeleton-text.short {
+    width: 60%;
+}
+
+.skeleton-text.medium {
+    width: 80%;
+}
+
+.skeleton-text.long {
+    width: 100%;
+}
+
+.skeleton-button {
+    height: 2.5rem;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 0.5rem;
 }
