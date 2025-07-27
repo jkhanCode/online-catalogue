@@ -41,8 +41,117 @@ function loadFocusProducts() {
     
     // Initialize carousels after products are loaded
     setTimeout(() => {
-        initializeImageCarousels();
+        initializeMediaCarousels();
     }, 100);
+}
+
+// Helper function to detect if media is video
+function isVideo(mediaSrc) {
+    const videoExtensions = ['.mp4', '.webm', '.ogg', '.mov', '.avi'];
+    return videoExtensions.some(ext => mediaSrc.toLowerCase().includes(ext));
+}
+
+// Create video element
+function createVideoElement(videoSrc, productName, index) {
+    return `
+        <video 
+            src="${videoSrc}" 
+            alt="${productName} - Video ${index + 1}"
+            class="w-full h-80 object-cover cursor-pointer"
+            controls
+            preload="metadata"
+            poster=""
+            onloadstart="handleMediaLoad(this)"
+            onerror="handleMediaError(this)"
+        >
+            Your browser does not support the video tag.
+        </video>
+    `;
+}
+
+// Create image element
+function createImageElement(imageSrc, productName, index) {
+    return `
+        <img 
+            src="${imageSrc}" 
+            alt="${productName} - Image ${index + 1}"
+            class="w-full h-80 object-cover cursor-pointer transition-transform duration-300 hover:scale-105"
+            loading="lazy"
+            onclick="openImageModal('${imageSrc}', '${productName}')"
+            onload="handleMediaLoad(this)"
+            onerror="handleMediaError(this)"
+        >
+    `;
+}
+
+// Handle media loading
+function handleMediaLoad(element) {
+    element.style.opacity = '1';
+}
+
+// Handle media errors
+function handleMediaError(element) {
+    if (element.tagName === 'VIDEO') {
+        element.outerHTML = `
+            <div class="w-full h-80 bg-gray-200 flex items-center justify-center">
+                <div class="text-center text-gray-500">
+                    <i class="fas fa-video-slash text-4xl mb-2"></i>
+                    <p>Video unavailable</p>
+                </div>
+            </div>
+        `;
+    } else {
+        element.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23f3f4f6"/><text x="200" y="150" text-anchor="middle" fill="%236b7280" font-family="Arial, sans-serif" font-size="16">Image not available</text></svg>';
+    }
+}
+
+// Setup dynamic rating stars
+function setupRatingStars(focusElement, rating) {
+    const starsContainer = focusElement.querySelector('.focus-rating-stars');
+    const numericRating = parseFloat(rating) || 0;
+    const fullStars = Math.floor(numericRating);
+    const hasHalfStar = numericRating % 1 >= 0.5;
+    
+    starsContainer.innerHTML = '';
+    
+    // Add full stars
+    for (let i = 0; i < fullStars; i++) {
+        const star = document.createElement('i');
+        star.className = 'fas fa-star text-sm';
+        starsContainer.appendChild(star);
+    }
+    
+    // Add half star if needed
+    if (hasHalfStar) {
+        const halfStar = document.createElement('i');
+        halfStar.className = 'fas fa-star-half-alt text-sm';
+        starsContainer.appendChild(halfStar);
+    }
+    
+    // Add empty stars to make 5 total
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+        const star = document.createElement('i');
+        star.className = 'far fa-star text-sm';
+        starsContainer.appendChild(star);
+    }
+}
+
+// Setup stock status with proper styling
+function setupStockStatus(focusElement, stock) {
+    const stockElement = focusElement.querySelector('.focus-stock');
+    const stockNum = parseInt(stock);
+    
+    if (stockNum > 10) {
+        stockElement.textContent = 'In Stock';
+        stockElement.className = 'focus-stock font-semibold text-green-600';
+    } else if (stockNum > 0) {
+        stockElement.textContent = `Low Stock (${stockNum})`;
+        stockElement.className = 'focus-stock font-semibold text-orange-600';
+    } else {
+        stockElement.textContent = 'Out of Stock';
+        stockElement.className = 'focus-stock font-semibold text-red-600';
+    }
 }
 
 // Create individual focus product element
@@ -58,19 +167,52 @@ function createFocusProduct(product, index) {
     focusElement.querySelector('.focus-brand').textContent = product.brand;
     focusElement.querySelector('.focus-stock').textContent = product.stock;
     
-    // Setup image carousel
-    const swiperWrapper = focusElement.querySelector('.swiper-wrapper');
-    const images = product.images || [product.image];
+    // Handle discount pricing
+    if (product.originalPrice && product.discount) {
+        const originalPriceEl = focusElement.querySelector('.focus-original-price');
+        const discountEl = focusElement.querySelector('.focus-discount');
+        
+        originalPriceEl.textContent = product.originalPrice;
+        originalPriceEl.classList.remove('hidden');
+        
+        discountEl.textContent = `-${product.discount}%`;
+        discountEl.classList.remove('hidden');
+    }
     
-    images.forEach((imageSrc, imgIndex) => {
+    // Setup enhanced media carousel (images + videos)
+    const swiperWrapper = focusElement.querySelector('.swiper-wrapper');
+    const mediaItems = product.media || product.images || [product.image];
+    
+    mediaItems.forEach((mediaSrc, mediaIndex) => {
         const slide = document.createElement('div');
         slide.className = 'swiper-slide';
-        slide.innerHTML = `<img src="${imageSrc}" alt="${product.name} - Image ${imgIndex + 1}" class="w-full h-80 object-cover cursor-pointer" onclick="openImageModal('${imageSrc}', '${product.name}')">`;
+        
+        // Auto-detect media type
+        if (isVideo(mediaSrc)) {
+            slide.innerHTML = createVideoElement(mediaSrc, product.name, mediaIndex);
+        } else {
+            slide.innerHTML = createImageElement(mediaSrc, product.name, mediaIndex);
+        }
+        
         swiperWrapper.appendChild(slide);
     });
     
+    // Update media counter
+    const currentMediaEl = focusElement.querySelector('.current-media');
+    const totalMediaEl = focusElement.querySelector('.total-media');
+    if (currentMediaEl && totalMediaEl) {
+        currentMediaEl.textContent = '1';
+        totalMediaEl.textContent = mediaItems.length.toString();
+    }
+    
+    // Setup dynamic rating stars
+    setupRatingStars(focusElement, product.rating);
+    
     // Setup expandable description
     setupExpandableDescription(focusElement, product.description);
+    
+    // Setup stock status with proper styling
+    setupStockStatus(focusElement, product.stock);
     
     // Add data attribute for tracking
     const productFocus = focusElement.querySelector('.product-focus');
@@ -83,24 +225,184 @@ function createFocusProduct(product, index) {
 // Setup event listeners for focus view
 function setupFocusEventListeners() {
     const container = document.getElementById('product-container');
-    const whatsappBtn = document.getElementById('focus-whatsapp-btn');
     
     // Scroll event listener for navigation update
     container.addEventListener('scroll', debounce(updateCurrentIndex, 100));
     
-    // WhatsApp button click
-    whatsappBtn.addEventListener('click', () => {
-        const currentProduct = focusProducts[currentFocusIndex];
-        if (currentProduct) {
-            openWhatsApp(currentProduct);
-        }
-    });
-    
     // Keyboard navigation
     document.addEventListener('keydown', handleKeyboardNavigation);
     
-    // Touch/swipe gestures
+    // Touch/swipe gestures for product navigation
     setupTouchNavigation(container);
+}
+
+// Initialize enhanced media carousels
+function initializeMediaCarousels() {
+    const carousels = document.querySelectorAll('.focus-media-carousel');
+    carousels.forEach((carousel, index) => {
+        // Add unique class for multiple carousels
+        const uniqueClass = `media-carousel-${index}`;
+        carousel.classList.add(uniqueClass);
+        
+        new Swiper(`.${uniqueClass}`, {
+            loop: false,
+            speed: 600,
+            effect: 'slide',
+            spaceBetween: 0,
+            centeredSlides: true,
+            pagination: {
+                el: `.${uniqueClass} .swiper-pagination`,
+                clickable: true,
+                dynamicBullets: true,
+                dynamicMainBullets: 3,
+            },
+            navigation: {
+                nextEl: `.${uniqueClass} .swiper-button-next`,
+                prevEl: `.${uniqueClass} .swiper-button-prev`,
+            },
+            keyboard: {
+                enabled: true,
+                onlyInViewport: true,
+            },
+            mousewheel: {
+                forceToAxis: true,
+            },
+            touchRatio: 1,
+            threshold: 10,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            preloadImages: false,
+            lazy: {
+                loadPrevNext: true,
+                loadOnTransitionStart: true,
+            },
+            on: {
+                slideChange: function() {
+                    // Update media counter
+                    const currentMediaEl = carousel.querySelector('.current-media');
+                    if (currentMediaEl) {
+                        currentMediaEl.textContent = (this.realIndex + 1).toString();
+                    }
+                    
+                    // Pause videos when not active
+                    this.slides.forEach(slide => {
+                        const video = slide.querySelector('video');
+                        if (video && !slide.classList.contains('swiper-slide-active')) {
+                            video.pause();
+                        }
+                    });
+                },
+                slideChangeTransitionEnd: function() {
+                    // Auto-play video in active slide if it exists
+                    const activeSlide = this.slides[this.activeIndex];
+                    const video = activeSlide?.querySelector('video');
+                    if (video) {
+                        video.currentTime = 0;
+                        // Don't auto-play, let user control
+                    }
+                }
+            }
+        });
+    });
+}
+
+// Enhanced action button functions
+function shareProduct() {
+    const currentProduct = focusProducts[currentFocusIndex];
+    if (!currentProduct) return;
+    
+    const shareData = {
+        title: currentProduct.name,
+        text: `Check out this ${currentProduct.name} - ${currentProduct.price}`,
+        url: window.location.href
+    };
+    
+    if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        navigator.share(shareData).catch(console.error);
+    } else {
+        // Fallback: copy to clipboard
+        const shareText = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
+        
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(shareText).then(() => {
+                showToast('Link copied to clipboard!', 'success');
+            }).catch(() => {
+                fallbackCopyToClipboard(shareText);
+            });
+        } else {
+            fallbackCopyToClipboard(shareText);
+        }
+    }
+}
+
+function openWhatsApp() {
+    const currentProduct = focusProducts[currentFocusIndex];
+    if (!currentProduct) return;
+    
+    const message = `Hi! I'm interested in: ${currentProduct.name} - ${currentProduct.price}. Can you provide more details?`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
+function orderOnline() {
+    const currentProduct = focusProducts[currentFocusIndex];
+    if (!currentProduct) return;
+    
+    // For now, this could redirect to an order page or show a modal
+    // You can customize this based on your needs
+    showToast('Redirecting to order page...', 'info');
+    
+    // Example: redirect to order page with product ID
+    setTimeout(() => {
+        window.location.href = `order.html?id=${currentProduct.id}`;
+    }, 1000);
+}
+
+// Helper function for fallback clipboard
+function fallbackCopyToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+        document.execCommand('copy');
+        showToast('Link copied to clipboard!', 'success');
+    } catch (err) {
+        showToast('Could not copy link. Please share manually.', 'error');
+    }
+    
+    document.body.removeChild(textArea);
+}
+
+// Enhanced toast notification
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
+    
+    toast.className = `fixed top-20 right-4 ${bgColor} text-white px-4 py-3 rounded-lg z-50 transform translate-x-full transition-transform duration-300 shadow-lg`;
+    toast.innerHTML = `
+        <div class="flex items-center">
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.transform = 'translateX(0)';
+    }, 100);
+    
+    setTimeout(() => {
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 300);
+    }, 3000);
 }
 
 // Handle keyboard navigation

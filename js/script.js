@@ -187,14 +187,17 @@ function createProductCard(product, index = 0) {
         setupProductCardDescription(cardElement, product.description || 'No description available');
         
         // Add event listeners with error handling
-        const viewIconBtn = cardElement.querySelector('.view-icon-btn');
+        const shareIconBtn = cardElement.querySelector('.share-icon-btn');
         const productTitle = cardElement.querySelector('.product-name');
         const orderBtn = cardElement.querySelector('.order-btn');
         const whatsappBtn = cardElement.querySelector('.whatsapp-btn');
+        const shareBtn = cardElement.querySelector('.share-btn');
         
         // Add accessibility attributes
         orderBtn.setAttribute('aria-label', `Order ${product.name}`);
         whatsappBtn.setAttribute('aria-label', `Order ${product.name} via WhatsApp`);
+        if (shareBtn) shareBtn.setAttribute('aria-label', `Share ${product.name}`);
+        if (shareIconBtn) shareIconBtn.setAttribute('aria-label', `Share ${product.name}`);
         
         // View product handler function
         const handleViewProduct = (e) => {
@@ -207,14 +210,32 @@ function createProductCard(product, index = 0) {
             }
         };
         
-        // View product event listeners
-        viewIconBtn.addEventListener('click', handleViewProduct);
+        // Share product handler function
+        const handleShareProduct = (e) => {
+            e.preventDefault();
+            try {
+                shareProduct(product.name, product.price, product.image, window.location.href);
+            } catch (error) {
+                console.error('Error sharing product:', error);
+                showToast('Unable to share product', 'error');
+            }
+        };
+        
+        // Product title click for viewing details
         productTitle.addEventListener('click', handleViewProduct);
         productTitle.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 handleViewProduct(e);
             }
         });
+        
+        // Share button event listeners
+        if (shareIconBtn) {
+            shareIconBtn.addEventListener('click', handleShareProduct);
+        }
+        if (shareBtn) {
+            shareBtn.addEventListener('click', handleShareProduct);
+        }
         
         orderBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -377,8 +398,7 @@ function searchProducts(products, searchTerm) {
 function openFocusView(productId) {
     const urlParams = new URLSearchParams();
     urlParams.set('id', productId);
-    urlParams.set('index', getProductIndex(productId));
-    window.location.href = `focus.html?${urlParams.toString()}`;
+    window.location.href = `product.html?${urlParams.toString()}`;
 }
 
 // Open order page for a specific product
@@ -683,47 +703,58 @@ function updateActiveFilter(activeButton) {
     activeButton.setAttribute('aria-pressed', 'true');
 }
 
-// Setup expandable description for product card
+// Setup trimmed description for product card (no read more functionality)
 function setupProductCardDescription(cardElement, description) {
     const descriptionElement = cardElement.querySelector('.product-description');
-    const toggleButton = cardElement.querySelector('.product-description-toggle');
     
     // Convert newlines to spaces for card display
     const cleanDescription = description.replace(/\n+/g, ' ');
     
-    // Check if description is long enough to need expansion
-    if (cleanDescription.length <= 120) {
-        // Short description, show all
-        descriptionElement.textContent = cleanDescription;
-        return;
+    // Always show trimmed content with line-clamp-2 for consistent layout
+    descriptionElement.textContent = cleanDescription;
+    descriptionElement.classList.add('line-clamp-2');
+}
+
+// Product sharing functionality
+function shareProduct(productName, productPrice, productImage, productUrl) {
+    // If no parameters provided, share the main page
+    if (!productName) {
+        productName = 'Our Amazing Products';
+        productPrice = '';
+        productUrl = window.location.href;
     }
     
-    // Show truncated text initially
-    const shortText = cleanDescription.substring(0, 120) + '...';
-    const fullText = cleanDescription;
-    
-    descriptionElement.textContent = shortText;
-    descriptionElement.classList.remove('line-clamp-2');
-    toggleButton.classList.remove('hidden');
-    
-    let isExpanded = false;
-    
-    toggleButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        isExpanded = !isExpanded;
-        
-        if (isExpanded) {
-            descriptionElement.textContent = fullText;
-            descriptionElement.classList.remove('line-clamp-2');
-            toggleButton.querySelector('.toggle-text').textContent = 'Show less';
-            toggleButton.querySelector('.toggle-icon').style.transform = 'rotate(180deg)';
-        } else {
-            descriptionElement.textContent = shortText;
-            descriptionElement.classList.add('line-clamp-2');
-            toggleButton.querySelector('.toggle-text').textContent = 'Read more';
-            toggleButton.querySelector('.toggle-icon').style.transform = 'rotate(0deg)';
-        }
-    });
+    const productData = {
+        title: `${productName} - Shop with Us`,
+        text: productPrice ? 
+            `Check out this amazing ${productName} for just ${productPrice}!` : 
+            `Check out our amazing products collection!`,
+        url: productUrl || window.location.href
+    };
+
+    // Check if Web Share API is supported
+    if (navigator.share && navigator.canShare && navigator.canShare(productData)) {
+        navigator.share(productData)
+            .then(() => {
+                showToast('Product shared successfully!', 'success');
+            })
+            .catch((error) => {
+                console.log('Error sharing:', error);
+                shareViaWhatsApp(productName, productPrice, productUrl);
+            });
+    } else {
+        // Fallback: Share via WhatsApp
+        shareViaWhatsApp(productName, productPrice, productUrl);
+    }
+}
+
+// Share via WhatsApp function
+function shareViaWhatsApp(productName, productPrice, productUrl) {
+    const baseMessage = productPrice ? 
+        `Check out this amazing product: *${productName}* for just *${productPrice}*!` :
+        `Check out our amazing products collection!`;
+    const message = `${baseMessage}\n\n${productUrl || window.location.href}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    showToast('Sharing via WhatsApp...', 'info');
 }

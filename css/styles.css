@@ -1,8 +1,861 @@
-/* Custom styles to complement Tailwind CSS */
+/* Premium Style Enhancements */
 
-/* Smooth scrolling for all elements */
-* {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --premium-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    --premium-shadow-hover: 0 16px 48px 0 rgba(31, 38, 135, 0.5);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-attachment: fixed;
+}
+
+/* Premium Glass Header */
+.premium-glass-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Morphing Navigation Buttons */
+.nav-btn-morph {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-btn-morph:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.nav-btn-morph:active {
+    transform: scale(0.95);
+}
+
+.nav-btn-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+}
+
+/* Circular Progress Ring */
+.progress-ring-container {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+    stroke-dasharray: 176;
+    stroke-dashoffset: 0;
+    opacity: 0.1;
+}
+
+.progress-ring__progress {
+    stroke-dasharray: 176;
+    stroke-dashoffset: 176;
+    transition: stroke-dashoffset 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+}
+
+/* Premium Product Cards */
+.product-card-premium {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.product-card-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card-premium:hover::before {
+    opacity: 1;
+}
+
+.product-card-premium:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: var(--premium-shadow-hover);
+}
+
+/* 3D Tilt Effect */
+.tilt-effect {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.tilt-effect:hover {
+    transform: perspective(1000px) rotateY(10deg) rotateX(-10deg);
+}
+
+/* Floating Rating Badge */
+.rating-badge-float {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--accent-gradient);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
+    animation: pulse-float 2s infinite;
+}
+
+@keyframes pulse-float {
+    0%, 100% {
+        transform: translateY(0);
+        box-shadow: 0 4px 20px rgba(79, 172, 254, 0.4);
+    }
+    50% {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(79, 172, 254, 0.6);
+    }
+}
+
+/* Magnetic Hover Effect */
+.magnetic-btn {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+/* Dynamic Background Gradients */
+.product-focus {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: background 0.5s ease;
+}
+
+.product-focus[data-category="electronics"] {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.product-focus[data-category="fashion"] {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.product-focus[data-category="home"] {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+.product-focus[data-category="beauty"] {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+}
+
+/* Enhanced Media Carousel (Images + Videos) */
+.focus-media-carousel {
+    perspective: 1000px;
+    border-radius: 24px;
+    min-height: 320px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.focus-media-carousel .swiper-slide {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.focus-media-carousel .swiper-slide img,
+.focus-media-carousel .swiper-slide video {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.focus-media-carousel .swiper-slide-active img,
+.focus-media-carousel .swiper-slide-active video {
+    transform: scale(1.02);
+}
+
+.focus-media-carousel .swiper-slide:not(.swiper-slide-active) img,
+.focus-media-carousel .swiper-slide:not(.swiper-slide-active) video {
+    transform: scale(0.98);
+    opacity: 0.9;
+}
+
+/* Enhanced navigation buttons */
+.focus-media-carousel .swiper-button-next,
+.focus-media-carousel .swiper-button-prev {
+    width: 48px !important;
+    height: 48px !important;
+    margin-top: -24px !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.focus-media-carousel .swiper-button-next:hover,
+.focus-media-carousel .swiper-button-prev:hover {
+    background: rgba(0, 0, 0, 0.8) !important;
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+}
+
+.focus-media-carousel .swiper-button-next:after,
+.focus-media-carousel .swiper-button-prev:after {
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
+
+/* Enhanced pagination */
+.focus-media-carousel .swiper-pagination {
+    bottom: 16px !important;
+}
+
+.focus-media-carousel .swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1 !important;
+    transition: all 0.3s ease !important;
+    margin: 0 5px !important;
+}
+
+.focus-media-carousel .swiper-pagination-bullet-active {
+    background: white !important;
+    transform: scale(1.4);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Product navigation buttons */
+.product-nav-btn {
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.product-nav-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+.product-nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* Enhanced action buttons */
+.action-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px 0 rgba(0, 0, 0, 0.15);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+.action-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.action-btn:hover::before {
+    left: 100%;
+}
+
+/* Mobile action buttons */
+@media (max-width: 768px) {
+    .action-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 12px 8px !important;
+    }
+    
+    .action-btn i {
+        margin: 0 !important;
+        margin-bottom: 4px !important;
+    }
+}
+
+/* Enhanced category badge */
+.focus-category {
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Media counter styling */
+.current-media, .total-media {
+    font-weight: 700;
+}
+
+/* Product info enhancements */
+.focus-name {
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+}
+
+.focus-description {
+    line-height: 1.6;
+}
+
+.focus-price {
+    background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+}
+
+/* Discount styling */
+.focus-original-price {
+    position: relative;
+}
+
+.focus-discount {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Rating stars enhancement */
+.focus-rating-stars i {
+    transition: transform 0.2s ease, color 0.2s ease;
+    margin-right: 2px;
+}
+
+.focus-rating-stars:hover i {
+    transform: scale(1.1);
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .focus-media-carousel {
+        min-height: 280px;
+    }
+    
+    .focus-media-carousel .swiper-slide img,
+    .focus-media-carousel .swiper-slide video {
+        height: 280px;
+    }
+    
+    .focus-media-carousel .swiper-button-next,
+    .focus-media-carousel .swiper-button-prev {
+        width: 40px !important;
+        height: 40px !important;
+        margin-top: -20px !important;
+    }
+    
+    .focus-media-carousel .swiper-button-next:after,
+    .focus-media-carousel .swiper-button-prev:after {
+        font-size: 14px !important;
+    }
+    
+    .product-nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+    }
+}
+
+/* Touch feedback */
+@media (hover: none) and (pointer: coarse) {
+    .focus-media-carousel .swiper-slide {
+        transition: transform 0.2s ease;
+    }
+    
+    .focus-media-carousel .swiper-slide:active {
+        transform: scale(0.98);
+    }
+    
+    .action-btn:hover {
+        transform: none;
+        box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.1);
+    }
+    
+    .action-btn:active {
+        transform: scale(0.98);
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Video controls styling */
+.focus-media-carousel video::-webkit-media-controls-panel {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+}
+
+.focus-media-carousel video::-webkit-media-controls-play-button,
+.focus-media-carousel video::-webkit-media-controls-start-playback-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+}
+
+/* Toast animations */
+.toast-enter {
+    transform: translateX(100%);
+}
+
+.toast-enter-active {
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+}
+
+.toast-exit {
+    transform: translateX(0);
+}
+
+.toast-exit-active {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+/* Image loading states */
+.image-loading {
+    transition: opacity 0.3s ease;
+}
+
+.image-loaded .image-loading {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Stock status styling */
+.focus-stock {
+    transition: color 0.3s ease;
+}
+
+/* Rating stars animation */
+.focus-rating-stars i {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.focus-rating-stars:hover i {
+    transform: scale(1.1);
+}
+
+/* Navigation dots styling */
+#nav-dots button {
+    transition: all 0.3s ease;
+}
+
+#nav-dots button:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+/* Error modal animations */
+#error-modal {
+    backdrop-filter: blur(8px);
+    transition: opacity 0.3s ease;
+}
+
+#error-modal:not(.hidden) {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Loading state animations */
+#loading-state {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Performance optimizations */
+.product-focus {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+.swiper-slide img {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .animate-spin,
+    .animate-bounce,
+    .pulse-float {
+        animation: none;
+    }
+    
+    .nav-btn-morph:hover {
+        transform: none;
+    }
+    
+    .magnetic-btn {
+        transition: none;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+button:focus-visible,
+.nav-btn-morph:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .premium-glass-header {
+        background: rgba(0, 0, 0, 0.9);
+        border-bottom: 2px solid white;
+    }
+    
+    .nav-btn-morph {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid white;
+    }
+}
+
+.focus-image-carousel .swiper-slide {
+    transform-style: preserve-3d;
+    transition: transform 0.3s ease;
+}
+
+.focus-image-carousel .swiper-slide-active {
+    transform: translateZ(50px);
+}
+
+.focus-image-carousel .swiper-slide-prev,
+.focus-image-carousel .swiper-slide-next {
+    transform: translateZ(0) scale(0.9);
+    opacity: 0.7;
+}
+
+/* Premium Floating Action Button */
+.fab-premium {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background: var(--accent-gradient);
+    box-shadow: 0 8px 30px rgba(79, 172, 254, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    z-index: 100;
+}
+
+.fab-premium:hover {
+    width: 180px;
+    border-radius: 30px;
+    box-shadow: 0 12px 40px rgba(79, 172, 254, 0.6);
+}
+
+.fab-premium:hover .fab-text {
+    opacity: 1;
+    margin-left: 8px;
+}
+
+.fab-text {
+    position: absolute;
+    right: 24px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Neumorphism Elements */
+.neumorphic {
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+    border-radius: 20px;
+}
+
+.neumorphic-inset {
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow: inset 20px 20px 60px #bebebe, inset -20px -20px 60px #ffffff;
+    border-radius: 20px;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+/* Animated Gradient Overlays */
+.gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #06c, #50c878);
+    background-size: 300% 300%;
+    animation: gradient-shift 15s ease infinite;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Advanced Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.display-font {
+    font-weight: 900;
+    font-size: clamp(2rem, 5vw, 4rem);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Micro-interactions */
+.micro-interaction {
+    position: relative;
+    overflow: hidden;
+}
+
+.micro-interaction::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.micro-interaction:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Loading Animations */
+.shimmer-load {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Enhanced Scroll Animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Container Queries for Components */
+@container (min-width: 400px) {
+    .responsive-card {
+        flex-direction: row;
+        gap: 20px;
+    }
+}
+
+/* Dynamic Viewport Units */
+.dynamic-height {
+    height: 100vh;
+    height: 100dvh;
+}
+
+/* Orientation-aware Layouts */
+@media (orientation: landscape) {
+    .orientation-aware {
+        flex-direction: row;
+    }
+}
+
+@media (orientation: portrait) {
+    .orientation-aware {
+        flex-direction: column;
+    }
+}
+
+/* Hardware Acceleration */
+.gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* Enhanced Focus Styles */
+:focus-visible {
+    outline: 2px solid #4facfe;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Smooth scroll behavior */
+html {
     scroll-behavior: smooth;
+}
+
+/* Enhanced Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes rotate360 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+    will-change: transform;
+}
+
+.contain-layout {
+    contain: layout style paint;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 /* Screen reader only content */
@@ -619,9 +1472,7 @@ button:disabled:hover {
     color: #2563eb;
 }
 
-.toggle-icon {
-    transition: transform 0.2s ease;
-}
+
 
 /* Image modal styles */
 #image-modal {
@@ -635,27 +1486,6 @@ button:disabled:hover {
 /* Product card description enhancement */
 .product-description-container {
     position: relative;
-}
-
-.product-description-toggle {
-    background: none;
-    border: none;
-    color: #3b82f6;
-    cursor: pointer;
-    font-size: 0.875rem;
-    font-weight: 500;
-    padding: 0;
-    margin-top: 0.5rem;
-    transition: color 0.2s ease;
-}
-
-.product-description-toggle:hover {
-    color: #2563eb;
-}
-
-.product-description-toggle .toggle-icon {
-    margin-left: 0.25rem;
-    transition: transform 0.2s ease;
 }
 
 /* Enhanced carousel for mobile */
@@ -841,23 +1671,13 @@ button:disabled:hover {
     border-radius: 4px;
 }
 
-/* Focus states for read more button */
-.product-card .product-description-toggle:focus-visible {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-    border-radius: 4px;
-}
+
 
 /* Focus states for view icon button */
 .product-card .view-icon-btn:focus-visible {
     outline: 2px solid #ffffff;
     outline-offset: 2px;
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
-}
-
-/* Remove any focus-within effects on the card itself */
-.product-card:focus-within {
-    /* No additional styling - let individual elements handle their own focus */
 }
 
 /* Improved button proportions */
@@ -975,4 +1795,726 @@ button:disabled:hover {
     background-size: 200% 100%;
     animation: skeleton-loading 1.5s infinite;
     border-radius: 0.5rem;
+}
+/* Enhanced Focus View Styles */
+
+/* Dynamic Star Rating Styles */
+.star-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star-rating i {
+    transition: color 0.2s ease;
+}
+
+.star-rating .fas.fa-star {
+    color: #fbbf24;
+}
+
+.star-rating .fas.fa-star-half-alt {
+    color: #fbbf24;
+}
+
+.star-rating .far.fa-star {
+    color: #d1d5db;
+}
+
+/* Enhanced Stock Status Badges */
+.focus-stock {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-align: center;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.focus-stock.bg-green-100 {
+    background-color: #dcfce7;
+    color: #166534;
+    border-color: #bbf7d0;
+}
+
+.focus-stock.bg-orange-100 {
+    background-color: #fed7aa;
+    color: #9a3412;
+    border-color: #fdba74;
+}
+
+.focus-stock.bg-red-100 {
+    background-color: #fecaca;
+    color: #991b1b;
+    border-color: #fca5a5;
+}
+
+/* Loading Skeleton Animations */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 0.5rem;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Enhanced Image Loading States */
+.focus-image-loading {
+    background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+}
+
+.focus-image-error {
+    background-color: #f9fafb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+}
+
+.focus-image-error::before {
+    content: "📷";
+    font-size: 2rem;
+    opacity: 0.5;
+}
+
+/* Pull-to-Refresh Indicator */
+#pull-indicator {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Toast Notifications */
+.toast-notification {
+    backdrop-filter: blur(4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+    font-weight: 500;
+    max-width: 320px;
+    word-wrap: break-word;
+}
+
+/* Enhanced WhatsApp Button Animation */
+#focus-whatsapp-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+#focus-whatsapp-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+#focus-whatsapp-btn:hover::before {
+    left: 100%;
+}
+
+/* Enhanced Carousel Styles */
+.focus-image-carousel {
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.focus-image-carousel .swiper-slide img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.focus-image-carousel .swiper-slide img:hover {
+    transform: scale(1.02);
+}
+
+.focus-image-carousel .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.6) !important;
+    opacity: 1 !important;
+    width: 8px !important;
+    height: 8px !important;
+    margin: 0 4px !important;
+    transition: all 0.3s ease !important;
+}
+
+.focus-image-carousel .swiper-pagination-bullet-active {
+    background: white !important;
+    transform: scale(1.2);
+}
+
+.focus-image-carousel .swiper-button-next,
+.focus-image-carousel .swiper-button-prev {
+    background: rgba(0, 0, 0, 0.5) !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    transition: all 0.3s ease !important;
+}
+
+.focus-image-carousel .swiper-button-next:hover,
+.focus-image-carousel .swiper-button-prev:hover {
+    background: rgba(0, 0, 0, 0.7) !important;
+    transform: scale(1.1);
+}
+
+/* Error State Styling */
+.product-focus-error {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+}
+
+.product-focus-error .error-icon {
+    animation: pulse-error 2s infinite;
+}
+
+@keyframes pulse-error {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Enhanced Smooth Scrolling */
+#product-container {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Improved Focus States for Accessibility */
+.focus-image-carousel .swiper-button-next:focus,
+.focus-image-carousel .swiper-button-prev:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced Description Toggle */
+.focus-description-toggle {
+    transition: all 0.2s ease;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+}
+
+.focus-description-toggle:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.focus-description-toggle:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Loading State for Images */
+.swiper-slide img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.swiper-slide img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Enhanced Mobile Optimizations */
+@media (max-width: 640px) {
+    .focus-image-carousel .swiper-button-next,
+    .focus-image-carousel .swiper-button-prev {
+        display: none !important;
+    }
+    
+    .focus-image-carousel .swiper-pagination {
+        bottom: 12px !important;
+    }
+    
+    #pull-indicator {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    .toast-notification {
+        max-width: 280px;
+        font-size: 0.875rem;
+    }
+}
+
+/* High Performance Animations */
+.focus-smooth-transition {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    .skeleton {
+        animation: none;
+        background: #f0f0f0;
+    }
+    
+    .focus-image-carousel .swiper-slide img {
+        transition: none;
+    }
+    
+    #focus-whatsapp-btn::before {
+        display: none;
+    }
+    
+    .toast-notification {
+        transition: none;
+    }
+}
+
+/* Dark Mode Enhancements (for future use) */
+@media (prefers-color-scheme: dark) {
+    .skeleton {
+        background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+        background-size: 200% 100%;
+    }
+    
+    #pull-indicator {
+        background: rgba(31, 41, 55, 0.9);
+        color: #f9fafb;
+    }
+}
+
+/* Performance Optimizations */
+.focus-image-carousel,
+.product-focus,
+#product-container {
+    contain: layout style paint;
+}
+
+/* Enhanced Accessibility */
+.focus-rating[aria-label] {
+    position: relative;
+}
+
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* Improved Button States */
+#focus-whatsapp-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+#focus-whatsapp-btn:disabled::before {
+    display: none;
+}
+
+/* Enhanced Category Badge */
+.focus-category {
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+/* Smooth Loading Transitions */
+.focus-content-loaded {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced Stock Status Hover Effects */
+.focus-stock:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Improved Star Rating Accessibility */
+.star-rating[role="img"] {
+    display: inline-flex;
+    align-items: center;
+}
+
+.star-rating[role="img"]::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* Enhanced Image Modal */
+#image-modal {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#image-modal img {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+}
+
+/* Optimized Carousel Performance */
+.swiper-wrapper {
+    will-change: transform;
+}
+
+.swiper-slide {
+    will-change: transform;
+}
+
+/* Quick Action Buttons */
+.quick-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 20px;
+    border-radius: 25px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 120px;
+    justify-content: flex-end;
+}
+
+.quick-action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.quick-action-btn i {
+    font-size: 18px;
+}
+
+.quick-action-label {
+    white-space: nowrap;
+}
+
+/* Navigation Dots */
+.nav-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.nav-dot.active {
+    background: white;
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.3);
+}
+
+.nav-dot::before {
+    content: attr(data-title);
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-dot:hover::before {
+    opacity: 1;
+}
+
+/* Enhanced Product Focus Template */
+.product-focus-enhanced {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-focus-enhanced::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate360 30s linear infinite;
+    pointer-events: none;
+}
+
+/* Premium Product Card */
+.product-info-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.product-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--primary-gradient);
+    opacity: 0.8;
+}
+
+/* Enhanced Category Badge with Gradient */
+.category-badge-premium {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.category-badge-premium:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated Price Display */
+.price-display {
+    position: relative;
+    display: inline-block;
+}
+
+.price-display::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-gradient);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.price-display:hover::after {
+    transform: scaleX(1);
+}
+
+/* Stock Status with Animation */
+.stock-status {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.stock-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    animation: pulse 2s infinite;
+}
+
+.stock-status.in-stock {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.stock-status.low-stock {
+    background: rgba(251, 146, 60, 0.1);
+    color: #fb923c;
+}
+
+.stock-status.out-of-stock {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+/* Enhanced Loading States */
+.product-loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer-slide 2s infinite;
+}
+
+@keyframes shimmer-slide {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Premium Scroll Indicator */
+.scroll-indicator-premium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.8;
+    animation: fade-bounce 3s infinite;
+}
+
+@keyframes fade-bounce {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+    50% {
+        opacity: 0.4;
+        transform: translateY(10px);
+    }
+}
+
+/* Enhanced Carousel Controls */
+.carousel-control-premium {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.carousel-control-premium:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Optimizations for Premium Features */
+@media (max-width: 768px) {
+    .nav-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .quick-action-btn {
+        min-width: auto;
+        padding: 10px 16px;
+    }
+    
+    .quick-action-label {
+        display: none;
+    }
+    
+    .quick-action-btn:hover .quick-action-label {
+        display: block;
+    }
+    
+    #nav-dots {
+        display: none;
+    }
+}
+
+/* Performance Optimizations */
+.gpu-optimized {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Final Polish */
+.premium-container {
+    position: relative;
+    contain: layout style paint;
+}
+
+/* Custom responsive utilities for mobile optimization */
+@media (min-width: 475px) {
+    .xs\:inline {
+        display: inline;
+    }
+    
+    .xs\:hidden {
+        display: none;
+    }
+}
+
+/* Mobile-first button layout improvements */
+@media (max-width: 474px) {
+    .product-card .flex.space-x-1 button {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.375rem;
+    }
+    
+    .product-card .flex.space-x-1 button i {
+        font-size: 0.875rem;
+    }
 }

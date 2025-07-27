@@ -151,26 +151,13 @@
                     <span
                         class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm"></span>
                 </div>
-                <div class="absolute top-3 left-3">
-                    <button
-                        class="view-icon-btn bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black">
-                        <i class="fas fa-expand-alt text-sm" aria-hidden="true"></i>
-                        <span class="sr-only">View product details</span>
-                    </button>
-                </div>
+               
             </div>
             <div class="p-4 flex flex-col flex-1">
-                <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded"
+                <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer  transition-colors duration-200 rounded"
                     tabindex="0" role="button" aria-label="View product details" title=""></h3>
                 <div class="product-description-container mb-3 flex-1">
                     <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2"></div>
-                    <button
-                        class="product-description-toggle hidden text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded"
-                        aria-expanded="false">
-                        <span class="toggle-text">Read more</span>
-                        <i class="fas fa-chevron-down toggle-icon ml-1 transition-transform duration-200"
-                            aria-hidden="true"></i>
-                    </button>
                 </div>
                 <div class="flex items-center justify-between mb-4">
                     <span class="product-price text-2xl font-bold text-blue-600"></span>
@@ -179,16 +166,25 @@
                         <span class="product-rating text-sm text-gray-600 ml-1"></span>
                     </div>
                 </div>
-                <div class="flex space-x-3 mt-auto">
+                <div class="flex space-x-1 sm:space-x-2 mt-auto">
                     <button
-                        class="order-btn flex-1 text-white font-medium px-6 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        class="order-btn flex-1 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                         type="button">
-                        <i class="fas fa-shopping-bag mr-2" aria-hidden="true"></i>Order Now
+                        <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                        <span class="hidden xs:inline">Order</span>
+                        <span class="xs:hidden">Order</span>
                     </button>
                     <button
-                        class="whatsapp-btn text-white font-medium px-4 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                        class="whatsapp-btn text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                         type="button">
-                        <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>Chat
+                        <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                        <span class="hidden sm:inline">Chat</span>
+                    </button>
+                    <button
+                        class="share-btn bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200"
+                        type="button">
+                        <i class="fas fa-share-alt" aria-hidden="true"></i>
+                        <span class="sr-only">Share product</span>
                     </button>
                 </div>
             </div>

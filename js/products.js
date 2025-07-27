@@ -3,10 +3,19 @@ const products = [
     {
         id: 1,
         name: "Premium Wireless Headphones",
-        description: "High-quality wireless headphones with advanced noise cancellation and 30-hour battery life. Perfect for music lovers and professionals who demand exceptional audio quality.\n\nThese headphones feature premium drivers that deliver crisp highs, rich mids, and deep bass. The adaptive noise cancellation technology automatically adjusts to your environment, blocking out unwanted sounds while preserving the clarity of your music.\n\nWith fast charging capabilities, you get 5 hours of playback with just 10 minutes of charging. The comfortable over-ear design with memory foam padding ensures all-day comfort during extended listening sessions.",
+        description: "High-quality wireless headphones with advanced noise cancellation and 30-hour battery life. Perfect for music lovers and professionals who demand exceptional audio quality.\n\nThese headphones feature premium drivers that deliver crisp highs, rich mids, and deep bass. The adaptive noise cancellation technology automatically adjusts to your environment, blocking out unwanted sounds while preserving the clarity of your music.\n\nWith fast charging capabilities, you get 5 hours of playbook with just 10 minutes of charging. The comfortable over-ear design with memory foam padding ensures all-day comfort during extended listening sessions.",
         price: "₹149.99",
+        originalPrice: "₹199.99",
+        discount: "25",
         category: "electronics",
         image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
+        media: [
+            "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
+            "https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4",
+            "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop",
+            "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=400&h=300&fit=crop"
+        ],
         images: [
             "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop",
             "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=300&fit=crop",

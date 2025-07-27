@@ -35,91 +35,130 @@
         <!-- Products will be dynamically loaded here -->
     </div>
 
-    <!-- Sticky Action Buttons -->
-    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black to-transparent z-40">
-        <div class="flex space-x-3 max-w-md mx-auto">
-            <button onclick="goBack()" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200">
-                <i class="fas fa-list mr-2"></i>Back to List
-            </button>
-            <button id="focus-whatsapp-btn" class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-xl transition-colors duration-200">
-                <i class="fab fa-whatsapp mr-2"></i>Order Now
-            </button>
+    <!-- Enhanced Sticky Action Buttons -->
+    <div class="fixed bottom-0 left-0 right-0 z-40">
+        <!-- Mobile: Full-width action bar -->
+        <div class="block md:hidden bg-white border-t border-gray-200 p-4">
+            <div class="grid grid-cols-3 gap-3">
+                <button onclick="shareProduct()" class="action-btn bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-4 rounded-xl transition-all duration-200 min-h-[44px]">
+                    <i class="fas fa-share-alt text-lg mb-1 block"></i>
+                    <span class="text-xs">Share</span>
+                </button>
+                <button onclick="openWhatsApp()" class="action-btn bg-green-500 hover:bg-green-600 text-white font-medium py-4 rounded-xl transition-all duration-200 min-h-[44px]">
+                    <i class="fab fa-whatsapp text-lg mb-1 block"></i>
+                    <span class="text-xs">WhatsApp</span>
+                </button>
+                <button onclick="orderOnline()" class="action-btn bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 rounded-xl transition-all duration-200 min-h-[44px]">
+                    <i class="fas fa-shopping-cart text-lg mb-1 block"></i>
+                    <span class="text-xs">Order</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Desktop: Horizontal buttons with gradient background -->
+        <div class="hidden md:block p-6 bg-gradient-to-t from-black via-black/80 to-transparent">
+            <div class="flex space-x-4 max-w-lg mx-auto">
+                <button onclick="shareProduct()" class="action-btn flex-1 bg-gray-800 hover:bg-gray-700 text-white font-medium py-4 px-6 rounded-xl transition-all duration-200 min-h-[48px] flex items-center justify-center">
+                    <i class="fas fa-share-alt mr-2"></i>
+                    <span>Share</span>
+                </button>
+                <button onclick="openWhatsApp()" class="action-btn flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-4 px-6 rounded-xl transition-all duration-200 min-h-[48px] flex items-center justify-center">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    <span>WhatsApp</span>
+                </button>
+                <button onclick="orderOnline()" class="action-btn flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-xl transition-all duration-200 min-h-[48px] flex items-center justify-center">
+                    <i class="fas fa-shopping-cart mr-2"></i>
+                    <span>Order Online</span>
+                </button>
+            </div>
         </div>
     </div>
 
     <!-- Product Focus Template -->
     <template id="product-focus-template">
-        <div class="product-focus h-screen snap-start relative flex items-center justify-center">
-            <div class="w-full max-w-md mx-auto p-4">
-                <!-- Product Image Carousel -->
-                <div class="relative mb-6">
-                    <div class="focus-image-carousel swiper rounded-2xl shadow-2xl overflow-hidden">
-                        <div class="swiper-wrapper">
-                            <!-- Images will be added dynamically -->
-                        </div>
-                        
-                        <!-- Navigation -->
-                        <div class="swiper-button-next text-white bg-black bg-opacity-50 w-8 h-8 rounded-full flex items-center justify-center after:text-xs after:font-bold"></div>
-                        <div class="swiper-button-prev text-white bg-black bg-opacity-50 w-8 h-8 rounded-full flex items-center justify-center after:text-xs after:font-bold"></div>
-                        
-                        <!-- Pagination -->
-                        <div class="swiper-pagination"></div>
-                    </div>
-                    
-                    <!-- Category Badge -->
-                    <div class="absolute top-4 right-4 z-10">
-                        <span class="focus-category bg-white bg-opacity-90 px-3 py-1 rounded-full text-sm font-medium text-gray-700"></span>
-                    </div>
-                </div>
-
-                <!-- Product Info -->
-                <div class="bg-white bg-opacity-95 backdrop-blur-sm rounded-2xl p-6 shadow-xl">
-                    <h2 class="focus-name text-2xl font-bold text-gray-800 mb-3"></h2>
-                    
-                    <!-- Expandable Description -->
-                    <div class="focus-description-container mb-4">
-                        <div class="focus-description text-gray-600 leading-relaxed"></div>
-                        <button class="focus-description-toggle text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 hidden">
-                            <span class="toggle-text">Read more</span>
-                            <i class="fas fa-chevron-down ml-1 toggle-icon transition-transform duration-200"></i>
-                        </button>
-                    </div>
-                    
-                    <!-- Price and Rating -->
-                    <div class="flex items-center justify-between mb-6">
-                        <span class="focus-price text-3xl font-bold text-blue-600"></span>
-                        <div class="flex items-center">
-                            <div class="flex text-yellow-400 mr-2">
-                                <i class="fas fa-star text-sm"></i>
-                                <i class="fas fa-star text-sm"></i>
-                                <i class="fas fa-star text-sm"></i>
-                                <i class="fas fa-star text-sm"></i>
-                                <i class="fas fa-star text-sm"></i>
-                            </div>
-                            <span class="focus-rating text-sm text-gray-600"></span>
-                        </div>
-                    </div>
-
-                    <!-- Product Details -->
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div class="bg-gray-50 rounded-lg p-3">
-                            <span class="text-gray-500 block">Brand</span>
-                            <span class="focus-brand font-medium"></span>
-                        </div>
-                        <div class="bg-gray-50 rounded-lg p-3">
-                            <span class="text-gray-500 block">Stock</span>
-                            <span class="focus-stock font-medium text-green-600"></span>
-                        </div>
-                    </div>
-                </div>
+        <div class="product-focus h-screen snap-start relative flex flex-col">
+            <!-- Product Navigation Controls -->
+            <div class="absolute top-1/2 left-4 transform -translate-y-1/2 z-30">
+                <button onclick="navigateToPrevious()" class="product-nav-btn text-white bg-black bg-opacity-50 hover:bg-opacity-70 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200" aria-label="Previous product">
+                    <i class="fas fa-chevron-left text-lg"></i>
+                </button>
+            </div>
+            <div class="absolute top-1/2 right-4 transform -translate-y-1/2 z-30">
+                <button onclick="navigateToNext()" class="product-nav-btn text-white bg-black bg-opacity-50 hover:bg-opacity-70 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200" aria-label="Next product">
+                    <i class="fas fa-chevron-right text-lg"></i>
+                </button>
             </div>
 
-            <!-- Scroll Indicator -->
-            <div class="absolute bottom-24 left-1/2 transform -translate-x-1/2 text-white text-center">
-                <div class="animate-bounce">
-                    <i class="fas fa-chevron-up text-sm mb-1"></i>
-                    <p class="text-xs">Swipe to browse</p>
-                    <i class="fas fa-chevron-down text-sm mt-1"></i>
+            <div class="flex-1 flex items-center justify-center p-4 pb-24">
+                <div class="w-full max-w-md mx-auto">
+                    <!-- Enhanced Media Carousel (Images + Videos) -->
+                    <div class="relative mb-6">
+                        <div class="focus-media-carousel swiper rounded-2xl shadow-2xl overflow-hidden bg-gray-900">
+                            <div class="swiper-wrapper">
+                                <!-- Media items will be added dynamically -->
+                            </div>
+                            
+                            <!-- Enhanced Navigation -->
+                            <div class="swiper-button-next !text-white !bg-black !bg-opacity-60 !w-12 !h-12 !rounded-full !flex !items-center !justify-center hover:!bg-opacity-80 !transition-all !duration-200 after:!text-lg after:!font-bold" aria-label="Next media"></div>
+                            <div class="swiper-button-prev !text-white !bg-black !bg-opacity-60 !w-12 !h-12 !rounded-full !flex !items-center !justify-center hover:!bg-opacity-80 !transition-all !duration-200 after:!text-lg after:!font-bold" aria-label="Previous media"></div>
+                            
+                            <!-- Enhanced Pagination -->
+                            <div class="swiper-pagination !bottom-4"></div>
+                            
+                            <!-- Media Counter -->
+                            <div class="absolute top-4 left-4 z-20">
+                                <div class="bg-black bg-opacity-60 text-white px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm">
+                                    <span class="current-media">1</span> / <span class="total-media">1</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Category Badge -->
+                        <div class="absolute top-4 right-4 z-20">
+                            <span class="focus-category bg-white bg-opacity-95 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold text-gray-800 shadow-lg"></span>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Product Info -->
+                    <div class="bg-white bg-opacity-98 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-white border-opacity-20">
+                        <h2 class="focus-name text-2xl font-bold text-gray-900 mb-3 leading-tight"></h2>
+                        
+                        <!-- Price with Discount -->
+                        <div class="mb-4">
+                            <div class="flex items-center space-x-3">
+                                <span class="focus-price text-3xl font-bold text-blue-600"></span>
+                                <span class="focus-original-price text-lg text-gray-500 line-through hidden"></span>
+                                <span class="focus-discount bg-red-500 text-white px-2 py-1 rounded-md text-sm font-medium hidden"></span>
+                            </div>
+                            <div class="flex items-center mt-2">
+                                <div class="focus-rating-stars flex text-yellow-400 mr-2">
+                                    <!-- Stars will be dynamically generated -->
+                                </div>
+                                <span class="focus-rating text-sm text-gray-600"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Expandable Description -->
+                        <div class="focus-description-container mb-4">
+                            <div class="focus-description text-gray-700 leading-relaxed text-sm"></div>
+                            <button class="focus-description-toggle text-blue-600 hover:text-blue-700 text-sm font-medium mt-2 hidden transition-colors duration-200">
+                                <span class="toggle-text">Read more</span>
+                                <i class="fas fa-chevron-down ml-1 toggle-icon transition-transform duration-200"></i>
+                            </button>
+                        </div>
+
+                        <!-- Product Details -->
+                        <div class="grid grid-cols-2 gap-4 text-sm mb-6">
+                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-3 border border-gray-200">
+                                <span class="text-gray-500 block mb-1 text-xs uppercase tracking-wider">Brand</span>
+                                <span class="focus-brand font-semibold text-gray-900"></span>
+                            </div>
+                            <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-3 border border-gray-200">
+                                <span class="text-gray-500 block mb-1 text-xs uppercase tracking-wider">Stock</span>
+                                <span class="focus-stock font-semibold"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

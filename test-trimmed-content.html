@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Trimmed Content</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-sm mx-auto">
+        <h1 class="text-2xl font-bold mb-6 text-center">Trimmed Content Test</h1>
+        
+        <!-- Test Product Card -->
+        <article class="product-card bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative">
+                <img class="product-image w-full h-48 object-cover" 
+                     src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop" 
+                     alt="Test Product" />
+                <div class="absolute top-3 right-3">
+                    <span class="product-category bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                </div>
+            </div>
+            <div class="p-4 flex flex-col flex-1">
+                <h3 class="product-name font-semibold text-lg text-gray-800 mb-2 line-clamp-1">Test Product with Long Name</h3>
+                <div class="product-description-container mb-3 flex-1">
+                    <div class="product-description text-gray-600 text-sm leading-relaxed line-clamp-2">
+                        This is a very long product description that would normally trigger the read more functionality. It contains multiple sentences and detailed information about the product features, benefits, and specifications that users might want to know about before making a purchase decision.
+                    </div>
+                </div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="product-price text-2xl font-bold text-blue-600">$99.99</span>
+                    <div class="flex items-center text-yellow-400">
+                        <i class="fas fa-star text-sm"></i>
+                        <span class="product-rating text-sm text-gray-600 ml-1">4.5 (123 reviews)</span>
+                    </div>
+                </div>
+                <div class="flex space-x-3 mt-auto">
+                    <button class="order-btn flex-1 text-white font-medium px-6 bg-blue-600 hover:bg-blue-700 rounded-lg py-3">
+                        <i class="fas fa-shopping-bag mr-2"></i>Order Now
+                    </button>
+                    <button class="whatsapp-btn text-white font-medium px-4 bg-green-500 hover:bg-green-600 rounded-lg py-3">
+                        <i class="fab fa-whatsapp mr-2"></i>Chat
+                    </button>
+                </div>
+            </div>
+        </article>
+        
+        <div class="mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <h2 class="text-lg font-semibold text-green-800 mb-2">✅ Changes Applied</h2>
+            <ul class="text-sm text-green-700 space-y-1">
+                <li>• Product descriptions now show only trimmed content</li>
+                <li>• No "Read more" button appears</li>
+                <li>• Content is limited to 2 lines with line-clamp-2</li>
+                <li>• Clean, consistent card layout maintained</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
