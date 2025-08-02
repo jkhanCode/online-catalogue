@@ -1,7 +1,8 @@
 // Order modal state management
 let currentModalProduct = null;
-let isModalOTPSectionVisible = false;
+let isModalPaymentSectionVisible = false;
 let isModalOrderConfirmed = false;
+let hasSharedPaymentScreenshot = false;
 
 // Initialize order modal when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,23 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // Setup event listeners for order modal
 function setupOrderModalEventListeners() {
     const modalForm = document.getElementById('modal-order-form');
-    const modalOtpInputs = document.querySelectorAll('.modal-otp-input');
-    const modalResendBtn = document.getElementById('modal-resend-otp');
     
     // Form validation
     if (modalForm) {
         modalForm.addEventListener('input', validateModalForm);
-    }
-    
-    // OTP input handling
-    modalOtpInputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => handleModalOTPInput(e, index));
-        input.addEventListener('keydown', (e) => handleModalOTPKeydown(e, index));
-    });
-    
-    // Resend OTP button
-    if (modalResendBtn) {
-        modalResendBtn.addEventListener('click', resendModalOTP);
     }
     
     // Phone number formatting
@@ -96,8 +84,9 @@ function closeOrderModal() {
     
     // Reset state
     currentModalProduct = null;
-    isModalOTPSectionVisible = false;
+    isModalPaymentSectionVisible = false;
     isModalOrderConfirmed = false;
+    hasSharedPaymentScreenshot = false;
     
     // Reset form
     resetModalForm();
@@ -110,28 +99,36 @@ function resetModalForm() {
         form.reset();
     }
     
-    // Hide OTP section
-    const otpSection = document.getElementById('modal-otp-section');
-    otpSection.classList.add('hidden');
+    // Hide payment section
+    const paymentSection = document.getElementById('modal-payment-section');
+    if (paymentSection) {
+        paymentSection.style.display = 'none';
+    }
+    
+    // Show action buttons
+    const actionBtns = document.getElementById('modal-action-buttons');
+    if (actionBtns) {
+        actionBtns.style.display = 'block';
+    }
     
     // Reset buttons
-    const verifyBtn = document.getElementById('modal-verify-phone-btn');
-    const confirmBtn = document.getElementById('modal-confirm-order-btn');
+    const payNowBtn = document.getElementById('modal-pay-now-btn');
+    const continueBtn = document.getElementById('modal-continue-payment');
     
-    verifyBtn.style.display = 'block';
-    verifyBtn.disabled = true;
-    verifyBtn.innerHTML = '<i class="fas fa-mobile-alt mr-2"></i>Verify Phone Number';
+    if (payNowBtn) {
+        payNowBtn.disabled = true;
+        payNowBtn.innerHTML = '<i class="fas fa-credit-card mr-2"></i>Pay Now';
+    }
     
-    confirmBtn.disabled = true;
-    confirmBtn.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Confirm Order';
+    if (continueBtn) {
+        continueBtn.disabled = true;
+        continueBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        continueBtn.classList.remove('hover:bg-green-600');
+    }
     
-    // Clear OTP inputs
-    const otpInputs = document.querySelectorAll('.modal-otp-input');
-    otpInputs.forEach(input => {
-        input.value = '';
-        input.classList.remove('border-green-500', 'bg-green-50');
-        input.classList.add('border-gray-300');
-    });
+    // Reset payment state
+    isModalPaymentSectionVisible = false;
+    hasSharedPaymentScreenshot = false;
 }
 
 // Validate modal form
@@ -148,163 +145,126 @@ function validateModalForm() {
                    phone.length >= 10 && 
                    address.length >= 10;
     
-    // Enable/disable verify phone button
-    const verifyBtn = document.getElementById('modal-verify-phone-btn');
-    if (verifyBtn) {
-        verifyBtn.disabled = !isValid;
-        verifyBtn.classList.toggle('opacity-50', !isValid);
+    // Enable/disable pay now button
+    const payNowBtn = document.getElementById('modal-pay-now-btn');
+    if (payNowBtn) {
+        payNowBtn.disabled = !isValid;
+        payNowBtn.classList.toggle('opacity-50', !isValid);
     }
+    
+    return isValid;
 }
 
-// Show OTP verification section
-function showModalOTPSection() {
-    const form = document.getElementById('modal-order-form');
-    const formData = new FormData(form);
+// Main order submission function - show payment section
+function submitModalOrder(event) {
+    event.preventDefault();
     
-    const phone = formData.get('phone')?.trim();
-    
-    if (!phone || phone.length < 10) {
-        alert('Please enter a valid phone number');
+    if (!validateModalForm()) {
+        showModalError('Please fill in all rdequired fields');
         return;
     }
     
-    // Show OTP section
-    const otpSection = document.getElementById('modal-otp-section');
-    otpSection.classList.remove('hidden');
-    
-    // Hide verify phone button
-    const verifyBtn = document.getElementById('modal-verify-phone-btn');
-    const confirmBtn = document.getElementById('modal-confirm-order-btn');
-    
-    verifyBtn.style.display = 'none';
-    confirmBtn.disabled = true;
-    
-    // Simulate sending OTP
-    simulateModalSendOTP(phone);
-    
-    // Focus on first OTP input
-    const firstOTPInput = document.querySelector('.modal-otp-input');
-    if (firstOTPInput) {
-        setTimeout(() => firstOTPInput.focus(), 100);
-    }
-    
-    isModalOTPSectionVisible = true;
+    // Show payment section instead of OTP
+    showModalPaymentSection();
 }
 
-// Simulate sending OTP
-function simulateModalSendOTP(phone) {
-    const verifyBtn = document.getElementById('modal-verify-phone-btn');
-    verifyBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Sending OTP...';
+// Show payment section in modal
+function showModalPaymentSection() {
+    const actionBtns = document.getElementById('modal-action-buttons');
+    const paymentSection = document.getElementById('modal-payment-section');
     
-    setTimeout(() => {
-        verifyBtn.innerHTML = '<i class="fas fa-check mr-2"></i>OTP Sent!';
-        setTimeout(() => {
-            verifyBtn.style.display = 'none';
-        }, 1000);
-    }, 2000);
-}
-
-// Handle OTP input
-function handleModalOTPInput(event, index) {
-    const input = event.target;
-    const value = input.value;
-    
-    // Only allow numbers
-    if (!/^\d*$/.test(value)) {
-        input.value = value.replace(/\D/g, '');
+    if (!paymentSection) {
+        showModalError('Payment section not found');
         return;
     }
     
-    // Move to next input if current is filled
-    if (value.length === 1 && index < 5) {
-        const nextInput = document.querySelectorAll('.modal-otp-input')[index + 1];
-        if (nextInput) {
-            nextInput.focus();
-        }
+    // Hide action buttons and show payment section
+    if (actionBtns) {
+        actionBtns.style.display = 'none';
     }
     
-    // Check if all OTP inputs are filled
-    checkModalOTPComplete();
+    paymentSection.style.display = 'block';
+    isModalPaymentSectionVisible = true;
+    
+    // Generate QR code for payment
+    generatePaymentQR();
+    
+    // Show success message
+    showModalSuccess('Ready to complete your purchase via WhatsApp');
 }
 
-// Handle OTP input keydown events
-function handleModalOTPKeydown(event, index) {
-    // Handle backspace to move to previous input
-    if (event.key === 'Backspace' && !event.target.value && index > 0) {
-        const prevInput = document.querySelectorAll('.modal-otp-input')[index - 1];
-        if (prevInput) {
-            prevInput.focus();
-        }
-    }
+// Connect to WhatsApp with streamlined message
+function connectToWhatsApp() {
+    const whatsappNumber = '919868902123';
+    const message = 'Hey! I\'m ready to buy, payment is in process.';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Show success modal
+    showModalOrderSuccess();
 }
 
-// Check if OTP is complete
-function checkModalOTPComplete() {
-    const otpInputs = document.querySelectorAll('.modal-otp-input');
-    const otpValue = Array.from(otpInputs).map(input => input.value).join('');
+// Connect to WhatsApp from success modal
+function connectToWhatsAppFromSuccess() {
+    const whatsappNumber = '919868902123';
+    const message = 'Hey! I\'m ready to buy, payment is in process.';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     
-    const confirmBtn = document.getElementById('modal-confirm-order-btn');
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
     
-    if (otpValue.length === 6) {
-        confirmBtn.disabled = false;
-        confirmBtn.classList.remove('opacity-50');
-        
-        // Simulate OTP verification
-        setTimeout(() => validateModalOTP(otpValue), 500);
-    } else {
-        confirmBtn.disabled = true;
-        confirmBtn.classList.add('opacity-50');
-    }
+    // Close modals
+    closeAllModals();
 }
 
-// Validate OTP (simulated)
-function validateModalOTP(otp) {
-    const otpInputs = document.querySelectorAll('.modal-otp-input');
+// Generate QR code for payment
+function generatePaymentQR() {
+    const qrContainer = document.getElementById('modal-qr-code');
+    if (!qrContainer) return;
     
-    // Visual feedback for successful validation
-    otpInputs.forEach(input => {
-        input.classList.add('border-green-500', 'bg-green-50');
-        input.classList.remove('border-gray-300');
-    });
+    // Get order total
+    const total = getModalOrderTotal();
     
-    // Enable confirm order button
-    const confirmBtn = document.getElementById('modal-confirm-order-btn');
-    confirmBtn.disabled = false;
-    confirmBtn.classList.remove('opacity-50');
+    // For demo purposes, show a placeholder QR code
+    // In production, you would use a QR code library like qrcode.js
+    qrContainer.innerHTML = `
+        <div class="w-48 h-48 bg-white border-2 border-gray-300 flex items-center justify-center mx-auto">
+            <div class="text-center">
+                <div class="text-sm text-gray-600 mb-2">QR Code</div>
+                <div class="text-xs text-gray-500">Amount: ₹${total}</div>
+                <div class="text-xs text-gray-400 mt-1">Scan to Pay</div>
+            </div>
+        </div>
+    `;
 }
 
-// Resend OTP
-function resendModalOTP() {
-    const resendBtn = document.getElementById('modal-resend-otp');
+// Get modal order total
+function getModalOrderTotal() {
+    if (!currentModalProduct) return 0;
     
-    // Clear existing OTP inputs
-    const otpInputs = document.querySelectorAll('.modal-otp-input');
-    otpInputs.forEach(input => {
-        input.value = '';
-        input.classList.remove('border-green-500', 'bg-green-50');
-        input.classList.add('border-gray-300');
-    });
-    
-    // Disable confirm button
-    const confirmBtn = document.getElementById('modal-confirm-order-btn');
-    confirmBtn.disabled = true;
-    confirmBtn.classList.add('opacity-50');
-    
-    // Show loading state
-    resendBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Resending...';
-    resendBtn.disabled = true;
-    
-    // Simulate resending
-    setTimeout(() => {
-        resendBtn.innerHTML = 'Resend OTP';
-        resendBtn.disabled = false;
-        
-        // Focus on first OTP input
-        const firstOTPInput = document.querySelector('.modal-otp-input');
-        if (firstOTPInput) {
-            firstOTPInput.focus();
-        }
-    }, 2000);
+    const quantity = parseInt(document.getElementById('modal-quantity')?.value || 1);
+    const price = currentModalProduct.price || 0;
+    return price * quantity;
+}
+
+// Show modal order success
+function showModalOrderSuccess() {
+    showModalSuccessModal();
+}
+
+// Show modal error message
+function showModalError(message) {
+    // You can implement a toast notification or alert here
+    alert(message);
+}
+
+// Show modal success message
+function showModalSuccess(message) {
+    // You can implement a toast notification here
+    // For now, we'll just log it
+    console.log('Success:', message);
 }
 
 // Format phone number input
@@ -320,44 +280,7 @@ function formatModalPhoneNumber(event) {
     event.target.value = value;
 }
 
-// Confirm order
-function confirmModalOrder() {
-    if (!currentModalProduct) {
-        alert('No product selected');
-        return;
-    }
-    
-    const form = document.getElementById('modal-order-form');
-    const formData = new FormData(form);
-    
-    // Collect form data
-    const orderData = {
-        product: currentModalProduct,
-        customer: {
-            name: formData.get('fullName'),
-            phone: formData.get('phone'),
-            email: formData.get('email'),
-            address: formData.get('address'),
-            instructions: formData.get('instructions')
-        },
-        timestamp: new Date().toISOString()
-    };
-    
-    // Show loading state
-    const confirmBtn = document.getElementById('modal-confirm-order-btn');
-    confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
-    confirmBtn.disabled = true;
-    
-    // Simulate order processing
-    setTimeout(() => {
-        // Store order data
-        localStorage.setItem('lastModalOrder', JSON.stringify(orderData));
-        
-        // Show success modal
-        showModalSuccessModal();
-        isModalOrderConfirmed = true;
-    }, 2000);
-}
+// This function is now replaced by submitModalOrder which shows payment section directly
 
 // Show success modal
 function showModalSuccessModal() {
@@ -447,7 +370,7 @@ function openWhatsApp(product, customerInfo = null) {
         message += `Thank you!`;
     }
     
-    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const phoneNumber = '919868902123'; // Your WhatsApp business number
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }

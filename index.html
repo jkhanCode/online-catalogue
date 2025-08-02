@@ -21,6 +21,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="css/styles.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Shared Order Form Component -->
+    <script src="js/shared-order-form.js"></script>
 </head>
 
 <body class="bg-gray-50 min-h-screen">
@@ -276,51 +278,71 @@
                     </div>
                 </form>
 
-                <!-- OTP Verification Section -->
-                <div id="modal-otp-section" class="mt-6 hidden">
+                <!-- Payment Section -->
+                <div id="modal-payment-section" class="mt-6 hidden">
                     <h3 class="text-lg font-semibold text-gray-800 mb-4">
-                        Verify Your Phone Number
+                        <i class="fas fa-credit-card mr-2 text-blue-600"></i>Make Payment
                     </h3>
-                    <p class="text-gray-600 text-sm mb-4">
-                        We've sent a verification code to your phone number
+                    
+                    <!-- QR Code Scanner -->
+                    <div class="bg-gray-50 rounded-xl p-6 text-center mb-4">
+                        <div class="w-48 h-48 mx-auto bg-white rounded-lg shadow-sm flex items-center justify-center mb-4">
+                            <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0icXIiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBmaWxsPSJ3aGl0ZSIvPjxyZWN0IHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCIgZmlsbD0iYmxhY2siLz48cmVjdCB4PSIxNSIgeT0iNSIgd2lkdGg9IjUiIGhlaWdodD0iNSIgZmlsbD0iYmxhY2siLz48cmVjdCB4PSI1IiB5PSIxNSIgd2lkdGg9IjUiIGhlaWdodD0iNSIgZmlsbD0iYmxhY2siLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI3FyKSIvPjx0ZXh0IHg9IjEwMCIgeT0iMjIwIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTIiIGZpbGw9IiM2YjcyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlNjYW4gdG8gUGF5PC90ZXh0Pjwvc3ZnPg==" 
+                                 alt="Payment QR Code" class="w-full h-full object-contain" />
+                        </div>
+                        <div class="text-center">
+                            <p class="text-sm font-medium text-gray-800 mb-2">
+                                <i class="fas fa-qrcode mr-2 text-blue-600"></i>Scan to Pay
+                            </p>
+                            <p class="text-xs text-gray-600 mb-3">
+                                Scan this QR code with your UPI app to make payment
+                            </p>
+                            <div class="flex items-center justify-center space-x-4 text-xs text-gray-500">
+                                <span class="flex items-center">
+                                    <i class="fab fa-google-pay text-blue-600 mr-1"></i>GPay
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-mobile-alt text-purple-600 mr-1"></i>PhonePe
+                                </span>
+                                <span class="flex items-center">
+                                    <i class="fas fa-university text-orange-600 mr-1"></i>Paytm
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Instructions -->
+                    <div class="bg-blue-50 rounded-lg p-4 mb-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-info-circle text-blue-600 mt-0.5"></i>
+                            <div class="text-sm text-blue-800">
+                                <p class="font-medium mb-1">Payment Instructions:</p>
+                                <ol class="list-decimal list-inside space-y-1 text-xs">
+                                    <li>Scan the QR code above with your UPI app</li>
+                                    <li>Complete the payment</li>
+                                    <li>Take a screenshot of the transaction</li>
+                                    <li>Share the screenshot via WhatsApp below</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Connect to WhatsApp Button -->
+                    <button type="button" onclick="connectToWhatsApp()" 
+                        class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
+                        <i class="fab fa-whatsapp mr-2"></i>Connect to WhatsApp
+                    </button>
+
+                    <p class="text-xs text-gray-500 text-center mt-3">
+                        We'll connect you to WhatsApp to complete your purchase
                     </p>
-
-                    <div class="flex space-x-2 mb-4">
-                        <input type="text" maxlength="1"
-                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
-                        <input type="text" maxlength="1"
-                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
-                        <input type="text" maxlength="1"
-                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
-                        <input type="text" maxlength="1"
-                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
-                        <input type="text" maxlength="1"
-                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
-                        <input type="text" maxlength="1"
-                            class="modal-otp-input w-12 h-12 text-center border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg font-bold" />
-                    </div>
-
-                    <div class="flex justify-between items-center text-sm">
-                        <span class="text-gray-500">Didn't receive the code?</span>
-                        <button type="button" id="modal-resend-otp"
-                            class="text-blue-600 hover:text-blue-700 font-medium">
-                            Resend OTP
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="mt-6 space-y-3">
-                    <button type="button" id="modal-verify-phone-btn" onclick="showModalOTPSection()"
+                <div id="modal-action-buttons" class="mt-6 space-y-3">
+                    <button type="button" id="modal-pay-now-btn" onclick="submitModalOrder(event)"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
-                        <i class="fas fa-shield-alt mr-2"></i>Verify Phone
-                        Number
-                    </button>
-
-                    <button type="button" id="modal-confirm-order-btn" onclick="confirmModalOrder()" disabled
-                        class="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-all duration-200">
-                        <i class="fas fa-check mr-2"></i>Confirm
-                        Order
+                        <i class="fas fa-credit-card mr-2"></i>Pay Now
                     </button>
 
                     <button type="button" onclick="orderModalViaWhatsApp()"
@@ -340,16 +362,15 @@
                 <i class="fas fa-check text-2xl text-green-600"></i>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">
-                Order Confirmed!
+                Ready to Purchase!
             </h3>
             <p class="text-gray-600 mb-6">
-                Thank you for your order. We'll contact you soon to confirm
-                delivery details.
+                Your order details are ready. Connect to WhatsApp to complete your purchase with our team.
             </p>
             <div class="space-y-3">
-                <button onclick="goModalToWhatsApp()"
+                <button onclick="connectToWhatsAppFromSuccess()"
                     class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors">
-                    <i class="fab fa-whatsapp mr-2"></i>Chat with Us
+                    <i class="fab fa-whatsapp mr-2"></i>Connect to WhatsApp
                 </button>
                 <button onclick="closeAllModals()"
                     class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">

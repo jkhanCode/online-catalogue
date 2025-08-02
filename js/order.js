@@ -79,11 +79,11 @@ function validateForm() {
                    phone.length >= 10 && 
                    address.length >= 10;
     
-    // Enable/disable verify phone button
-    const verifyBtn = document.getElementById('verify-phone-btn');
-    if (verifyBtn) {
-        verifyBtn.disabled = !isValid;
-        verifyBtn.classList.toggle('opacity-50', !isValid);
+    // Enable/disable pay now button
+    const payNowBtn = document.getElementById('pay-now-btn');
+    if (payNowBtn) {
+        payNowBtn.disabled = !isValid;
+        payNowBtn.classList.toggle('opacity-50', !isValid);
     }
 }
 
@@ -377,18 +377,57 @@ function openWhatsApp(product, customerInfo = null) {
         message += `Thank you!`;
     }
     
-    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const phoneNumber = '919868902123'; // Your WhatsApp business number
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
 
-// Go to WhatsApp from success modal
-function goToWhatsApp() {
-    const lastOrder = localStorage.getItem('lastOrder');
-    if (lastOrder) {
-        const orderData = JSON.parse(lastOrder);
-        openWhatsApp(orderData.product, orderData.customer);
+// Streamlined WhatsApp connection functions
+function connectToWhatsAppFromOrder() {
+    const form = document.getElementById('order-form');
+    const formData = new FormData(form);
+    
+    const fullName = formData.get('fullName')?.trim();
+    const phone = formData.get('phone')?.trim();
+    const address = formData.get('address')?.trim();
+    
+    if (!fullName || fullName.length < 2) {
+        alert('Please enter a valid full name');
+        return;
     }
+    
+    if (!phone || phone.length < 10) {
+        alert('Please enter a valid phone number');
+        return;
+    }
+    
+    if (!address || address.length < 10) {
+        alert('Please enter a complete delivery address');
+        return;
+    }
+    
+    // Connect to WhatsApp with streamlined message
+    const whatsappNumber = '919868902123';
+    const message = 'Hey! I\'m ready to buy, payment is in process.';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Show success modal
+    showSuccessModal();
+}
+
+function connectToWhatsAppFromOrderSuccess() {
+    const whatsappNumber = '919868902123';
+    const message = 'Hey! I\'m ready to buy, payment is in process.';
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Go back to catalog
+    backToCatalog();
 }
 
 // Back to catalog from success modal

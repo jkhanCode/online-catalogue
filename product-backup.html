@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Wireless Headphones - Shop with Us</title>
+     <meta name="keywords" content="products, catalog, electronics, fashion, home, beauty, online shopping" />
+   
+    <meta name="description" content="High-quality wireless headphones with advanced noise cancellation and 30-hour battery life.">
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="Product Name - Brief Description" />
+    <meta property="og:description" content="Compelling product description that entices users to click" />
+    <meta property="og:image" content="https://demo.webapexius.in/photo.jpeg" />
+    <meta property="og:url" content="https://demo.webapexius.in/product.html?id=1" />
+
+    <!-- Product-specific tags -->
+    <meta property="product:price:amount" content="29.99" />
+    <meta property="product:price:currency" content="USD" />
+    <meta property="product:availability" content="in stock" />
+    <meta property="product:condition" content="new" />
+    <meta property="product:retailer_item_id" content="SKU123" />
+
+    <!-- Additional recommended tags -->
+    <meta property="og:site_name" content="Your Store Name" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card tags (for Twitter sharing) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Product Name - Brief Description" />
+    <meta name="twitter:description" content="Compelling product description" />
+    <meta name="twitter:image" content="https://demo.webapexius.in/photo.jpeg" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+    <!-- Shared Order Form Component -->
+    <script src="js/shared-order-form.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .image-zoom {
+            transition: transform 0.3s ease;
+        }
+        .image-zoom:hover {
+            transform: scale(1.05);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .accordion-content.open {
+            max-height: 1000px;
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50">
+    <!-- Header -->
+    <header class="page-header sticky top-0 z-40" role="banner">
+        <div class="max-w-6xl mx-auto px-4 md:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl font-bold text-gray-800">
+                    Our Products
+                </h1>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-store text-blue-600" aria-hidden="true"></i>
+                    <span class="text-sm text-gray-600 hidden sm:inline">Quality Products</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="max-w-6xl mx-auto px-4 md:px-8 py-4">
+        <div class="flex items-center space-x-2 text-sm text-gray-600">
+            <a href="index.html" class="hover:text-blue-600 transition-colors duration-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>
+                Back to Catalog
+            </a>
+            <span class="text-gray-400">/</span>
+            <span>Electronics</span>
+            <span class="text-gray-400">/</span>
+            <span class="text-gray-900 font-medium">Premium Wireless Headphones</span>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="max-w-6xl mx-auto lg:px-4 xl:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <!-- Product Image -->
+            <div class="space-y-4">
+                <!-- Mobile Full Width Image (Visible on smaller screens) -->
+                <div class="lg:hidden px-4">
+                    <div class="aspect-square bg-white overflow-hidden rounded-lg shadow-sm border border-gray-100">
+                        <img id="main-image-mobile" 
+                             src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover" 
+                             alt="Premium Wireless Headphones" 
+                             class="w-full h-full object-cover image-zoom cursor-pointer">
+                    </div>
+                </div>
+                
+                <!-- Desktop Grid Layout (Hidden on mobile) -->
+                <div class="hidden lg:grid lg:grid-cols-5 gap-3">
+                    <!-- Thumbnail Gallery - Left Side -->
+                    <div class="col-span-1 space-y-2">
+                        <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border-2 border-blue-600 cursor-pointer">
+                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&h=150&fit=crop&crop=center" 
+                                 alt="Headphones view 1" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                 onclick="changeMainImage('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover')">
+                        </div>
+                        <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer hover:border-blue-600 transition-colors duration-300">
+                            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&h=150&fit=crop&crop=center" 
+                                 alt="Headphones view 2" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                 onclick="changeMainImage('https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=600&fit=cover')">
+                        </div>
+                        <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer hover:border-blue-600 transition-colors duration-300">
+                            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=150&h=150&fit=crop&crop=center" 
+                                 alt="Headphones view 3" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                 onclick="changeMainImage('https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=cover')">
+                        </div>
+                        <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer hover:border-blue-600 transition-colors duration-300">
+                            <img src="https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=150&h=150&fit=crop&crop=center" 
+                                 alt="Headphones view 4" 
+                                 class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                 onclick="changeMainImage('https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=600&h=600&fit=cover')">
+                        </div>
+                    </div>
+                    
+                    <!-- Main Image - Right Side (Desktop) -->
+                    <div class="col-span-4">
+                        <div class="aspect-square bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                            <img id="main-image" 
+                                 src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover" 
+                                 alt="Premium Wireless Headphones" 
+                                 class="w-full h-full object-cover image-zoom cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Thumbnail Gallery - Below Main Image (Visible on smaller screens) -->
+                <div class="grid grid-cols-4 gap-2 lg:hidden px-4">
+                    <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border-2 border-blue-600 cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&h=150&fit=crop&crop=center" 
+                             alt="Headphones view 1" 
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                             onclick="changeMainImageMobile('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover')">
+                    </div>
+                    <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer hover:border-blue-600 transition-colors duration-300">
+                        <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&h=150&fit=crop&crop=center" 
+                             alt="Headphones view 2" 
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                             onclick="changeMainImageMobile('https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&h=600&fit=cover')">
+                    </div>
+                    <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer hover:border-blue-600 transition-colors duration-300">
+                        <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=150&h=150&fit=crop&crop=center" 
+                             alt="Headphones view 3" 
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                             onclick="changeMainImageMobile('https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=cover')">
+                    </div>
+                    <div class="aspect-square bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer hover:border-blue-600 transition-colors duration-300">
+                        <img src="https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=150&h=150&fit=crop&crop=center" 
+                             alt="Headphones view 4" 
+                             class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                             onclick="changeMainImageMobile('https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=600&h=600&fit=cover')">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product Info -->
+            <div class="space-y-6 px-4 lg:px-0">
+                <!-- Category Badge -->
+                <div class="inline-block">
+                    <span class="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+                        Electronics
+                    </span>
+                </div>
+                
+                <!-- Title and Price -->
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                        Premium Wireless Headphones
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Experience exceptional audio quality with our premium wireless headphones featuring advanced noise cancellation technology and all-day comfort.
+                    </p>
+                    
+                    <!-- Price -->
+                    <div class="flex items-center space-x-4 mb-4">
+                        <span class="text-4xl font-bold text-blue-600">₹149.99</span>
+                        <span class="text-xl text-gray-500 line-through">₹199.99</span>
+                        <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-medium">25% OFF</span>
+                    </div>
+                </div>
+                
+               
+                
+                <!-- Availability -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span class="text-green-600 font-medium">In Stock - Ready to Ship</span>
+                </div>
+                
+                
+                
+                <!-- Order Now Button -->
+                <button onclick="scrollToOrder()" 
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                    <i class="fas fa-shopping-cart mr-2"></i>
+                    Order Now
+                </button>
+                
+                <!-- WhatsApp and Share Buttons -->
+                <div class="flex space-x-3">
+                    <button onclick="chatOnWhatsApp('Premium Wireless Headphones', '₹149.99')" 
+                            class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2 text-lg"></i>
+                        <span>Chat on WhatsApp</span>
+                    </button>
+                    
+                    <button onclick="shareProduct()" 
+                            class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center">
+                        <i class="fas fa-share-alt mr-2"></i>
+                        <span>Share</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Description & Highlights -->
+    <section class="max-w-6xl mx-auto px-4 md:px-8 py-16">
+        <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Product Details</h2>
+            
+            <!-- Description -->
+            <div class="prose prose-lg max-w-none mb-12">
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Immerse yourself in superior sound quality with our Premium Wireless Headphones. Engineered with cutting-edge technology and designed for the modern lifestyle, these headphones deliver an unparalleled audio experience that will transform how you listen to music, take calls, and enjoy entertainment.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Whether you're commuting, working out, or simply relaxing at home, our headphones provide the perfect balance of comfort, style, and performance. The advanced noise cancellation technology ensures you can focus on what matters most, while the premium materials guarantee long-lasting durability.
+                </p>
+            </div>
+            
+            <!-- Specifications -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Specifications</h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Driver Size</span>
+                            <span class="font-medium text-gray-900">40mm</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Frequency Response</span>
+                            <span class="font-medium text-gray-900">20Hz - 20kHz</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Battery Life</span>
+                            <span class="font-medium text-gray-900">30 Hours</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Charging Time</span>
+                            <span class="font-medium text-gray-900">2 Hours</span>
+                        </div>
+                        <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                            <span class="text-gray-600">Weight</span>
+                            <span class="font-medium text-gray-900">250g</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">What's Included</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-700">Premium Wireless Headphones</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-700">USB-C Charging Cable</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-700">Premium Carrying Case</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-700">Quick Start Guide</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check text-green-500"></i>
+                            <span class="text-gray-700">2-Year Warranty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Accordion -->
+            <div>
+                <h3 class="text-xl font-semibold text-gray-900 mb-6">Frequently Asked Questions</h3>
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg">
+                        <button onclick="toggleAccordion('faq1')" class="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors duration-300">
+                            <span class="font-medium text-gray-900">How long does the battery last?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transform transition-transform duration-300" id="faq1-icon"></i>
+                        </button>
+                        <div id="faq1" class="accordion-content">
+                            <div class="p-4 pt-0 text-gray-700">
+                                The headphones provide up to 30 hours of continuous playback with noise cancellation enabled, and up to 40 hours without it. A quick 15-minute charge provides 3 hours of playback time.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button onclick="toggleAccordion('faq2')" class="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors duration-300">
+                            <span class="font-medium text-gray-900">Are they compatible with all devices?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transform transition-transform duration-300" id="faq2-icon"></i>
+                        </button>
+                        <div id="faq2" class="accordion-content">
+                            <div class="p-4 pt-0 text-gray-700">
+                                Yes, our headphones are compatible with all Bluetooth-enabled devices including smartphones, tablets, laptops, and smart TVs. They also support multiple codec formats for optimal audio quality.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-gray-200 rounded-lg">
+                        <button onclick="toggleAccordion('faq3')" class="w-full flex items-center justify-between p-4 text-left hover:bg-gray-50 transition-colors duration-300">
+                            <span class="font-medium text-gray-900">What's the return policy?</span>
+                            <i class="fas fa-chevron-down text-gray-400 transform transition-transform duration-300" id="faq3-icon"></i>
+                        </button>
+                        <div id="faq3" class="accordion-content">
+                            <div class="p-4 pt-0 text-gray-700">
+                                We offer a 30-day money-back guarantee. If you're not completely satisfied, return the product in its original condition for a full refund. We also provide a 2-year manufacturer warranty.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Section -->
+    <section id="order-section" class="max-w-6xl mx-auto px-4 md:px-8 py-16">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 md:p-12">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Place Your Order</h2>
+                <p class="text-gray-600">Fill in your details below and we'll get your order processed quickly.</p>
+            </div>
+                
+            <div class="max-w-md mx-auto" id="inline-order-form-container">
+                <!-- Shared order form will be injected here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="max-w-6xl mx-auto px-4 md:px-8 py-16">
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Related Products</h2>
+        
+        <!-- Swiper Container -->
+        <div class="related-products-swiper swiper">
+            <div class="swiper-wrapper">
+                <!-- Product Card 1 -->
+                <div class="swiper-slide">
+                    <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" role="article">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=300&h=300&fit=crop&crop=center" 
+                                 alt="Wireless Earbuds" 
+                                 class="w-full h-48 object-cover"
+                                 loading="lazy">
+                            <div class="absolute top-3 right-3">
+                                <span class="bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                            </div>
+                            
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 rounded"
+                                tabindex="0" role="button" aria-label="View product details" 
+                                onclick="viewProduct('wireless-earbuds')">Wireless Earbuds</h3>
+                            <div class="mb-3 flex-1">
+                                <div class="text-gray-600 text-sm leading-relaxed line-clamp-2">Premium sound in compact design with advanced noise cancellation</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-blue-600">₹89.99</span>
+                                <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                                    <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                                    <span class="text-sm text-gray-600 ml-1">4.5</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1 sm:space-x-2 mt-auto">
+                                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        onclick="openOrderModal(); setModalProduct('Wireless Earbuds', '₹89.99', 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=150&h=150&fit=crop&crop=center')">
+                                    <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                                    <span class="hidden xs:inline">Order</span>
+                                    <span class="xs:hidden">Order</span>
+                                </button>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                        onclick="chatOnWhatsApp('Wireless Earbuds', '₹89.99')">
+                                    <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                                    <span class="hidden sm:inline">Chat</span>
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                        onclick="shareProduct('Wireless Earbuds', '₹89.99', 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?w=300&h=300&fit=crop&crop=center')">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                    <span class="sr-only">Share product</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Product Card 2 -->
+                <div class="swiper-slide">
+                    <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" role="article">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=300&fit=crop&crop=center" 
+                                 alt="Gaming Headset" 
+                                 class="w-full h-48 object-cover"
+                                 loading="lazy">
+                            <div class="absolute top-3 right-3">
+                                <span class="bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                            </div>
+                            
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 rounded"
+                                tabindex="0" role="button" aria-label="View product details" 
+                                onclick="viewProduct('gaming-headset')">Gaming Headset</h3>
+                            <div class="mb-3 flex-1">
+                                <div class="text-gray-600 text-sm leading-relaxed line-clamp-2">Immersive gaming experience with crystal clear audio</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-blue-600">₹199.99</span>
+                                <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                                    <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                                    <span class="text-sm text-gray-600 ml-1">4.7</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1 sm:space-x-2 mt-auto">
+                                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        onclick="openOrderModal(); setModalProduct('Gaming Headset', '₹199.99', 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=150&h=150&fit=crop&crop=center')">
+                                    <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                                    <span class="hidden xs:inline">Order</span>
+                                    <span class="xs:hidden">Order</span>
+                                </button>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                        onclick="chatOnWhatsApp('Gaming Headset', '₹199.99')">
+                                    <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                                    <span class="hidden sm:inline">Chat</span>
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                        onclick="shareProduct('Gaming Headset', '₹199.99', 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=300&h=300&fit=crop&crop=center')">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                    <span class="sr-only">Share product</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Product Card 3 -->
+                <div class="swiper-slide">
+                    <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" role="article">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=300&h=300&fit=crop&crop=center" 
+                                 alt="Bluetooth Speaker" 
+                                 class="w-full h-48 object-cover"
+                                 loading="lazy">
+                            <div class="absolute top-3 right-3">
+                                <span class="bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                            </div>
+                            
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 rounded"
+                                tabindex="0" role="button" aria-label="View product details" 
+                                onclick="viewProduct('bluetooth-speaker')">Bluetooth Speaker</h3>
+                            <div class="mb-3 flex-1">
+                                <div class="text-gray-600 text-sm leading-relaxed line-clamp-2">Portable powerful sound with deep bass and crisp highs</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-blue-600">₹79.99</span>
+                                <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                                    <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                                    <span class="text-sm text-gray-600 ml-1">4.3</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1 sm:space-x-2 mt-auto">
+                                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        onclick="openOrderModal(); setModalProduct('Bluetooth Speaker', '₹79.99', 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=150&h=150&fit=crop&crop=center')">
+                                    <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                                    <span class="hidden xs:inline">Order</span>
+                                    <span class="xs:hidden">Order</span>
+                                </button>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                        onclick="chatOnWhatsApp('Bluetooth Speaker', '₹79.99')">
+                                    <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                                    <span class="hidden sm:inline">Chat</span>
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                        onclick="shareProduct('Bluetooth Speaker', '₹79.99', 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=300&h=300&fit=crop&crop=center')">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                    <span class="sr-only">Share product</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Product Card 4 -->
+                <div class="swiper-slide">
+                    <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" role="article">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop&crop=center" 
+                                 alt="Studio Headphones" 
+                                 class="w-full h-48 object-cover"
+                                 loading="lazy">
+                            <div class="absolute top-3 right-3">
+                                <span class="bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                            </div>
+                           
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 rounded"
+                                tabindex="0" role="button" aria-label="View product details" 
+                                onclick="viewProduct('studio-headphones')">Studio Headphones</h3>
+                            <div class="mb-3 flex-1">
+                                <div class="text-gray-600 text-sm leading-relaxed line-clamp-2">Professional audio quality for musicians and audiophiles</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-blue-600">₹299.99</span>
+                                <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                                    <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                                    <span class="text-sm text-gray-600 ml-1">4.9</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1 sm:space-x-2 mt-auto">
+                                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        onclick="openOrderModal(); setModalProduct('Studio Headphones', '₹299.99', 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=150&h=150&fit=crop&crop=center')">
+                                    <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                                    <span class="hidden xs:inline">Order</span>
+                                    <span class="xs:hidden">Order</span>
+                                </button>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                        onclick="chatOnWhatsApp('Studio Headphones', '₹299.99')">
+                                    <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                                    <span class="hidden sm:inline">Chat</span>
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                        onclick="shareProduct('Studio Headphones', '₹299.99', 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=300&fit=crop&crop=center')">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                    <span class="sr-only">Share product</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Product Card 5 -->
+                <div class="swiper-slide">
+                    <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" role="article">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?w=300&h=300&fit=crop&crop=center" 
+                                 alt="Smart Watch" 
+                                 class="w-full h-48 object-cover"
+                                 loading="lazy">
+                            <div class="absolute top-3 right-3">
+                                <span class="bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                            </div>
+                            
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 rounded"
+                                tabindex="0" role="button" aria-label="View product details" 
+                                onclick="viewProduct('smart-watch')">Smart Watch</h3>
+                            <div class="mb-3 flex-1">
+                                <div class="text-gray-600 text-sm leading-relaxed line-clamp-2">Advanced fitness tracking with heart rate monitoring</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-blue-600">₹249.99</span>
+                                <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                                    <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                                    <span class="text-sm text-gray-600 ml-1">4.6</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1 sm:space-x-2 mt-auto">
+                                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        onclick="openOrderModal(); setModalProduct('Smart Watch', '₹249.99', 'https://images.unsplash.com/photo-1493612276216-ee3925520721?w=150&h=150&fit=crop&crop=center')">
+                                    <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                                    <span class="hidden xs:inline">Order</span>
+                                    <span class="xs:hidden">Order</span>
+                                </button>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                        onclick="chatOnWhatsApp('Smart Watch', '₹249.99')">
+                                    <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                                    <span class="hidden sm:inline">Chat</span>
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                        onclick="shareProduct('Smart Watch', '₹249.99', 'https://images.unsplash.com/photo-1493612276216-ee3925520721?w=300&h=300&fit=crop&crop=center')">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                    <span class="sr-only">Share product</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <!-- Product Card 6 -->
+                <div class="swiper-slide">
+                    <article class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" role="article">
+                        <div class="relative">
+                            <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=300&h=300&fit=crop&crop=center" 
+                                 alt="Wireless Charger" 
+                                 class="w-full h-48 object-cover"
+                                 loading="lazy">
+                            <div class="absolute top-3 right-3">
+                                <span class="bg-white bg-opacity-90 px-2 py-1 rounded-full text-xs font-medium text-gray-700 shadow-sm">Electronics</span>
+                            </div>
+                           
+                        </div>
+                        <div class="p-4 flex flex-col flex-1">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2 line-clamp-1 cursor-pointer hover:text-blue-600 transition-colors duration-200 rounded"
+                                tabindex="0" role="button" aria-label="View product details" 
+                                onclick="viewProduct('wireless-charger')">Wireless Charger</h3>
+                            <div class="mb-3 flex-1">
+                                <div class="text-gray-600 text-sm leading-relaxed line-clamp-2">Fast wireless charging pad for all compatible devices</div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-blue-600">₹39.99</span>
+                                <div class="flex items-center text-yellow-400" role="img" aria-label="Product rating">
+                                    <i class="fas fa-star text-sm" aria-hidden="true"></i>
+                                    <span class="text-sm text-gray-600 ml-1">4.2</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-1 sm:space-x-2 mt-auto">
+                                <button class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                                        onclick="openOrderModal(); setModalProduct('Wireless Charger', '₹39.99', 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=150&h=150&fit=crop&crop=center')">
+                                    <i class="fas fa-shopping-bag mr-1 sm:mr-2" aria-hidden="true"></i>
+                                    <span class="hidden xs:inline">Order</span>
+                                    <span class="xs:hidden">Order</span>
+                                </button>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                                        onclick="chatOnWhatsApp('Wireless Charger', '₹39.99')">
+                                    <i class="fab fa-whatsapp sm:mr-1" aria-hidden="true"></i>
+                                    <span class="hidden sm:inline">Chat</span>
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                                        onclick="shareProduct('Wireless Charger', '₹39.99', 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?w=300&h=300&fit=crop&crop=center')">
+                                    <i class="fas fa-share-alt" aria-hidden="true"></i>
+                                    <span class="sr-only">Share product</span>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+            <!-- Navigation arrows -->
+            <div class="swiper-button-next !text-blue-600 !font-bold after:!text-2xl"></div>
+            <div class="swiper-button-prev !text-blue-600 !font-bold after:!text-2xl"></div>
+            
+            <!-- Pagination dots -->
+            <div class="swiper-pagination !relative !mt-8"></div>
+        </div>
+    </section>
+
+  
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4">
+        <div class="relative max-w-4xl max-h-full">
+            <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white bg-black bg-opacity-50 w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition-all duration-300 z-10">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="modal-image" src="" alt="" class="max-w-full max-h-full object-contain rounded-lg">
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto" id="modal-order-form-container">
+            <!-- Shared order form will be injected here -->
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="modal-success-modal" class="fixed inset-0 bg-black bg-opacity-50 z-60 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-2xl text-green-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+                Order Confirmed!
+            </h3>
+            <p class="text-gray-600 mb-6">
+                Thank you for your order. We'll contact you soon to confirm delivery details.
+            </p>
+            <div class="space-y-3">
+                <button onclick="goModalToWhatsApp()"
+                    class="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors">
+                    <i class="fab fa-whatsapp mr-2"></i>Chat with Us
+                </button>
+                <button onclick="closeAllModals()"
+                    class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Product
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg transform translate-x-full transition-transform duration-300 z-50 hidden">
+        <span id="toast-message"></span>
+    </div>
+
+    
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize Related Products Carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            const relatedProductsSwiper = new Swiper('.related-products-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 24,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                    },
+                },
+            });
+        });
+
+        // WhatsApp Share Function
+        function shareOnWhatsApp() {
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            const productImage = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover";
+            const pageUrl = window.location.href;
+            const productDescription = "Experience exceptional audio quality with advanced noise cancellation technology and all-day comfort. Perfect for music lovers and professionals.";
+            
+            let message = `Take a look at this ${productName} on Our Store\n\n`;
+            message += `🎧 *${productName}*\n`;
+            message += `💰 *Special Price:* ${productPrice} (25% OFF!)\n`;
+            message += `📝 *Description:* ${productDescription}\n\n`;
+            message += `✨ *Key Features:*\n`;
+            message += `• Advanced Noise Cancellation\n`;
+            message += `• 30-Hour Battery Life\n`;
+            message += `• Bluetooth 5.0 Connectivity\n`;
+            message += `• Premium Comfort Design\n`;
+            message += `• 2-Year Warranty\n\n`;
+            message += `� *Product Image:* ${productImage}\n\n`;
+            message += `� *View Full Details & Order:*\n${pageUrl}\n\n`;
+            message += `🛒 *Order now before the offer ends!*`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Enhanced WhatsApp Share Function (without image links)
+        function shareProductEnhanced() {
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            const pageUrl = window.location.href;
+            const productDescription = "Experience exceptional audio quality with advanced noise cancellation technology and all-day comfort. Perfect for music lovers and professionals.";
+            
+            let message = `Take a look at this ${productName} on Our Store\n\n`;
+            message += `🎧 *${productName}*\n`;
+            message += `💰 *Special Price:* ${productPrice} (25% OFF!)\n`;
+            message += `📝 *Description:* ${productDescription}\n\n`;
+            message += `✨ *Key Features:*\n`;
+            message += `• Advanced Noise Cancellation\n`;
+            message += `• 30-Hour Battery Life\n`;
+            message += `• Bluetooth 5.0 Connectivity\n`;
+            message += `• Premium Comfort Design\n`;
+            message += `• 2-Year Warranty\n\n`;
+            message += `🔗 *View Full Details & Order:*\n${pageUrl}\n\n`;
+            message += `📸 *To see product images: Click the link above, then share images directly from our website!*\n\n`;
+            message += `🛒 *Order now before the offer ends!*`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Product Share Function
+        function shareProduct(productName, productPrice, productImage) {
+            // If no parameters provided, use main product details
+            if (!productName) {
+                productName = 'Premium Wireless Headphones';
+                productPrice = '₹149.99';
+                productImage = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover';
+            }
+            
+            // Enhanced product description for sharing
+            const productDescription = 'Experience exceptional audio quality with advanced noise cancellation technology and all-day comfort. Perfect for music lovers and professionals.';
+            
+            const productData = {
+                title: `${productName} - Shop with Us`,
+                text: `Take a look at this ${productName} on Our Store\n\n🎧 ${productName}\n💰 Special Price: ${productPrice}\n📝 ${productDescription}\n\nShop now:`,
+                url: window.location.href
+            };
+
+            // Check if Web Share API is supported
+            if (navigator.share && navigator.canShare && navigator.canShare(productData)) {
+                navigator.share(productData)
+                    .then(() => {
+                        showToast('Product shared successfully!', 'success');
+                    })
+                    .catch((error) => {
+                        console.log('Error sharing:', error);
+                        shareViaWhatsApp(productName, productPrice, productImage, productDescription);
+                    });
+            } else {
+                // Fallback: Share via WhatsApp or copy to clipboard
+                shareViaWhatsApp(productName, productPrice, productImage, productDescription);
+            }
+        }
+
+        // Share via WhatsApp function
+        function shareViaWhatsApp(productName, productPrice, productImage, productDescription) {
+            let message = `Take a look at this ${productName} on Our Store\n\n`;
+            message += `🛍️ *${productName}*\n`;
+            message += `💰 *Special Price:* ${productPrice}\n\n`;
+            message += `✨ *Why choose us?*\n`;
+            message += `• Premium Quality Products\n`;
+            message += `• Best Prices Guaranteed\n`;
+            message += `• Fast & Reliable Delivery\n`;
+            message += `• Customer Satisfaction First\n\n`;
+            message += `🔗 *View Details & Order:*\n${window.location.href}\n\n`;
+            message += `🛒 *Order now for the best deal!*`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            showToast('Sharing via WhatsApp...', 'info');
+        }
+
+        // Copy to Clipboard Function
+        function copyToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('Link copied to clipboard!', 'success');
+                }).catch(() => {
+                    fallbackCopyToClipboard(text);
+                });
+            } else {
+                fallbackCopyToClipboard(text);
+            }
+        }
+
+        // Fallback copy method
+        function fallbackCopyToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast('Link copied to clipboard!', 'success');
+            } catch (err) {
+                showToast('Failed to copy link', 'error');
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        // Show Toast Notification
+        function showToast(message, type = 'info', duration = 3000) {
+            const toast = document.getElementById('toast-notification');
+            const toastMessage = document.getElementById('toast-message');
+            
+            if (!toast || !toastMessage) {
+                console.warn('Toast elements not found');
+                return;
+            }
+            
+            // Set message
+            toastMessage.textContent = message;
+            
+            // Reset classes and set color based on type
+            toast.className = 'fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg transform translate-x-0 transition-transform duration-300 z-50';
+            
+            switch(type) {
+                case 'success':
+                    toast.classList.add('bg-green-600', 'text-white');
+                    break;
+                case 'error':
+                    toast.classList.add('bg-red-600', 'text-white');
+                    break;
+                case 'warning':
+                    toast.classList.add('bg-yellow-600', 'text-white');
+                    break;
+                default:
+                    toast.classList.add('bg-gray-900', 'text-white');
+            }
+            
+            // Show the toast
+            toast.classList.remove('hidden');
+            
+            // Hide after duration
+            setTimeout(() => {
+                toast.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                    toast.style.transform = 'translateX(0)';
+                }, 300);
+            }, duration);
+        }
+
+        // View Product Function
+        function viewProduct(productSlug) {
+            // This would typically navigate to the specific product page
+            console.log('Viewing product:', productSlug);
+            // For demo purposes, we'll just show an alert
+            showToast(`Viewing ${productSlug.replace('-', ' ')}...`, 'info');
+            window.location.href = `product.html?product=${productSlug}`;
+        }
+
+        // Order Modal Functions
+        function openOrderModal() {
+            const modal = document.getElementById('order-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset form and state
+            resetModalForm();
+            
+            // Focus on first input
+            const firstInput = document.getElementById('modal-full-name');
+            if (firstInput) {
+                setTimeout(() => firstInput.focus(), 100);
+            }
+        }
+
+        function closeOrderModal() {
+            const modal = document.getElementById('order-modal');
+            const successModal = document.getElementById('modal-success-modal');
+            
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            successModal.classList.add('hidden');
+            successModal.classList.remove('flex');
+            document.body.style.overflow = 'auto';
+            
+            // Reset form
+            resetModalForm();
+        }
+
+        // Reset modal form
+        function resetModalForm() {
+            const form = document.getElementById('modal-order-form');
+            if (form) {
+                form.reset();
+            }
+            
+            // Hide OTP section
+            const otpSection = document.getElementById('modal-otp-section');
+            if (otpSection) {
+                otpSection.classList.add('hidden');
+            }
+            
+            // Reset buttons
+            const verifyBtn = document.getElementById('modal-verify-phone-btn');
+            const confirmBtn = document.getElementById('modal-confirm-order-btn');
+            
+            if (verifyBtn) {
+                verifyBtn.style.display = 'block';
+                verifyBtn.disabled = true;
+                verifyBtn.innerHTML = '<i class="fas fa-shield-alt mr-2"></i>Verify Phone Number';
+            }
+            
+            if (confirmBtn) {
+                confirmBtn.disabled = true;
+                confirmBtn.innerHTML = '<i class="fas fa-check mr-2"></i>Confirm Order';
+            }
+            
+            // Clear OTP inputs
+            const otpInputs = document.querySelectorAll('.modal-otp-input');
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('border-green-500', 'bg-green-50');
+                input.classList.add('border-gray-300');
+            });
+        }
+
+        // Validate modal form
+        function validateModalForm() {
+            const form = document.getElementById('modal-order-form');
+            if (!form) return;
+            
+            const formData = new FormData(form);
+            
+            const fullName = formData.get('fullName')?.trim();
+            const phone = formData.get('phone')?.trim();
+            const address = formData.get('address')?.trim();
+            
+            const isValid = fullName && phone && address && 
+                           fullName.length >= 2 && 
+                           phone.length >= 10 && 
+                           address.length >= 10;
+            
+            // Enable/disable verify phone button
+            const verifyBtn = document.getElementById('modal-verify-phone-btn');
+            if (verifyBtn) {
+                verifyBtn.disabled = !isValid;
+                verifyBtn.classList.toggle('opacity-50', !isValid);
+            }
+        }
+
+        // Show OTP verification section
+        function showModalOTPSection() {
+            const form = document.getElementById('modal-order-form');
+            const formData = new FormData(form);
+            
+            const phone = formData.get('phone')?.trim();
+            const fullName = formData.get('fullName')?.trim();
+            const address = formData.get('address')?.trim();
+            
+            if (!fullName || fullName.length < 2) {
+                showToast('Please enter a valid full name', 'error');
+                return;
+            }
+            
+            if (!phone || phone.length < 10) {
+                showToast('Please enter a valid phone number', 'error');
+                return;
+            }
+            
+            if (!address || address.length < 10) {
+                showToast('Please enter a complete delivery address', 'error');
+                return;
+            }
+            
+            // Show OTP section
+            const otpSection = document.getElementById('modal-otp-section');
+            otpSection.classList.remove('hidden');
+            
+            // Hide verify phone button
+            const verifyBtn = document.getElementById('modal-verify-phone-btn');
+            const confirmBtn = document.getElementById('modal-confirm-order-btn');
+            
+            verifyBtn.style.display = 'none';
+            confirmBtn.disabled = true;
+            
+            // Simulate sending OTP
+            simulateModalSendOTP(phone);
+            
+            // Focus on first OTP input
+            const firstOTPInput = document.querySelector('.modal-otp-input');
+            if (firstOTPInput) {
+                setTimeout(() => firstOTPInput.focus(), 100);
+            }
+        }
+
+        // Simulate sending OTP
+        function simulateModalSendOTP(phone) {
+            showToast(`OTP sent to ${phone}`, 'success');
+            
+            setTimeout(() => {
+                showToast('Please enter the 6-digit OTP code', 'info');
+            }, 1000);
+        }
+
+        // Confirm modal order
+        function confirmModalOrder() {
+            const otpInputs = document.querySelectorAll('.modal-otp-input');
+            const otpCode = Array.from(otpInputs).map(input => input.value).join('');
+            
+            if (otpCode.length !== 6) {
+                showToast('Please enter the complete 6-digit OTP', 'error');
+                return;
+            }
+            
+            // Simulate order processing
+            const confirmBtn = document.getElementById('modal-confirm-order-btn');
+            confirmBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+            confirmBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Hide main modal and show success modal
+                document.getElementById('order-modal').classList.add('hidden');
+                document.getElementById('order-modal').classList.remove('flex');
+                document.getElementById('modal-success-modal').classList.remove('hidden');
+                document.getElementById('modal-success-modal').classList.add('flex');
+                
+                showToast('Order confirmed successfully!', 'success');
+            }, 2000);
+        }
+
+        // WhatsApp order function
+        function orderModalViaWhatsApp() {
+            const form = document.getElementById('modal-order-form');
+            const formData = new FormData(form);
+            
+            const fullName = formData.get('fullName')?.trim();
+            const phone = formData.get('phone')?.trim();
+            const email = formData.get('email')?.trim();
+            const address = formData.get('address')?.trim();
+            const instructions = formData.get('instructions')?.trim();
+            
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            
+            let message = `🛒 *New Order Request*\n\n`;
+            message += `📱 *Product:* ${productName}\n`;
+            message += `💰 *Price:* ${productPrice}\n\n`;
+            message += `👤 *Customer Details:*\n`;
+            message += `Name: ${fullName || 'Not provided'}\n`;
+            message += `Phone: ${phone || 'Not provided'}\n`;
+            if (email) message += `Email: ${email}\n`;
+            message += `\n📍 *Delivery Address:*\n${address || 'Not provided'}\n`;
+            if (instructions) message += `\n📝 *Special Instructions:*\n${instructions}\n`;
+            
+            const phoneNumber = '919868902123'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            showToast('Redirecting to WhatsApp...', 'info');
+        }
+
+        // Success modal functions
+        function goModalToWhatsApp() {
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            const message = `Hi! I just placed an order for *${productName}* (${productPrice}). Could you please confirm the delivery details?`;
+            const phoneNumber = '919868902123'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            closeAllModals();
+        }
+
+        function closeAllModals() {
+            document.getElementById('order-modal').classList.add('hidden');
+            document.getElementById('order-modal').classList.remove('flex');
+            document.getElementById('modal-success-modal').classList.add('hidden');
+            document.getElementById('modal-success-modal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+            resetModalForm();
+        }
+
+        // Setup modal form validation and OTP inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form validation
+            const modalForm = document.getElementById('modal-order-form');
+            if (modalForm) {
+                modalForm.addEventListener('input', validateModalForm);
+            }
+            
+            // OTP input handling
+            const modalOtpInputs = document.querySelectorAll('.modal-otp-input');
+            modalOtpInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    if (e.target.value.length === 1 && index < modalOtpInputs.length - 1) {
+                        modalOtpInputs[index + 1].focus();
+                    }
+                    
+                    // Check if all OTP fields are filled
+                    const allFilled = Array.from(modalOtpInputs).every(inp => inp.value.length === 1);
+                    const confirmBtn = document.getElementById('modal-confirm-order-btn');
+                    if (confirmBtn) {
+                        confirmBtn.disabled = !allFilled;
+                    }
+                });
+                
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                        modalOtpInputs[index - 1].focus();
+                    }
+                });
+            });
+            
+            // Resend OTP functionality
+            const resendBtn = document.getElementById('modal-resend-otp');
+            if (resendBtn) {
+                resendBtn.addEventListener('click', () => {
+                    const form = document.getElementById('modal-order-form');
+                    const formData = new FormData(form);
+                    const phone = formData.get('phone')?.trim();
+                    
+                    if (phone) {
+                        simulateModalSendOTP(phone);
+                        showToast('OTP resent successfully', 'success');
+                    }
+                });
+            }
+        });
+
+        // Image Gallery Functions
+        function changeMainImage(src) {
+            document.getElementById('main-image').src = src;
+            
+            // Reset all thumbnail borders
+            document.querySelectorAll('.aspect-square').forEach(thumb => {
+                thumb.classList.remove('border-blue-600', 'border-2');
+                thumb.classList.add('border-gray-200', 'border');
+            });
+            
+            // Find and highlight the matching thumbnails (both desktop and mobile)
+            const imageId = src.split('photo-')[1]?.split('?')[0]; // Extract image ID from URL
+            if (imageId) {
+                document.querySelectorAll(`img[src*="${imageId}"]`).forEach(img => {
+                    const thumbContainer = img.parentElement;
+                    thumbContainer.classList.remove('border-gray-200', 'border');
+                    thumbContainer.classList.add('border-blue-600', 'border-2');
+                });
+            }
+        }
+        
+        // Mobile Image Gallery Function
+        function changeMainImageMobile(src) {
+            document.getElementById('main-image-mobile').src = src;
+            
+            // Reset all mobile thumbnail borders
+            document.querySelectorAll('.lg\\:hidden .aspect-square').forEach(thumb => {
+                thumb.classList.remove('border-blue-600', 'border-2');
+                thumb.classList.add('border-gray-200', 'border');
+            });
+            
+            // Find and highlight the matching mobile thumbnail
+            const imageId = src.split('photo-')[1]?.split('?')[0]; // Extract image ID from URL
+            if (imageId) {
+                document.querySelectorAll(`.lg\\:hidden img[src*="${imageId}"]`).forEach(img => {
+                    const thumbContainer = img.parentElement;
+                    thumbContainer.classList.remove('border-gray-200', 'border');
+                    thumbContainer.classList.add('border-blue-600', 'border-2');
+                });
+            }
+        }
+
+        // Open image in modal
+        document.getElementById('main-image').addEventListener('click', function() {
+            document.getElementById('modal-image').src = this.src;
+            document.getElementById('image-modal').classList.remove('hidden');
+            document.getElementById('image-modal').classList.add('flex');
+        });
+        
+        // Open mobile image in modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileImage = document.getElementById('main-image-mobile');
+            if (mobileImage) {
+                mobileImage.addEventListener('click', function() {
+                    document.getElementById('modal-image').src = this.src;
+                    document.getElementById('image-modal').classList.remove('hidden');
+                    document.getElementById('image-modal').classList.add('flex');
+                });
+            }
+        });
+
+        function closeImageModal() {
+            document.getElementById('image-modal').classList.add('hidden');
+            document.getElementById('image-modal').classList.remove('flex');
+        }
+
+        // Accordion Functions
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Close all other accordions
+                document.querySelectorAll('.accordion-content').forEach(acc => {
+                    acc.classList.remove('open');
+                });
+                document.querySelectorAll('[id$="-icon"]').forEach(ic => {
+                    ic.style.transform = 'rotate(0deg)';
+                });
+                
+                // Open clicked accordion
+                content.classList.add('open');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // Scroll to Order Section (now opens modal)
+        function scrollToOrder() {
+            openOrderModal();
+        }
+
+        // OTP and Order Functions (for the inline form)
+        function validateInlineForm() {
+            const form = document.getElementById('order-form');
+            if (!form) return;
+            
+            const formData = new FormData(form);
+            
+            const fullName = formData.get('fullName')?.trim();
+            const phone = formData.get('phone')?.trim();
+            const address = formData.get('address')?.trim();
+            
+            const isValid = fullName && phone && address && 
+                           fullName.length >= 2 && 
+                           phone.length >= 10 && 
+                           address.length >= 10;
+            
+            // Enable/disable verify phone button
+            const verifyBtn = document.getElementById('verify-phone-btn');
+            if (verifyBtn) {
+                verifyBtn.disabled = !isValid;
+                verifyBtn.classList.toggle('opacity-50', !isValid);
+            }
+        }
+
+        function showOTPSection() {
+            const form = document.getElementById('order-form');
+            const formData = new FormData(form);
+            
+            const phone = formData.get('phone')?.trim();
+            const fullName = formData.get('fullName')?.trim();
+            const address = formData.get('address')?.trim();
+            
+            if (!fullName || fullName.length < 2) {
+                showToast('Please enter a valid full name', 'error');
+                return;
+            }
+            
+            if (!phone || phone.length < 10) {
+                showToast('Please enter a valid phone number', 'error');
+                return;
+            }
+            
+            if (!address || address.length < 10) {
+                showToast('Please enter a complete delivery address', 'error');
+                return;
+            }
+            
+            // Show OTP section
+            const otpSection = document.getElementById('otp-section');
+            otpSection.classList.remove('hidden');
+            
+            // Hide verify phone button and show place order button
+            const verifyBtn = document.getElementById('verify-phone-btn');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+            
+            verifyBtn.style.display = 'none';
+            placeOrderBtn.classList.remove('hidden');
+            placeOrderBtn.disabled = true;
+            
+            // Simulate sending OTP
+            showToast(`OTP sent to ${phone}`, 'success');
+            
+            setTimeout(() => {
+                showToast('Please enter the 6-digit OTP code', 'info');
+            }, 1000);
+            
+            // Focus on first OTP input
+            const firstOTPInput = document.querySelector('.otp-input');
+            if (firstOTPInput) {
+                setTimeout(() => firstOTPInput.focus(), 100);
+            }
+        }
+
+        function orderViaWhatsApp() {
+            const form = document.getElementById('order-form');
+            const formData = new FormData(form);
+            
+            const fullName = formData.get('fullName')?.trim();
+            const phone = formData.get('phone')?.trim();
+            const email = formData.get('email')?.trim();
+            const address = formData.get('address')?.trim();
+            const instructions = formData.get('instructions')?.trim();
+            
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            
+            let message = `🛒 *New Order Request*\n\n`;
+            message += `📱 *Product:* ${productName}\n`;
+            message += `💰 *Price:* ${productPrice}\n\n`;
+            message += `👤 *Customer Details:*\n`;
+            message += `Name: ${fullName || 'Not provided'}\n`;
+            message += `Phone: ${phone || 'Not provided'}\n`;
+            if (email) message += `Email: ${email}\n`;
+            message += `\n📍 *Delivery Address:*\n${address || 'Not provided'}\n`;
+            if (instructions) message += `\n📝 *Special Instructions:*\n${instructions}\n`;
+            
+            const phoneNumber = '919868902123'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            showToast('Redirecting to WhatsApp...', 'info');
+        }
+
+        function goToWhatsApp() {
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            const message = `Hi! I just placed an order for *${productName}* (${productPrice}). Could you please confirm the delivery details?`;
+            const phoneNumber = '919868902123'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            resetForm();
+        }
+
+        // Order Form Submission (inline form)
+        document.addEventListener('DOMContentLoaded', function() {
+            const orderForm = document.getElementById('order-form');
+            if (orderForm) {
+                // Form validation
+                orderForm.addEventListener('input', validateInlineForm);
+                
+                // Form submission
+                orderForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(orderForm);
+                    const fullName = formData.get('fullName')?.trim();
+                    const phone = formData.get('phone')?.trim();
+                    const address = formData.get('address')?.trim();
+                    
+                    // Check if all OTP fields are filled
+                    const otpInputs = document.querySelectorAll('.otp-input');
+                    const otpCode = Array.from(otpInputs).map(input => input.value).join('');
+                    
+                    if (!fullName || !phone || !address) {
+                        showToast('Please fill in all required fields', 'error');
+                        return;
+                    }
+                    
+                    if (otpCode.length !== 6) {
+                        showToast('Please enter the complete 6-digit OTP', 'error');
+                        return;
+                    }
+                    
+                    const orderBtn = document.getElementById('place-order-btn');
+                    const orderBtnText = document.getElementById('order-btn-text');
+                    const orderSpinner = document.getElementById('order-spinner');
+                    
+                    // Show loading state
+                    orderBtnText.textContent = 'Processing...';
+                    orderSpinner.classList.remove('hidden');
+                    orderBtn.disabled = true;
+                    
+                    // Simulate order processing
+                    setTimeout(() => {
+                        orderForm.classList.add('hidden');
+                        document.getElementById('order-success').classList.remove('hidden');
+                        showToast('Order placed successfully!', 'success');
+                    }, 2000);
+                });
+                
+                // OTP input handling
+                const otpInputs = document.querySelectorAll('.otp-input');
+                otpInputs.forEach((input, index) => {
+                    input.addEventListener('input', (e) => {
+                        if (e.target.value.length === 1 && index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
+                        }
+                        
+                        // Check if all OTP fields are filled
+                        const allFilled = Array.from(otpInputs).every(inp => inp.value.length === 1);
+                        const placeOrderBtn = document.getElementById('place-order-btn');
+                        if (placeOrderBtn) {
+                            placeOrderBtn.disabled = !allFilled;
+                        }
+                    });
+                    
+                    input.addEventListener('keydown', (e) => {
+                        if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
+                            otpInputs[index - 1].focus();
+                        }
+                    });
+                });
+                
+                // Resend OTP functionality
+                const resendBtn = document.getElementById('resend-otp');
+                if (resendBtn) {
+                    resendBtn.addEventListener('click', () => {
+                        const formData = new FormData(orderForm);
+                        const phone = formData.get('phone')?.trim();
+                        
+                        if (phone) {
+                            showToast(`OTP resent to ${phone}`, 'success');
+                        }
+                    });
+                }
+            }
+        });
+
+        // Reset Form (inline form)
+        function resetForm() {
+            const orderForm = document.getElementById('order-form');
+            const orderSuccess = document.getElementById('order-success');
+            const otpSection = document.getElementById('otp-section');
+            const verifyBtn = document.getElementById('verify-phone-btn');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+            
+            // Show form and hide success message
+            orderForm.classList.remove('hidden');
+            orderSuccess.classList.add('hidden');
+            otpSection.classList.add('hidden');
+            
+            // Reset buttons
+            verifyBtn.style.display = 'block';
+            verifyBtn.disabled = true;
+            placeOrderBtn.classList.add('hidden');
+            
+            // Reset form fields
+            orderForm.reset();
+            
+            // Reset button states
+            const orderBtnText = document.getElementById('order-btn-text');
+            const orderSpinner = document.getElementById('order-spinner');
+            
+            if (orderBtnText) orderBtnText.textContent = 'Confirm Order - ₹149.99';
+            if (orderSpinner) orderSpinner.classList.add('hidden');
+            if (placeOrderBtn) placeOrderBtn.disabled = false;
+            
+            // Clear OTP inputs
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('border-green-500', 'bg-green-50');
+                input.classList.add('border-gray-300');
+            });
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('image-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageModal();
+            }
+        });
+
+        document.getElementById('order-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeOrderModal();
+            }
+        });
+
+        // Keyboard navigation for modals
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+                closeOrderModal();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Related Products Functions
+        function setModalProduct(name, price, imageUrl) {
+            const modalProductName = document.getElementById('modal-product-name');
+            const modalProductPrice = document.getElementById('modal-product-price');
+            const modalProductImage = document.getElementById('modal-product-image');
+            
+            if (modalProductName) modalProductName.textContent = name;
+            if (modalProductPrice) modalProductPrice.textContent = price;
+            if (modalProductImage) {
+                modalProductImage.src = imageUrl;
+                modalProductImage.alt = name;
+            }
+        }
+
+        // Streamlined WhatsApp connection functions
+        function connectToWhatsAppFromProduct() {
+            const form = document.getElementById('order-form');
+            const formData = new FormData(form);
+            
+            const fullName = formData.get('fullName')?.trim();
+            const phone = formData.get('phone')?.trim();
+            const address = formData.get('address')?.trim();
+            
+            if (!fullName || fullName.length < 2) {
+                showToast('Please enter a valid full name', 'error');
+                return;
+            }
+            
+            if (!phone || phone.length < 10) {
+                showToast('Please enter a valid phone number', 'error');
+                return;
+            }
+            
+            if (!address || address.length < 10) {
+                showToast('Please enter a complete delivery address', 'error');
+                return;
+            }
+            
+            // Connect to WhatsApp with streamlined message
+            const whatsappNumber = '919868902123';
+            const message = 'Hey! I\'m ready to buy, payment is in process.';
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success section
+            document.getElementById('order-form').classList.add('hidden');
+            document.getElementById('order-success').classList.remove('hidden');
+            
+            showToast('Connecting to WhatsApp...', 'success');
+        }
+
+        function connectToWhatsAppFromProductSuccess() {
+            const whatsappNumber = '919868902123';
+            const message = 'Hey! I\'m ready to buy, payment is in process.';
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Reset form
+            resetForm();
+        }
+
+        function chatOnWhatsApp(productName, productPrice) {
+            const productUrl = window.location.href;
+            
+            let message = `🛍️ *Product Inquiry*\n\n`;
+            message += `Hi! I need inquiry for this product:\n\n`;
+            message += `📱 *Product:* ${productName || 'Premium Wireless Headphones'}\n`;
+            message += `💰 *Price:* ${productPrice || '₹149.99'}\n\n`;
+            message += `🔗 *Product Link:* ${productUrl}\n\n`;
+            message += `Could you please provide more details about:\n`;
+            message += `• Product specifications & features\n`;
+            message += `• Availability & stock status\n`;
+            message += `• Delivery time & shipping charges\n`;
+            message += `• Warranty & return policy\n`;
+            message += `• Any ongoing offers or discounts\n\n`;
+            message += `I'm interested in purchasing this product. Please share complete details.\n\n`;
+            message += `Thank you!`;
+            
+            const phoneNumber = '919868902123'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+            showToast('Redirecting to WhatsApp for product inquiry...', 'info');
+        }
+    </script>
+</body>
+</html>
