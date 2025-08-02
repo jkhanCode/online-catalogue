@@ -110,10 +110,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize application
 function initializeApp() {
+    setupLazyLoading(); // Setup observer first
     setupEventListeners();
     createSkeletonCards();
     loadProducts();
-    setupLazyLoading();
     setupAccessibility();
 }
 
@@ -189,6 +189,27 @@ function retryLoadProducts() {
 // Display products in the grid with error handling
 function displayProducts(productsToShow) {
     try {
+        // Clean up any existing timeouts before clearing DOM
+        const existingImages = DOM.productGrid.querySelectorAll('img[data-src]');
+        existingImages.forEach(img => {
+            if (img._fallbackTimeout) {
+                clearTimeout(img._fallbackTimeout);
+                delete img._fallbackTimeout;
+            }
+            if (img._immediateTimeout) {
+                clearTimeout(img._immediateTimeout);
+                delete img._immediateTimeout;
+            }
+            // Unobserve existing images
+            if (window.imageObserver) {
+                try {
+                    window.imageObserver.unobserve(img);
+                } catch (e) {
+                    // Ignore errors during cleanup
+                }
+            }
+        });
+        
         DOM.productGrid.innerHTML = '';
         
         if (!Array.isArray(productsToShow)) {
@@ -208,11 +229,13 @@ function displayProducts(productsToShow) {
         
         DOM.productGrid.appendChild(fragment);
         
-        // Setup lazy loading for new images
-        setupLazyLoadingForNewImages();
+        // Setup lazy loading for new images with delay to ensure DOM is ready
+        setTimeout(() => {
+            setupLazyLoadingForNewImages();
+        }, 100);
         
         // Setup intersection observer for animations
-        setTimeout(observeProductCards, 100);
+        setTimeout(observeProductCards, 200);
         
     } catch (error) {
         console.error('Error displaying products:', error);
@@ -629,72 +652,189 @@ function createSkeletonCards() {
 
 // Lazy loading setup
 function setupLazyLoading() {
+    console.log('Setting up lazy loading...');
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
+                    console.log('Image intersecting, loading:', img.getAttribute('data-src'));
                     loadImage(img);
                     observer.unobserve(img);
                 }
             });
         }, {
-            rootMargin: '50px'
+            rootMargin: '50px',
+            threshold: 0.1
         });
         
         // Store observer for later use
         window.imageObserver = imageObserver;
+        console.log('Image observer created successfully');
+    } else {
+        console.log('IntersectionObserver not supported');
+        window.imageObserver = null;
     }
 }
 
 // Setup lazy loading for new images
 function setupLazyLoadingForNewImages() {
-    if (window.imageObserver) {
-        const lazyImages = DOM.productGrid.querySelectorAll('img[data-src]');
-        lazyImages.forEach(img => window.imageObserver.observe(img));
+    const lazyImages = DOM.productGrid.querySelectorAll('img[data-src]');
+    console.log(`Setting up lazy loading for ${lazyImages.length} new images`);
+    
+    if (!window.imageObserver) {
+        console.log('No image observer available, loading images directly');
+        lazyImages.forEach((img, index) => {
+            setTimeout(() => loadImage(img), index * 50); // Stagger loading
+        });
+        return;
     }
+    
+    lazyImages.forEach((img, index) => {
+        try {
+            // Add immediate fallback for search results
+            const immediateTimeout = setTimeout(() => {
+                if (img.classList.contains('loading') && img.getAttribute('data-src')) {
+                    console.log('Immediate fallback triggered for:', img.getAttribute('data-src'));
+                    loadImage(img);
+                }
+            }, 1000); // 1 second immediate fallback
+            
+            img._immediateTimeout = immediateTimeout;
+            window.imageObserver.observe(img);
+        } catch (error) {
+            console.error('Error observing image:', error);
+            loadImage(img);
+        }
+    });
 }
 
 // Setup lazy image loading
 function setupLazyImage(imgElement, src, alt) {
+    if (!imgElement || !src) {
+        console.error('Invalid image element or source');
+        return;
+    }
+    
     imgElement.setAttribute('data-src', src);
-    imgElement.alt = alt;
+    imgElement.alt = alt || 'Product image';
     imgElement.classList.add('loading');
     
     // Add placeholder
     imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZiNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvYWRpbmcuLi48L3RleHQ+PC9zdmc+';
-    // console.log(window.imageObserver);
+    
+    console.log('Setting up lazy image:', src);
+    
+    // Check if image is already in viewport - if so, load immediately
+    const rect = imgElement.getBoundingClientRect();
+    const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+    
+    if (isInViewport) {
+        console.log('Image is in viewport, loading immediately:', src);
+        setTimeout(() => loadImage(imgElement), 50);
+        return;
+    }
+    
+    // Add timeout fallback for intersection observer
+    const fallbackTimeout = setTimeout(() => {
+        if (imgElement.classList.contains('loading')) {
+            console.log('Intersection observer timeout, loading image directly:', src);
+            loadImage(imgElement);
+        }
+    }, 2000); // Reduced to 2 seconds for faster fallback
+    
+    // Store timeout reference to clear it later
+    imgElement._fallbackTimeout = fallbackTimeout;
+    
     if (window.imageObserver) {
-        window.imageObserver.observe(imgElement);
+        try {
+            window.imageObserver.observe(imgElement);
+            console.log('Image added to observer:', src);
+        } catch (error) {
+            console.error('Error observing image:', error);
+            clearTimeout(fallbackTimeout);
+            loadImage(imgElement);
+        }
     } else {
         // Fallback for browsers without IntersectionObserver
-        loadImage(imgElement);
+        console.log('No intersection observer, loading image directly:', src);
+        clearTimeout(fallbackTimeout);
+        setTimeout(() => loadImage(imgElement), 100);
     }
 }
 
 // Load image with error handling
 function loadImage(imgElement) {
     const src = imgElement.getAttribute('data-src');
-    if (!src || loadedImages.has(src)) return;
+    if (!src) {
+        console.error('No data-src found for image');
+        return;
+    }
+    
+    if (loadedImages.has(src)) {
+        console.log('Image already loaded:', src);
+        imgElement.src = src;
+        imgElement.classList.remove('loading');
+        imgElement.classList.add('loaded');
+        imgElement.removeAttribute('data-src');
+        return;
+    }
+    
+    console.log('Loading image:', src);
+    
+    // Clear any existing timeouts
+    if (imgElement._fallbackTimeout) {
+        clearTimeout(imgElement._fallbackTimeout);
+        delete imgElement._fallbackTimeout;
+    }
+    if (imgElement._immediateTimeout) {
+        clearTimeout(imgElement._immediateTimeout);
+        delete imgElement._immediateTimeout;
+    }
     
     const tempImg = new Image();
     
+    // Add loading timeout
+    const loadTimeout = setTimeout(() => {
+        console.error('Image load timeout:', src);
+        handleImageError(imgElement, 'Load timeout');
+    }, 10000); // 10 second timeout
+    
     tempImg.onload = function() {
+        clearTimeout(loadTimeout);
+        console.log('Image loaded successfully:', src);
+        
         imgElement.src = src;
         imgElement.classList.remove('loading');
         imgElement.classList.add('loaded');
         loadedImages.add(src);
-        // imgElement.removeAttribute('data-src');
-    };
-    
-    tempImg.onerror = function() {
-        imgElement.classList.remove('loading');
-        imgElement.classList.add('error');
-        console.error('Failed to load image:', src);
         imgElement.removeAttribute('data-src');
     };
     
+    tempImg.onerror = function() {
+        clearTimeout(loadTimeout);
+        console.error('Failed to load image:', src);
+        handleImageError(imgElement, 'Load failed');
+    };
+    
+    // Set crossOrigin for external images
+    if (src.startsWith('http') && !src.includes(window.location.hostname)) {
+        tempImg.crossOrigin = 'anonymous';
+    }
+    
     tempImg.src = src;
+}
+
+// Handle image loading errors
+function handleImageError(imgElement, reason) {
+    imgElement.classList.remove('loading');
+    imgElement.classList.add('error');
+    
+    // Set error placeholder
+    imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZmVmMmYyIi8+PHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2VmNDQ0NCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBBdmFpbGFibGU8L3RleHQ+PHRleHQgeD0iNTAlIiB5PSI1NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMCIgZmlsbD0iIzk5OTk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPjwvdGV4dD48L3N2Zz4=';
+    
+    imgElement.removeAttribute('data-src');
+    console.log(`Image error handled: ${reason}`);
 }
 
 // Toast notification system
@@ -885,7 +1025,7 @@ function chatOnWhatsApp(productName, productPrice) {
     message += `I'm interested in purchasing this product. Please share complete details.\n\n`;
     message += `Thank you!`;
     
-    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const phoneNumber = '919868902123'; // Your WhatsApp business number
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     showToast('Redirecting to WhatsApp for product inquiry...', 'info');
