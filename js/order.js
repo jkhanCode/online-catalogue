@@ -336,6 +336,52 @@ function orderViaWhatsApp() {
     openWhatsApp(currentOrderProduct, hasCustomerInfo ? customerInfo : null);
 }
 
+// Open WhatsApp for product inquiry or order
+function openWhatsApp(product, customerInfo = null) {
+    if (!product) {
+        alert('No product selected');
+        return;
+    }
+    
+    let message = '';
+    
+    if (customerInfo) {
+        // Order message with customer info
+        message = `🛒 *New Order Request*\n\n`;
+        message += `Hi! I would like to place an order:\n\n`;
+        message += `📱 *Product:* ${product.name}\n`;
+        message += `💰 *Price:* ${product.price}\n\n`;
+        message += `👤 *Customer Details:*\n`;
+        message += `• Name: ${customerInfo.name}\n`;
+        message += `• Phone: ${customerInfo.phone}\n`;
+        if (customerInfo.email) message += `• Email: ${customerInfo.email}\n`;
+        message += `• Address: ${customerInfo.address}\n`;
+        if (customerInfo.instructions) message += `• Special Instructions: ${customerInfo.instructions}\n`;
+        message += `\n🔗 *Product Link:* ${window.location.href}\n\n`;
+        message += `Please confirm my order and let me know the next steps.\n\n`;
+        message += `Thank you!`;
+    } else {
+        // Product inquiry message
+        message = `🛍️ *Product Inquiry*\n\n`;
+        message += `Hi! I need inquiry for this product:\n\n`;
+        message += `📱 *Product:* ${product.name}\n`;
+        message += `💰 *Price:* ${product.price}\n\n`;
+        message += `🔗 *Product Link:* ${window.location.href}\n\n`;
+        message += `Could you please provide more details about:\n`;
+        message += `• Product specifications & features\n`;
+        message += `• Availability & stock status\n`;
+        message += `• Delivery time & shipping charges\n`;
+        message += `• Warranty & return policy\n`;
+        message += `• Any ongoing offers or discounts\n\n`;
+        message += `I'm interested in purchasing this product. Please share complete details.\n\n`;
+        message += `Thank you!`;
+    }
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
+
 // Go to WhatsApp from success modal
 function goToWhatsApp() {
     const lastOrder = localStorage.getItem('lastOrder');

@@ -201,28 +201,36 @@ function createWhatsAppMessage(product, customerInfo = null) {
             throw new Error('Invalid product data');
         }
         
-        let message = `Hi! I'd like to order:\n\n`;
-        message += `📦 Product: ${sanitizeForWhatsApp(product.name)}\n`;
-        message += `💰 Price: ${sanitizeForWhatsApp(product.price)}\n`;
+        let message = `🛒 *New Order Request*\n\n`;
+        message += `📦 *Product:* ${sanitizeForWhatsApp(product.name)}\n`;
+        message += `💰 *Price:* ${sanitizeForWhatsApp(product.price)}\n`;
+        
+        if (product.description) {
+            message += `📝 *Description:* ${sanitizeForWhatsApp(product.description)}\n`;
+        }
         
         if (product.brand) {
-            message += `🏷️ Brand: ${sanitizeForWhatsApp(product.brand)}\n`;
+            message += `🏷️ *Brand:* ${sanitizeForWhatsApp(product.brand)}\n`;
+        }
+        
+        if (product.image) {
+            message += `📸 *Product Image:* ${sanitizeForWhatsApp(product.image)}\n`;
         }
         
         if (customerInfo && validateCustomerInfo(customerInfo)) {
-            message += `\n👤 Customer Details:\n`;
-            message += `Name: ${sanitizeForWhatsApp(customerInfo.name)}\n`;
-            message += `Phone: ${sanitizeForWhatsApp(customerInfo.phone)}\n`;
+            message += `\n👤 *Customer Details:*\n`;
+            message += `• Name: ${sanitizeForWhatsApp(customerInfo.name)}\n`;
+            message += `• Phone: ${sanitizeForWhatsApp(customerInfo.phone)}\n`;
             if (customerInfo.email) {
-                message += `Email: ${sanitizeForWhatsApp(customerInfo.email)}\n`;
+                message += `• Email: ${sanitizeForWhatsApp(customerInfo.email)}\n`;
             }
-            message += `Address: ${sanitizeForWhatsApp(customerInfo.address)}\n`;
+            message += `• Address: ${sanitizeForWhatsApp(customerInfo.address)}\n`;
             if (customerInfo.instructions) {
-                message += `Special Instructions: ${sanitizeForWhatsApp(customerInfo.instructions)}\n`;
+                message += `• Special Instructions: ${sanitizeForWhatsApp(customerInfo.instructions)}\n`;
             }
         }
         
-        message += `\nPlease confirm availability and delivery details. Thank you!`;
+        message += `\n✅ Please confirm availability and delivery details. Thank you!`;
         
         return encodeURIComponent(message);
     } catch (error) {
@@ -235,7 +243,8 @@ function createWhatsAppMessage(product, customerInfo = null) {
 function openWhatsApp(product, customerInfo = null) {
     try {
         const message = createWhatsAppMessage(product, customerInfo);
-        const whatsappUrl = `https://wa.me/?text=${message}`;
+        const phoneNumber = '919868907397'; // Your WhatsApp business number
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
         
         // Check if WhatsApp is available
         const link = document.createElement('a');

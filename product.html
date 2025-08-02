@@ -5,15 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Wireless Headphones - Shop with Us</title>
      <meta name="keywords" content="products, catalog, electronics, fashion, home, beauty, online shopping" />
-    <meta property="og:title" content="Product Catalog - Shop with Us" />
-    <meta property="og:description" content="Browse our curated collection of quality products at great prices." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image"
-        content="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=630&fit=crop" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Product Catalog - Shop with Us" />
-    <meta name="twitter:description" content="Browse our curated collection of quality products at great prices." />
+   
     <meta name="description" content="High-quality wireless headphones with advanced noise cancellation and 30-hour battery life.">
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="Product Name - Brief Description" />
+    <meta property="og:description" content="Compelling product description that entices users to click" />
+    <meta property="og:image" content="https://demo.webapexius.in/photo.jpeg" />
+    <meta property="og:url" content="https://demo.webapexius.in/product.html?id=1" />
+
+    <!-- Product-specific tags -->
+    <meta property="product:price:amount" content="29.99" />
+    <meta property="product:price:currency" content="USD" />
+    <meta property="product:availability" content="in stock" />
+    <meta property="product:condition" content="new" />
+    <meta property="product:retailer_item_id" content="SKU123" />
+
+    <!-- Additional recommended tags -->
+    <meta property="og:site_name" content="Your Store Name" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card tags (for Twitter sharing) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Product Name - Brief Description" />
+    <meta name="twitter:description" content="Compelling product description" />
+    <meta name="twitter:image" content="https://demo.webapexius.in/photo.jpeg" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -208,17 +224,7 @@
                     </div>
                 </div>
                 
-                <!-- Rating -->
-                <div class="flex items-center space-x-2">
-                    <div class="flex text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span class="text-gray-600 text-sm">(4.8 out of 5 - 124 reviews)</span>
-                </div>
+               
                 
                 <!-- Availability -->
                 <div class="flex items-center space-x-2">
@@ -226,28 +232,7 @@
                     <span class="text-green-600 font-medium">In Stock - Ready to Ship</span>
                 </div>
                 
-                <!-- Key Features -->
-                <div class="bg-gray-50 rounded-xl p-6 space-y-3">
-                    <h3 class="font-semibold text-gray-900 mb-4">Key Features:</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-volume-up text-blue-600"></i>
-                            <span class="text-sm text-gray-700">Noise Cancellation</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-battery-full text-blue-600"></i>
-                            <span class="text-sm text-gray-700">30-Hour Battery</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-bluetooth text-blue-600"></i>
-                            <span class="text-sm text-gray-700">Bluetooth 5.0</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <i class="fas fa-headphones text-blue-600"></i>
-                            <span class="text-sm text-gray-700">Premium Comfort</span>
-                        </div>
-                    </div>
-                </div>
+                
                 
                 <!-- Order Now Button -->
                 <button onclick="scrollToOrder()" 
@@ -258,7 +243,7 @@
                 
                 <!-- WhatsApp and Share Buttons -->
                 <div class="flex space-x-3">
-                    <button onclick="shareOnWhatsApp()" 
+                    <button onclick="chatOnWhatsApp('Premium Wireless Headphones', '₹149.99')" 
                             class="flex-1 bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 flex items-center justify-center">
                         <i class="fab fa-whatsapp mr-2 text-lg"></i>
                         <span>Chat on WhatsApp</span>
@@ -1076,9 +1061,52 @@
         function shareOnWhatsApp() {
             const productName = "Premium Wireless Headphones";
             const productPrice = "₹149.99";
+            const productImage = "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover";
             const pageUrl = window.location.href;
-            const message = `Check out this amazing product: *${productName}* for just *${productPrice}*!\n\n${pageUrl}`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const productDescription = "Experience exceptional audio quality with advanced noise cancellation technology and all-day comfort. Perfect for music lovers and professionals.";
+            
+            let message = `Take a look at this ${productName} on Our Store\n\n`;
+            message += `🎧 *${productName}*\n`;
+            message += `💰 *Special Price:* ${productPrice} (25% OFF!)\n`;
+            message += `📝 *Description:* ${productDescription}\n\n`;
+            message += `✨ *Key Features:*\n`;
+            message += `• Advanced Noise Cancellation\n`;
+            message += `• 30-Hour Battery Life\n`;
+            message += `• Bluetooth 5.0 Connectivity\n`;
+            message += `• Premium Comfort Design\n`;
+            message += `• 2-Year Warranty\n\n`;
+            message += `� *Product Image:* ${productImage}\n\n`;
+            message += `� *View Full Details & Order:*\n${pageUrl}\n\n`;
+            message += `🛒 *Order now before the offer ends!*`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Enhanced WhatsApp Share Function (without image links)
+        function shareProductEnhanced() {
+            const productName = "Premium Wireless Headphones";
+            const productPrice = "₹149.99";
+            const pageUrl = window.location.href;
+            const productDescription = "Experience exceptional audio quality with advanced noise cancellation technology and all-day comfort. Perfect for music lovers and professionals.";
+            
+            let message = `Take a look at this ${productName} on Our Store\n\n`;
+            message += `🎧 *${productName}*\n`;
+            message += `💰 *Special Price:* ${productPrice} (25% OFF!)\n`;
+            message += `📝 *Description:* ${productDescription}\n\n`;
+            message += `✨ *Key Features:*\n`;
+            message += `• Advanced Noise Cancellation\n`;
+            message += `• 30-Hour Battery Life\n`;
+            message += `• Bluetooth 5.0 Connectivity\n`;
+            message += `• Premium Comfort Design\n`;
+            message += `• 2-Year Warranty\n\n`;
+            message += `🔗 *View Full Details & Order:*\n${pageUrl}\n\n`;
+            message += `📸 *To see product images: Click the link above, then share images directly from our website!*\n\n`;
+            message += `🛒 *Order now before the offer ends!*`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
@@ -1088,12 +1116,15 @@
             if (!productName) {
                 productName = 'Premium Wireless Headphones';
                 productPrice = '₹149.99';
-                productImage = window.location.href;
+                productImage = 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=cover';
             }
+            
+            // Enhanced product description for sharing
+            const productDescription = 'Experience exceptional audio quality with advanced noise cancellation technology and all-day comfort. Perfect for music lovers and professionals.';
             
             const productData = {
                 title: `${productName} - Shop with Us`,
-                text: `Check out this amazing ${productName} for just ${productPrice}!`,
+                text: `Take a look at this ${productName} on Our Store\n\n🎧 ${productName}\n💰 Special Price: ${productPrice}\n📝 ${productDescription}\n\nShop now:`,
                 url: window.location.href
             };
 
@@ -1105,18 +1136,29 @@
                     })
                     .catch((error) => {
                         console.log('Error sharing:', error);
-                        shareViaWhatsApp(productName, productPrice);
+                        shareViaWhatsApp(productName, productPrice, productImage, productDescription);
                     });
             } else {
                 // Fallback: Share via WhatsApp or copy to clipboard
-                shareViaWhatsApp(productName, productPrice);
+                shareViaWhatsApp(productName, productPrice, productImage, productDescription);
             }
         }
 
         // Share via WhatsApp function
-        function shareViaWhatsApp(productName, productPrice) {
-            const message = `Check out this amazing product: *${productName}* for just *${productPrice}*!\n\n${window.location.href}`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+        function shareViaWhatsApp(productName, productPrice, productImage, productDescription) {
+            let message = `Take a look at this ${productName} on Our Store\n\n`;
+            message += `🛍️ *${productName}*\n`;
+            message += `💰 *Special Price:* ${productPrice}\n\n`;
+            message += `✨ *Why choose us?*\n`;
+            message += `• Premium Quality Products\n`;
+            message += `• Best Prices Guaranteed\n`;
+            message += `• Fast & Reliable Delivery\n`;
+            message += `• Customer Satisfaction First\n\n`;
+            message += `🔗 *View Details & Order:*\n${window.location.href}\n\n`;
+            message += `🛒 *Order now for the best deal!*`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             showToast('Sharing via WhatsApp...', 'info');
         }
@@ -1204,6 +1246,7 @@
             console.log('Viewing product:', productSlug);
             // For demo purposes, we'll just show an alert
             showToast(`Viewing ${productSlug.replace('-', ' ')}...`, 'info');
+            window.location.href = `product.html?product=${productSlug}`;
         }
 
         // Order Modal Functions
@@ -1402,7 +1445,8 @@
             message += `\n📍 *Delivery Address:*\n${address || 'Not provided'}\n`;
             if (instructions) message += `\n📝 *Special Instructions:*\n${instructions}\n`;
             
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             showToast('Redirecting to WhatsApp...', 'info');
@@ -1413,7 +1457,8 @@
             const productName = "Premium Wireless Headphones";
             const productPrice = "₹149.99";
             const message = `Hi! I just placed an order for *${productName}* (${productPrice}). Could you please confirm the delivery details?`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             closeAllModals();
         }
@@ -1664,7 +1709,8 @@
             message += `\n📍 *Delivery Address:*\n${address || 'Not provided'}\n`;
             if (instructions) message += `\n📝 *Special Instructions:*\n${instructions}\n`;
             
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             
             showToast('Redirecting to WhatsApp...', 'info');
@@ -1674,7 +1720,8 @@
             const productName = "Premium Wireless Headphones";
             const productPrice = "₹149.99";
             const message = `Hi! I just placed an order for *${productName}* (${productPrice}). Could you please confirm the delivery details?`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
             resetForm();
         }
@@ -1852,10 +1899,26 @@
         }
 
         function chatOnWhatsApp(productName, productPrice) {
-            const message = `Hi! I'm interested in the *${productName}* priced at *${productPrice}*. Could you provide more details?`;
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            const productUrl = window.location.href;
+            
+            let message = `🛍️ *Product Inquiry*\n\n`;
+            message += `Hi! I need inquiry for this product:\n\n`;
+            message += `📱 *Product:* ${productName || 'Premium Wireless Headphones'}\n`;
+            message += `💰 *Price:* ${productPrice || '₹149.99'}\n\n`;
+            message += `🔗 *Product Link:* ${productUrl}\n\n`;
+            message += `Could you please provide more details about:\n`;
+            message += `• Product specifications & features\n`;
+            message += `• Availability & stock status\n`;
+            message += `• Delivery time & shipping charges\n`;
+            message += `• Warranty & return policy\n`;
+            message += `• Any ongoing offers or discounts\n\n`;
+            message += `I'm interested in purchasing this product. Please share complete details.\n\n`;
+            message += `Thank you!`;
+            
+            const phoneNumber = '919868907397'; // Your WhatsApp business number
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-            showToast('Redirecting to WhatsApp...', 'info');
+            showToast('Redirecting to WhatsApp for product inquiry...', 'info');
         }
     </script>
 </body>

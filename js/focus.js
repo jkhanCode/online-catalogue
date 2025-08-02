@@ -311,36 +311,80 @@ function shareProduct() {
     const currentProduct = focusProducts[currentFocusIndex];
     if (!currentProduct) return;
     
+    const productUrl = window.location.href;
+    
+    let message = `Take a look at this ${currentProduct.name} on Our Store\n\n`;
+    message += `🛍️ *${currentProduct.name}*\n`;
+    message += `💰 *Special Price:* ${currentProduct.price}\n\n`;
+    message += `✨ *Why choose us?*\n`;
+    message += `• Premium Quality Products\n`;
+    message += `• Best Prices Guaranteed\n`;
+    message += `• Fast & Reliable Delivery\n`;
+    message += `• Customer Satisfaction First\n\n`;
+    message += `🔗 *View Details & Order:*\n${productUrl}\n\n`;
+    message += `🛒 *Order now for the best deal!*`;
+    
     const shareData = {
         title: currentProduct.name,
-        text: `Check out this ${currentProduct.name} - ${currentProduct.price}`,
-        url: window.location.href
+        text: message,
+        url: productUrl
     };
     
     if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
-        navigator.share(shareData).catch(console.error);
+        navigator.share(shareData).catch(() => {
+            // Fallback to WhatsApp sharing
+            shareViaWhatsApp();
+        });
     } else {
-        // Fallback: copy to clipboard
-        const shareText = `${shareData.title}\n${shareData.text}\n${shareData.url}`;
-        
-        if (navigator.clipboard) {
-            navigator.clipboard.writeText(shareText).then(() => {
-                showToast('Link copied to clipboard!', 'success');
-            }).catch(() => {
-                fallbackCopyToClipboard(shareText);
-            });
-        } else {
-            fallbackCopyToClipboard(shareText);
-        }
+        // Fallback to WhatsApp sharing
+        shareViaWhatsApp();
     }
+}
+
+function shareViaWhatsApp() {
+    const currentProduct = focusProducts[currentFocusIndex];
+    if (!currentProduct) return;
+    
+    const productUrl = window.location.href;
+    
+    let message = `Take a look at this ${currentProduct.name} on Our Store\n\n`;
+    message += `🛍️ *${currentProduct.name}*\n`;
+    message += `💰 *Special Price:* ${currentProduct.price}\n\n`;
+    message += `✨ *Why choose us?*\n`;
+    message += `• Premium Quality Products\n`;
+    message += `• Best Prices Guaranteed\n`;
+    message += `• Fast & Reliable Delivery\n`;
+    message += `• Customer Satisfaction First\n\n`;
+    message += `🔗 *View Details & Order:*\n${productUrl}\n\n`;
+    message += `🛒 *Order now for the best deal!*`;
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
 }
 
 function openWhatsApp() {
     const currentProduct = focusProducts[currentFocusIndex];
     if (!currentProduct) return;
     
-    const message = `Hi! I'm interested in: ${currentProduct.name} - ${currentProduct.price}. Can you provide more details?`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    const productUrl = window.location.href;
+    
+    let message = `🛍️ *Product Inquiry*\n\n`;
+    message += `Hi! I need inquiry for this product:\n\n`;
+    message += `📱 *Product:* ${currentProduct.name}\n`;
+    message += `💰 *Price:* ${currentProduct.price}\n\n`;
+    message += `🔗 *Product Link:* ${productUrl}\n\n`;
+    message += `Could you please provide more details about:\n`;
+    message += `• Product specifications & features\n`;
+    message += `• Availability & stock status\n`;
+    message += `• Delivery time & shipping charges\n`;
+    message += `• Warranty & return policy\n`;
+    message += `• Any ongoing offers or discounts\n\n`;
+    message += `I'm interested in purchasing this product. Please share complete details.\n\n`;
+    message += `Thank you!`;
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 }
 

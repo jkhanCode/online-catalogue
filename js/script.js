@@ -21,7 +21,84 @@ let loadedImages = new Set();
 let retryCount = 0;
 const MAX_RETRIES = 3;
 
-// Initialize the application
+// Share via WhatsApp function
+function shareViaWhatsApp(productName, productPrice, productUrl, productImage, productDescription) {
+    let message = '';
+    
+    if (productName && productPrice) {
+        // Professional product sharing format
+        message = `Take a look at this ${productName} on Our Store\n\n`;
+        message += `🛍️ *${productName}*\n`;
+        message += `💰 *Special Price:* ${productPrice}\n\n`;
+        message += `✨ *Why choose us?*\n`;
+        message += `• Premium Quality Products\n`;
+        message += `• Best Prices Guaranteed\n`;
+        message += `• Fast & Reliable Delivery\n`;
+        message += `• Customer Satisfaction First\n\n`;
+        message += `🔗 *View Details & Order:*\n${productUrl || window.location.href}\n\n`;
+        message += `🛒 *Order now for the best deal!*`;
+    } else {
+        // General catalog sharing
+        message = `Take a look at our Amazing Product Collection\n\n`;
+        message += `🛍️ *Premium Products at Unbeatable Prices*\n\n`;
+        message += `✨ *What makes us special?*\n`;
+        message += `• Curated Quality Products\n`;
+        message += `• Best Price Guarantee\n`;
+        message += `• Fast & Secure Delivery\n`;
+        message += `• 100% Customer Satisfaction\n\n`;
+        message += `🔗 *Browse Our Collection:*\n${productUrl || window.location.href}\n\n`;
+        message += `🛒 *Shop now for amazing deals!*`;
+    }
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    showToast('Sharing via WhatsApp...', 'info');
+}
+
+// Init// Share via WhatsApp function
+function shareViaWhatsApp(productName, productPrice, productUrl, productImage, productDescription) {
+    let message = '';
+    
+    if (productName && productPrice) {
+        // Professional product sharing format similar to the attachment
+        const description = productDescription || 'High-quality product available at an amazing price. Perfect choice for discerning customers.';
+        
+        message = `Take a look at this ${productName} on Our Store\n\n`;
+        message += `�️ *${productName}*\n`;
+        message += `💰 *Special Price:* ${productPrice}\n`;
+        message += `📝 *Description:* ${description}\n\n`;
+        message += `✨ *Key Highlights:*\n`;
+        message += `• Premium Quality Guaranteed\n`;
+        message += `• Best Price Available\n`;
+        message += `• Fast & Secure Delivery\n`;
+        message += `• 100% Customer Satisfaction\n\n`;
+        
+        message += `🔗 *View Full Details & Order:*\n${productUrl || window.location.href}\n\n`;
+        message += `📸 *To see product images: Click the link above, then share images directly from our website!*\n\n`;
+        message += `🛒 *Order now for the best deal!*`;
+    } else {
+        // General catalog sharing
+        message = `🛍️ *Discover Amazing Products!*\n\n`;
+        message += `✨ Browse our curated collection of quality products:\n`;
+        message += `• Electronics & Gadgets\n`;
+        message += `• Fashion & Accessories\n`;
+        message += `• Home & Living\n`;
+        message += `• Beauty & Personal Care\n\n`;
+        message += `💯 *Why shop with us?*\n`;
+        message += `• Best Prices Guaranteed\n`;
+        message += `• Fast & Reliable Delivery\n`;
+        message += `• Quality Products Only\n`;
+        message += `• 24/7 Customer Support\n\n`;
+        message += `🔗 *Shop Now:* ${productUrl || window.location.href}\n\n`;
+        message += `🛒 *Start shopping today!*`;
+    }
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    showToast('Sharing via WhatsApp...', 'info');
+}
 document.addEventListener('DOMContentLoaded', function() {
     try {
         initializeApp();
@@ -53,7 +130,8 @@ function loadProducts(category = 'all', searchTerm = '') {
         setTimeout(() => {
             try {
                 let filteredProducts = getProductsByCategory(category);
-                
+                    console.log(filteredProducts);
+                    
                 // Apply search filter if search term exists
                 if (searchTerm.trim()) {
                     filteredProducts = searchProducts(filteredProducts, searchTerm);
@@ -166,6 +244,7 @@ function createProductCard(product, index = 0) {
         
         // Setup lazy loading for image
         const imageElement = cardElement.querySelector('.product-image');
+        console.log(product);
         setupLazyImage(imageElement, product.image, product.name);
         
         // Populate product data with sanitization
@@ -214,7 +293,9 @@ function createProductCard(product, index = 0) {
         const handleShareProduct = (e) => {
             e.preventDefault();
             try {
-                shareProduct(product.name, product.price, product.image, window.location.href);
+                // Pass product details including description for enhanced sharing
+                const productDescription = product.description || `High-quality ${product.name.toLowerCase()} available at an amazing price. Premium quality guaranteed with fast delivery.`;
+                shareProduct(product.name, product.price, product.image, window.location.href, productDescription);
             } catch (error) {
                 console.error('Error sharing product:', error);
                 showToast('Unable to share product', 'error');
@@ -250,7 +331,7 @@ function createProductCard(product, index = 0) {
         whatsappBtn.addEventListener('click', (e) => {
             e.preventDefault();
             try {
-                openWhatsApp(product);
+                chatOnWhatsApp(product.name, product.price);
             } catch (error) {
                 console.error('Error opening WhatsApp:', error);
                 showToast('Unable to open WhatsApp', 'error');
@@ -582,7 +663,7 @@ function setupLazyImage(imgElement, src, alt) {
     
     // Add placeholder
     imgElement.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzZiNzI4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkxvYWRpbmcuLi48L3RleHQ+PC9zdmc+';
-    
+    // console.log(window.imageObserver);
     if (window.imageObserver) {
         window.imageObserver.observe(imgElement);
     } else {
@@ -603,7 +684,7 @@ function loadImage(imgElement) {
         imgElement.classList.remove('loading');
         imgElement.classList.add('loaded');
         loadedImages.add(src);
-        imgElement.removeAttribute('data-src');
+        // imgElement.removeAttribute('data-src');
     };
     
     tempImg.onerror = function() {
@@ -724,11 +805,14 @@ function shareProduct(productName, productPrice, productImage, productUrl) {
         productUrl = window.location.href;
     }
     
+    // Enhanced product description for sharing
+    const productDescription = `Premium quality ${productName.toLowerCase()} available at unbeatable prices. Trusted by thousands of satisfied customers.`;
+    
     const productData = {
-        title: `${productName} - Shop with Us`,
+        title: productPrice ? `${productName} - Shop with Us` : `Amazing Products - Shop with Us`,
         text: productPrice ? 
-            `Check out this amazing ${productName} for just ${productPrice}!` : 
-            `Check out our amazing products collection!`,
+            `Take a look at this ${productName} on Our Store\n\n🛍️ ${productName}\n💰 Special Price: ${productPrice}\n📝 ${productDescription}\n\nShop now:` : 
+            `🛍️ Discover Amazing Products!\n\nBrowse our curated collection of premium quality products at unbeatable prices.\n\nShop now:`,
         url: productUrl || window.location.href
     };
 
@@ -740,21 +824,69 @@ function shareProduct(productName, productPrice, productImage, productUrl) {
             })
             .catch((error) => {
                 console.log('Error sharing:', error);
-                shareViaWhatsApp(productName, productPrice, productUrl);
+                shareViaWhatsApp(productName, productPrice, productUrl, productImage, productDescription);
             });
     } else {
         // Fallback: Share via WhatsApp
-        shareViaWhatsApp(productName, productPrice, productUrl);
+        shareViaWhatsApp(productName, productPrice, productUrl, productImage, productDescription);
     }
 }
 
 // Share via WhatsApp function
 function shareViaWhatsApp(productName, productPrice, productUrl) {
-    const baseMessage = productPrice ? 
-        `Check out this amazing product: *${productName}* for just *${productPrice}*!` :
-        `Check out our amazing products collection!`;
-    const message = `${baseMessage}\n\n${productUrl || window.location.href}`;
-    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    let message = '';
+    
+    if (productPrice) {
+        // Professional product sharing format
+        message = `Take a look at this ${productName} on Our Store\n\n`;
+        message += `🛍️ *${productName}*\n`;
+        message += `💰 *Special Price:* ${productPrice}\n\n`;
+        message += `✨ *Why choose us?*\n`;
+        message += `• Premium Quality Products\n`;
+        message += `• Best Prices Guaranteed\n`;
+        message += `• Fast & Reliable Delivery\n`;
+        message += `• Customer Satisfaction First\n\n`;
+        message += `🔗 *View Details & Order:*\n${productUrl || window.location.href}\n\n`;
+        message += `🛒 *Order now for the best deal!*`;
+    } else {
+        // General catalog sharing
+        message = `Take a look at our Amazing Product Collection\n\n`;
+        message += `🛍️ *Premium Products at Unbeatable Prices*\n\n`;
+        message += `✨ *What makes us special?*\n`;
+        message += `• Curated Quality Products\n`;
+        message += `• Best Price Guarantee\n`;
+        message += `• Fast & Secure Delivery\n`;
+        message += `• 100% Customer Satisfaction\n\n`;
+        message += `🔗 *Browse Our Collection:*\n${productUrl || window.location.href}\n\n`;
+        message += `🛒 *Shop now for amazing deals!*`;
+    }
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
     showToast('Sharing via WhatsApp...', 'info');
+}
+
+// Chat on WhatsApp function for product inquiries
+function chatOnWhatsApp(productName, productPrice) {
+    const productUrl = window.location.href;
+    
+    let message = `🛍️ *Product Inquiry*\n\n`;
+    message += `Hi! I need inquiry for this product:\n\n`;
+    message += `📱 *Product:* ${productName || 'Product from our catalog'}\n`;
+    message += `💰 *Price:* ${productPrice || 'Please check pricing'}\n\n`;
+    message += `🔗 *Product Link:* ${productUrl}\n\n`;
+    message += `Could you please provide more details about:\n`;
+    message += `• Product specifications & features\n`;
+    message += `• Availability & stock status\n`;
+    message += `• Delivery time & shipping charges\n`;
+    message += `• Warranty & return policy\n`;
+    message += `• Any ongoing offers or discounts\n\n`;
+    message += `I'm interested in purchasing this product. Please share complete details.\n\n`;
+    message += `Thank you!`;
+    
+    const phoneNumber = '919868907397'; // Your WhatsApp business number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    showToast('Redirecting to WhatsApp for product inquiry...', 'info');
 }
